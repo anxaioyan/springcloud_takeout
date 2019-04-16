@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/layui/layui.js"></script>
+    <script src="../js/jquery/jquery-1.9.1.js"></script>
+    <link rel="stylesheet" href="../js/layui/css/layui.css">
+</head>
+<body>
+    <ul id="demo"></ul>
+</body>
+<script>
+    layui.use('tree', function(){
+        layui.tree({
+            elem: '#demo',
+            nodes:function () {
+                $.ajax({
+                    url:'../myPersonalTree/treeListMy',
+                    type:'get',
+                    dataType:'json',
+                    success:function (data) {
+                        var nodes=JSON.parse(data);
+
+                        return nodes;
+                    }
+                })
+            }
+        });
+    });
+</script>
+</html>

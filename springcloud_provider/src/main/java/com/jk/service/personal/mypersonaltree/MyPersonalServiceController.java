@@ -11,7 +11,12 @@
 package com.jk.service.personal.mypersonaltree
         ;
 
+import com.jk.mapper.personal.mypersonaltree.MyPersonalMapper;
+import com.jk.model.personal.mypersonaltree.MyPersonalTreeBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -25,6 +30,28 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class MyPersonalServiceController implements MyPersonalTreeApiService{
 
+    @Autowired
+    private MyPersonalMapper myPersonalMapper;
 
+    @Override
+    public List<MyPersonalTreeBean> treeListMy() {
+
+        Integer pid=0;
+        List<MyPersonalTreeBean> list = getNodes(pid);
+        return list;
+
+    }
+
+    private List<MyPersonalTreeBean> getNodes(Integer pid) {
+
+        List<MyPersonalTreeBean> list = myPersonalMapper.queryTreeBeanBy(pid);
+
+        for (MyPersonalTreeBean treeBean : list) {
+            Integer id = treeBean.getId();
+            List<MyPersonalTreeBean> nodes = getNodes(id);
+            treeBean.setChildren(nodes);
+        }
+        return list;
+    }
 
 }

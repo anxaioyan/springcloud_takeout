@@ -31,6 +31,6 @@ public class PageController {
      */
     @RequestMapping("toPersonalLayUi")
     public  String toPersonalLayUi(){
-        return "personalLayUi";
+        return "personal/personalLayUi";
     }
 }

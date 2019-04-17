@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.UserMapper">
+    <select id="queryReg" parameterType="string" resultType="int">
+        select * from t_reg where account=#{account}
+    </select>
+    <!--注册-->
+    <insert id="reg" parameterType="com.jk.model.UserBean">
+        insert into t_reg (account,password) values (#{account},#{password})
+    </insert>
+    <!--用户名查询-->
+    <select id="getUserInfoByAccount" parameterType="string" resultType="int">
+        select count(*) from t_reg where account=#{account}
+    </select>
+
+</mapper>

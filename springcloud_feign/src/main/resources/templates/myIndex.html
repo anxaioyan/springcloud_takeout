@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../js/layui/css/layui.css">
+    <link rel="stylesheet" href="../js/layui/css/style.css">
+</head>
+
+<body>
+<!--黑框 最新活动-->
+<ul class="layui-nav layui-bg-black ">
+    <li class="layui-nav-item"><a href="">最新活动</a></li>
+    <li class="layui-nav-item layui-this"><a href="">我的订单</a></li>
+    <li class="layui-nav-item"><a href="">加盟合作</a></li>
+    <li class="layui-nav-item"><a href="">控制台<span class="layui-badge">9</span></a>
+    </li>
+    <li class="layui-nav-item">
+        <a href="">个人中心<span class="layui-badge-dot"></span></a>
+    </li>
+    <li class="layui-nav-item">
+        <img src="https://lvdelong.oss-cn-beijing.aliyuncs.com/show/8.png" class="layui-nav-img">我
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:;">修改信息</a></dd>
+            <dd><a href="javascript:;">安全管理</a></dd>
+            <dd><a href="javascript:;">退了</a></dd>
+        </dl>
+    </li>
+</ul>
+<!--进度条-->
+<div class="layui-progress">
+    <div class="layui-progress-bar" lay-percent="40%"></div>
+</div>
+<div style="margin-top: 15px; width:300px">
+    <div class="layui-progress">
+        <div class="layui-progress-bar" lay-percent="70%"></div>
+    </div>
+</div>
+<!--承诺-->
+<div class="place-pro clearfix container ng-scope layui-nav layui-bg-green" ng-if="isBeijing">
+    <div class="promise-title">
+        <div>饿了么向消费者郑重承诺</div>
+        <a ng-href="//h5.ele.me/irregularshop/?latitude=0&amp;longitude=0&amp;city_id=3"
+           href="//h5.ele.me/irregularshop/?latitude=0&amp;longitude=0&amp;city_id=3">下线名单公示专栏 <img
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNyIgaGVpZ2h0PSI3IiB2aWV3Qm94PSIwIDAgNyA3Ij4KICAgIDxkZWZzPgogICAgICAgIDxwYXRoIGlkPSJhIiBkPSJNMTAwLjYzNSA4LjI3bDIuNzg4LTIuMzg2YS4yMDMuMjAzIDAgMCAwIDAtLjMxOC4yOTUuMjk1IDAgMCAwLS4zNzIgMGwtMi45NzQgMi41NDZhLjIwMy4yMDMgMCAwIDAgMCAuMzE4bDIuOTc0IDIuNTQ2Yy4xMDMuMDg4LjI3LjA4OC4zNzIgMGEuMjAzLjIwMyAwIDAgMCAwLS4zMThsLTIuNzg4LTIuMzg3eiIvPgogICAgPC9kZWZzPgogICAgPHVzZSBmaWxsPSJub25lIiBmaWxsLXJ1bGU9Im5vbnplcm8iIHN0cm9rZT0iIzAwODlEQyIgc3Ryb2tlLXdpZHRoPSIuNSIgdHJhbnNmb3JtPSJtYXRyaXgoLTEgMCAwIDEgMTA2LjUgLTUpIiB4bGluazpocmVmPSIjYSIvPgo8L3N2Zz4K"
+                alt="eleme"></a></div>
+    <div class="promise-content">
+        我平台已经对入网餐饮服务提供者的食品经营许可证进行严格的实地审查，并保证入网餐饮服务提供者食品经营许可证载明的经营者名称、经营场所、主体业态、经营项目、有效期等许可信息合法、真实、准确、有效。
+    </div>
+</div>
+<!--地址-->
+<div class="location" ng-style="{visibility: geohash ? '' : 'hidden'}" role="navigation" location=""><span>当前位置:</span>
+    <span class="location-current">
+        <a class="inherit ng-binding" ng-href="/place/wx4ez77bybbs" ubt-click="401" ng-bind="place.name || place.address" href="/place/wx4ez77bybbs">北京明园大学</a>
+        <!--input 搜索-->
+          <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">请输入</label>
+      <div class="layui-input-inline">
+        <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+           <button class="layui-btn layui-btn-primary">原始按钮</button>
+      </div>
+    </div>
+  </div>
+    </span>
+    <span class="location-change" ng-class="{ 'location-hashistory': user.username &amp;&amp; userPlaces &amp;&amp; userPlaces.length > 0 }">
+        <a ng-href="/home" ubt-click="400" hardjump="" href="/home">[切换地址]</a>
+        <ul class="dropbox location-dropbox" ubt-visit="398">
+            <li class="arrow"></li>
+            <li class="changelocation">
+                <a ng-href="lali" hardjump="" href="/lali">修改收货地址<span class="icon-location"></span></a>
+            </li>
+        </ul>
+    </span>
+    <span ng-transclude=""></span>
+</div>
+<!--tab选项卡-->
+<div class="layui-tab layui-tab-card" lay-allowclose="true">
+    <ul class="layui-tab-title">
+        <li class="layui-this">网站设置</li>
+        <li>用户基本管理</li>
+        <li>权限分配</li>
+        <li>商品管理</li>
+        <li>订单管理</li>
+    </ul>
+    <div class="layui-tab-content" style="height: 150px;">
+        <div class="layui-tab-item layui-show">
+            1. 我个人比较喜欢卡片风格的，所以你发现又是以卡片的风格举例
+            2. 删除功能适用于所有风格
+        </div>
+        <div class="layui-tab-item">2</div>
+        <div class="layui-tab-item">3</div>
+        <div class="layui-tab-item">4</div>
+        <div class="layui-tab-item">5</div>
+        <div class="layui-tab-item">6</div>
+    </div>
+</div>
+<div class="layui-tab layui-tab-card" lay-filter="table_box"></div>
+</body>
+<script src="../js/layui/layui.js"></script>
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+
+        element.on('tab(table_box)', function (data) {
+            console.log(data);
+            if (data.index == 0 || data.index == 1 || data.index == 2) {
+                //这里的index表示有多少个选项卡
+                $(document).resize()
+            }
+        });
+    });
+
+</script>
+</html>

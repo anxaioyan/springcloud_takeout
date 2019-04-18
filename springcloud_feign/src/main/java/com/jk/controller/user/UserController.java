@@ -11,14 +11,13 @@
 package com.jk.controller.user;
 
 import com.jk.Service.user.UserServiceFeign;
+import com.jk.model.user.UserBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -43,5 +42,23 @@ public class UserController {
         System.out.println("----------------------------------------------s"+name);
 
         return result;
+    }
+
+    @GetMapping("queryReg")
+    @ResponseBody
+    public List<UserBean> queryReg(@RequestParam("account")String account) {
+        return  userService.queryReg(account);
+    }
+
+    @PostMapping("reg")
+    @ResponseBody
+    public  Boolean reg(@RequestBody UserBean userBean){
+        try {
+            return userService.reg(userBean);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

@@ -12,6 +12,8 @@ package com.jk.mapper.user;
 
 import com.jk.model.user.UserBean;
 
+import java.util.List;
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈a〉
@@ -23,4 +25,14 @@ import com.jk.model.user.UserBean;
 public interface UserMapper {
 
     UserBean findUserInfoByAccount(String account);
+
+    //注册
+    List<UserBean> queryReg(String account);
+
+    int getUserInfoByAccount(String account);
+
+    void reg(UserBean userBean);
+
+
+
 }

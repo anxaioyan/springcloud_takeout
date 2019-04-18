@@ -10,11 +10,11 @@
  */
 package com.jk.service.user;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.jk.model.user.UserBean;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -30,5 +30,14 @@ public interface UserService {
     @PostMapping("login")
     @ResponseBody
     HashMap<String, Object> login(@RequestParam("name") String name);
+
+    //注册
+    @GetMapping("queryReg")
+    @ResponseBody
+    List<UserBean> queryReg(@RequestParam("account") String account);
+
+    @PostMapping("reg")
+    @ResponseBody
+    Boolean reg(@RequestBody UserBean userBean);
 
 }

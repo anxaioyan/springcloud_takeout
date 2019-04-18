@@ -42,7 +42,6 @@
     $("#plogBtn").click(function () {
         var account=$("#accounts").val();
         var password=$("#passwords").val();
-        alert(account.length+"--"+password.length+"--"+$("#passwords").val());
         if (account.length==0||password.length==0) {
                 alert("账号和密码不能为空");
         }else {
@@ -59,12 +58,10 @@
                 type: 'post',
                 success: function (data) {
                     if (data.code != 0) {
-                        alert(data.code);
                         alert(data.msg);
                         return;
                     } else {
-                        location.href = "../page/page";
-
+                        location.href = "../page/toShou";
                     }
                 }
             })

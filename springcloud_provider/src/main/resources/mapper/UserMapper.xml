@@ -4,7 +4,7 @@
 
     <!--登录-->
     <select id="findUserInfoByAccount" parameterType="string" resultType="com.jk.model.user.UserBean">
-        select * from t_user where account = #{value}
+        select * from t_reg where account = #{value}
     </select>
     <select id="queryReg" parameterType="string" resultType="int">
         select * from t_reg where account=#{account}

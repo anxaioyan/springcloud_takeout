@@ -101,7 +101,6 @@
                         $('#ri').removeAttr('hidden');
                         $('#wr').attr('hidden','hidden');
 
-
                     } else {
                         $('#wr').removeAttr('hidden');
                         $('#ri').attr('hidden','hidden');
@@ -161,7 +160,7 @@
                 success:function(data){
                     if (data) {
                         layer.msg('注册成功');
-                        ///location.href = "login.html";
+                        location.href = "../page/tologin";
                     }else {
                         layer.msg('注册失败');
                     }

@@ -10,6 +10,7 @@
  */
 package com.jk.mapper.personal.mypersonaltree;
 
+import com.jk.model.personal.myMaterial.MyResideBean;
 import com.jk.model.personal.mypersonaltree.MyPersonalTreeBean;
 
 import java.util.List;
@@ -25,4 +26,14 @@ import java.util.List;
 public interface MyPersonalMapper {
 
     List<MyPersonalTreeBean> queryTreeBeanBy(Integer pid);
+
+    List<MyResideBean> findMyReside();
+
+    void deleteMyReside(Integer id);
+
+    void addMyReside(MyResideBean myResideBean);
+
+    MyResideBean findUpdeMyResideById(Integer id);
+
+    void upDateMyReside(MyResideBean myResideBean);
 }

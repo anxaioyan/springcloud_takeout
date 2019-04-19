@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery/jquery-1.9.1.js"  ></script>
+    <script src="../js/layui/layui.all.js"></script>
+    <link rel="stylesheet" href="../js/layui/css/layui.css">
+    <style>
+
+    </style>
+</head>
+<body>
+
+
+                <div class="layui-card-body">
+                    <div class="layui-container" id="myReside">
+
+
+                    </div>
+                </div>
+
+
+        <!--<div id="container" style="width: 1000px;height: 1000px"></div>-->
+</body>
+
+<!--<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.1&key=4ecf303ae73040bf66ef5d24d7946d70"></script>
+<script src="../js/projectConfiguration/myResidecs/myResidecs.js"></script>-->
+
+<script>
+    $(function () {
+        initMyReside();
+    })
+
+    function initMyReside() {
+        $.ajax({
+            url:'../myReside/findMyReside',
+            type:'get',
+            dataType:'json',
+            success:function (data) {
+                var html="<div class='layui-row' >";
+                for (var i = 0; i < data.length; i++) {
+                    var Obj={};
+                    Obj=JSON.stringify(data[i]);
+                    var address=data[i].address.substr(0,5)+"....";
+                    var areaReside=data[i].areaReside.substr(0,4)+"....";
+                    var sex= data[i].sex==1?"  先生":(data[i].sex==0?"  女士":"");
+                     html+=
+                         "<div class='layui-col-md3 layui-col-md-offset1 scss' style='margin-top:30px;height: 100px;border: 1px silver solid'>"+
+                        " <table style='width: 80%; margin: auto; margin-top: 10px;' >"+
+                             "<tr>"+
+                             "<td colspan='2'>"+
+                             "<span>"+data[i].surName+"</span>"+
+                             "<span>"+sex+"</span>"+
+                             "</td>"+
+                             "<td style='font-size:10px; text-align: right'>"+
+                             "<a href='javascript:;' onclick='updeMyReside("+Obj+")'><font color='silver'>修改 </font></a>"+
+                             "<a href='javascript:;' onclick='deleteReside("+data[i].id+")'><font color='silver'> 删除</font></a>"+
+                            "</td>"
+                         +"</tr>"+
+                         "<tr>"+
+                             "<td >"+areaReside+"</td>"+
+                             "<td >"+address+"</td>"+
+                        "</tr>"+
+                        "<tr>"+
+                            "<td colspan='3'>"+data[i].tel+"</td>"+
+                        "</tr>"
+                        +"</table>"
+                         +"</div>";
+
+                }
+                html+="<div class='layui-col-md3 layui-col-md-offset1' style='margin-top:30px;height: 100px;border: 1px silver solid'>" +
+                            "<a href='javascript:;' onclick='addMyReside()'><p style='text-align: center;margin-top:30px;'><span><b>+</b></span>  添加地址</p></a>"+
+                        "</div>"
+                +"</div>";
+                $("#myReside").html(html);
+
+            }
+        });
+    }
+
+    function deleteReside(id) {
+        if(confirm("您确定删除么")){
+                 $.ajax({
+
+                     url:'../myReside/deleteMyReside/'+id,
+                     type:'delete',
+                     dataType:'json',
+                     success:function (data) {
+                         if (data==true){
+
+                             initMyReside();
+                         }
+                     }
+                 })
+        }
+    }
+
+    function addMyReside() {
+
+                //跳转增加页面的路径
+        $.post('../page/toAddMyReside', {}, function(str){
+            layer.open({
+                title : "添加地址",
+                type: 1,
+                area: ['580px', '500px'],
+                content: str //注意，如果str是object，那么需要字符拼接。
+            });
+        });
+    }
+
+
+    //userList.js
+    //编辑用户
+    function updeMyReside(data){
+
+        $.post('../page/toUpdeMyReside',{},function (str) {
+            layer.open({
+                title : "编辑用户",
+                type : 1,
+                area: ['580px', '500px'],
+                content:str,
+                success : function() {
+
+                    $('.surName').val(data.surName);
+                    $('.id').val(data.id);
+                    $('.tel').val(data.tel);
+                    $('.areaReside').val(data.areaReside);
+                    $('.address').val(data.address);
+
+                    $('[name=sex]').each(function(i,item){
+                        if($(item).val()==data.sex){
+                            $(item).prop('checked',true);
+
+                        }
+                    });
+                    layui.use('form',function(){
+                        var form = layui.form;
+                        form.render();
+                    });
+                },
+
+                });
+
+        })
+
+
+
+
+
+        /*$.ajax({
+            url:'../myReside/findUpdeMyResideById/'+id,
+            type:'get',
+            dataType:'json',
+            success:function (data) {
+                $.post('../page/toUpdeMyReside',{},function (str) {
+                    layer.open({
+                        title : "编辑用户",
+                        type : 1,
+                        area: ['580px', '500px'],
+                        content:str,
+                        success : function() {
+
+                            $('.surName').val(data.surName);
+                            $('.id').val(data.id);
+                            $('.tel').val(data.tel);
+                            $('.areaReside').val(data.areaReside);
+                            $('.address').val(data.address);
+
+                            $('[name=sex]').each(function(i,item){
+                                if($(item).val()==data.sex){
+                                    $(item).prop('checked',true);
+
+                                }
+                            });
+                            layui.use('form',function(){
+                                var form = layui.form;
+                                form.render();
+                            });
+
+                        }
+                    });
+
+                })
+            }
+
+
+        });*/
+
+    }
+
+
+
+</script>
+
+</html>

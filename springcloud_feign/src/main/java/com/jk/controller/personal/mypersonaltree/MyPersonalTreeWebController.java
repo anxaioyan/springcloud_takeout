@@ -51,13 +51,5 @@ public class MyPersonalTreeWebController {
         return myPersonalTreeBeans;
     }
 
-    /**
-     * test
-     */
-    @GetMapping("test")
-    @ResponseBody
-    public String test(){
-         System.out.println("----请求成功");
-         return "----请求成功";
-    }
+
 }

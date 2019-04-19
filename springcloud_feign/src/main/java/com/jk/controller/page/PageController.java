@@ -12,7 +12,10 @@ package com.jk.controller.page
         ;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -32,5 +35,40 @@ public class PageController {
     @RequestMapping("toPersonalLayUi")
     public  String toPersonalLayUi(){
         return "personal/personalLayUi";
+    }
+
+
+    /**
+     * 跳转个人资料树页面
+     */
+    @RequestMapping("toPersonal")
+    public  String toPersonal(){
+        return "personal/myPersonal";
+    }
+
+    /**
+     * 跳转个人地址管理
+     */
+    @RequestMapping("toMyreside")
+    public  String toMyreside(){
+        return "personal/myreside";
+    }
+
+
+    /**
+     * 跳转个人地址管理
+     */
+    @RequestMapping("toAddMyReside")
+    public  String toAddMyReside(){
+        return "personal/addMyReside";
+    }
+
+    /**
+     * 跳转修改
+     */
+    @RequestMapping("toUpdeMyReside")
+    public String toUpdeMyReside(){
+
+        return "personal/updateMyReside";
     }
 }

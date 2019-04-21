@@ -107,6 +107,16 @@ public class MyPersonalServiceController implements MyPersonalTreeApiService{
         return myPersonalMapper.findMyPersonal(id);
     }
 
+
+    /**
+     * 修改个人资料
+     * @param myPersonalBean
+     */
+    @Override
+    public void upDatePersonal(MyPersonalBean myPersonalBean) {
+        myPersonalMapper.upDatePersonal(myPersonalBean);
+    }
+
     private List<MyPersonalTreeBean> getNodes(Integer pid) {
 
         List<MyPersonalTreeBean> list = myPersonalMapper.queryTreeBeanBy(pid);

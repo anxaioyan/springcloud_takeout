@@ -43,4 +43,8 @@ public interface MyPersonalTreeApiService {
     @GetMapping("findMyPersonal/{id}")
     @ResponseBody
     MyPersonalBean findMyPersonal(@PathVariable("id") Integer id);
+
+    @PostMapping("upDatePersonal")
+    @ResponseBody
+    void upDatePersonal(@RequestBody MyPersonalBean myPersonalBean);
 }

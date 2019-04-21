@@ -21,11 +21,9 @@
         <div class="layui-input-block">
             <img id="mytopimgf" style='border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;' class="mytopimgf"   alt='头像' width='190px' height='190px'>
             <input type="text" name="mytopimg"  id="mytopimg"   autocomplete="off" class="layui-input mytopimg">
-            <input type="file" id="butOne" onchange="showPreview(this)" >
-            <button type="button" class="layui-btn" id="test1">
-                <i class="layui-icon">&#xe67c;</i>上传图片
-            </button>
-        </div>uploadify
+            <input type="file" id="butOne" onchange="pre(this.id)" >
+
+        </div>
     </div>
 
     <div class="layui-form-item layui-form-text">
@@ -41,8 +39,8 @@
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
-    <input id="id" class="id" type="text"/>
-    <input type="button" value="ssss" onclick="ss()"/>
+    <input id="id" class="id" type="hidden"/>
+
 </form>
 </body>
 <script>
@@ -50,7 +48,7 @@
         var id=$("#id").val();
         var mytopimg=$("#mytopimg").val();
         var info=$("#info").val();
-        var img=$("#butOne")[0].files[0];
+
 
         $.ajax({
             url:'../myPersonal/upDatePersonal',
@@ -71,34 +69,28 @@
     })
 
 
-    function showPreview(source) {
-        var oFReader = new FileReader();
-        var file = source.files[0];
-        oFReader.readAsDataURL(file);
-        oFReader.onloadend = function(oFRevent){
-            var src = oFRevent.target.result;
-            $('#mytopimgf').attr('src',src);
-        }
+    function gets(files){
+        var url;
+        if(files){
+            if (window.navigator.userAgent.indexOf("MSIE")>=1){
+                url = document.getElementById(files).value;
+            }
+            else if(window.navigator.userAgent.indexOf("Firefox")>=1){
 
+                url = window.URL.createObjectURL(document.getElementById(files).files.item(0));
+            }
+            else if(navigator.userAgent.indexOf("Chrome")>0) { // Chrome 
+                url = window.URL.createObjectURL(document.getElementById(files).files.item(0));
+            }
+            return url;
+        };
+    };
+
+    function pre(files) {
+        var url = gets(files);
+        $('#mytopimgf').attr('src',url);
+        $('#mytopimg').val(url);
     }
-
-    layui.use('upload', function(){
-        var upload = layui.upload;
-          alert("dd")
-        //执行实例
-        var uploadInst = upload.render({
-            elem: '#test1' //绑定元素
-            ,url: '/upload/uploadify' //上传接口
-            ,method: ''
-            ,done: function(res){
-                //上传完毕回调
-
-            }
-            ,error: function(){
-                //请求异常回调
-            }
-        });
-    });
 
 </script>
 </html>

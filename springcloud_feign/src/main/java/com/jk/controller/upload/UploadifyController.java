@@ -10,16 +10,14 @@
  */
 package com.jk.controller.upload;
 
+import com.aliyun.oss.OSSClient;
+import com.jk.utils.AliyunOSSClientUtil;
+import com.jk.utils.OSSClientConstants;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -35,28 +33,21 @@ import java.util.Date;
 @RequestMapping("upload")
 public class UploadifyController {
 
-    @RequestMapping("uploadify")
+    /*@RequestMapping("uploadify")
     @ResponseBody
-    public String uploadify(MultipartFile sfile, HttpServletRequest request) throws IOException {
-       System.out.println("来了");
-        //获取原文件名称
-        String fileName = sfile.getOriginalFilename();
+    public String uploadify(String url){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String folderPath = request.getSession().getServletContext().getRealPath("/")+
-                "upload/";
-        File file = new File(folderPath);
-        //该目录是否已经存在
-        if(!file.exists()){
-            //创建文件夹
-            file.mkdir();
-        }
-        String onlyFileName = sdf.format(new Date())+fileName.substring(fileName.lastIndexOf('.'));
-        FileOutputStream fos = new FileOutputStream(folderPath+onlyFileName);
-        fos.write(sfile.getBytes());
-        fos.flush();
-        fos.close();
-        System.out.println(file+"-----------------");
-        return "asd";
-    }
+        String onlyFileName=sdf.format(new Date());
+        File file2 = new File(url+"\\"+onlyFileName);
+        System.out.println(url+"--------------");
+        System.out.println(file2+"+++++++");
+        //初始化OSSClient
+        OSSClient ossClient= AliyunOSSClientUtil.getOSSClient();
+        AliyunOSSClientUtil.uploadObject2OSS(ossClient, file2, OSSClientConstants.BACKET_NAME, OSSClientConstants.FOLDER);
+        String urls = "https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/"+onlyFileName;
+        return urls;
+
+
+    }*/
 
 }

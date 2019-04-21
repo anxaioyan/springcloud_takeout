@@ -36,6 +36,9 @@
         select t.id,t.mytopimg,t.info from t_mypersonal t where t.id=#{value}
     </select>
 
-
+    <!--修改个人资料-->
+    <update id="upDatePersonal" parameterType="com.jk.model.personal.myMaterial.MyPersonalBean">
+        update t_mypersonal t set t.mytopimg=#{mytopimg},t.info=#{info} where t.id=#{id}
+    </update>
 
 </mapper>

@@ -60,20 +60,9 @@ public class MyPersonalController {
     public Boolean upDatePersonal(@RequestBody MyPersonalBean myPersonalBean ){
 
         try {
+
             System.out.println(myPersonalBean.toString());
-
-            //得到真正的路径File file2
-            File file2 = new File(myPersonalBean.getMytopimg());
-
-            System.out.println("---------"+myPersonalBean.getMytopimg());
-            System.out.println("++++++"+file2);
-            /*//初始化OSSClient
-            OSSClient ossClient= AliyunOSSClientUtil.getOSSClient();
-            AliyunOSSClientUtil.uploadObject2OSS(ossClient, file2, OSSClientConstants.BACKET_NAME, OSSClientConstants.FOLDER);*/
-
-
-
-            /*personal.upDatePersonal(myPersonalBean);*/
+            personal.upDatePersonal(myPersonalBean);
             return true;
         }catch (Exception e){
             e.printStackTrace();

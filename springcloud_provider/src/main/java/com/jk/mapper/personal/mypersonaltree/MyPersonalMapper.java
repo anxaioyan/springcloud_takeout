@@ -39,4 +39,6 @@ public interface MyPersonalMapper {
     void upDateMyReside(MyResideBean myResideBean);
 
     MyPersonalBean findMyPersonal(Integer id);
+
+    void upDatePersonal(MyPersonalBean myPersonalBean);
 }

@@ -32,7 +32,4 @@ public interface UserMapper {
     int getUserInfoByAccount(String account);
 
     void reg(UserBean userBean);
-
-
-
 }

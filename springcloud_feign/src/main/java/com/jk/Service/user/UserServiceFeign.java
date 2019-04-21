@@ -11,7 +11,6 @@
 package com.jk.Service.user;
 
 import com.jk.service.user.UserService;
-import org.apache.catalina.User;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**

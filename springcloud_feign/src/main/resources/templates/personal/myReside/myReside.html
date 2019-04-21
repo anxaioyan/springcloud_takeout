@@ -6,26 +6,14 @@
     <script src="../js/jquery/jquery-1.9.1.js"  ></script>
     <script src="../js/layui/layui.all.js"></script>
     <link rel="stylesheet" href="../js/layui/css/layui.css">
-    <style>
 
-    </style>
 </head>
 <body>
-
-
-                <div class="layui-card-body">
-                    <div class="layui-container" id="myReside">
-
-
-                    </div>
-                </div>
-
-
-        <!--<div id="container" style="width: 1000px;height: 1000px"></div>-->
+    <div class="layui-card-body">
+        <div class="layui-container" id="myReside">
+        </div>
+    </div>
 </body>
-
-<!--<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.1&key=4ecf303ae73040bf66ef5d24d7946d70"></script>
-<script src="../js/projectConfiguration/myResidecs/myResidecs.js"></script>-->
 
 <script>
     $(function () {
@@ -143,49 +131,6 @@
                 });
 
         })
-
-
-
-
-
-        /*$.ajax({
-            url:'../myReside/findUpdeMyResideById/'+id,
-            type:'get',
-            dataType:'json',
-            success:function (data) {
-                $.post('../page/toUpdeMyReside',{},function (str) {
-                    layer.open({
-                        title : "编辑用户",
-                        type : 1,
-                        area: ['580px', '500px'],
-                        content:str,
-                        success : function() {
-
-                            $('.surName').val(data.surName);
-                            $('.id').val(data.id);
-                            $('.tel').val(data.tel);
-                            $('.areaReside').val(data.areaReside);
-                            $('.address').val(data.address);
-
-                            $('[name=sex]').each(function(i,item){
-                                if($(item).val()==data.sex){
-                                    $(item).prop('checked',true);
-
-                                }
-                            });
-                            layui.use('form',function(){
-                                var form = layui.form;
-                                form.render();
-                            });
-
-                        }
-                    });
-
-                })
-            }
-
-
-        });*/
 
     }
 

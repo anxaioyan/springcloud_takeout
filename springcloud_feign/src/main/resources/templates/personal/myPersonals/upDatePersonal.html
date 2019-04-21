@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui.form小例子</title>
+    <script src="../js/jquery/jquery-1.9.1.js"  ></script>
+    <script src="../js/layui/layui.all.js"></script>
+    <link rel="stylesheet" href="../js/layui/css/layui.css">
+    <script src="../js/uploadify/jquery.uploadify.js"></script>
+    <link rel="stylesheet" href="../js/uploadify/uploadify.css">
+
+</head>
+<body>
+
+<form id="rForm" class="layui-form" style="width: 400px;height: 400px" > <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item">
+        <label class="layui-form-label">头像</label>
+        <div class="layui-input-block">
+            "<img id="mytopimgf" style='border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;' src="" alt='头像' width='190px' height='190px'>"
+            <input type="hidden" name="mytopimg"  id="mytopimg"   autocomplete="off" class="layui-input mytopimg">
+            <input type="file" id="butOne">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">说明介绍</label>
+        <div class="layui-input-block">
+            <textarea maxlength="100"  id="info" id="address" class="address layui-textarea"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="button" class="layui-btn " lay-submit  lay-filter="*" id="rBtn" >立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    <input id="id" class="id" type="hidden"/>
+</form>
+
+</body>
+<script>
+    $("#rBtn").click(function () {
+        var id=$("#id").val();
+        var sex = $('input:radio[name="sex"]:checked').val();
+        var mytopimg=$("#mytopimg").val();
+        var info=$("#info").val();
+
+
+
+
+        if(surName.length==0||surName.length>7){
+            alert('请填写正确姓名');
+            return false;
+        }
+
+        if(!telRegxp.test(tel)){
+            alert("手机号码不正确")
+            return false;
+        }
+        var index = parent.layer.getFrameIndex(window.name);
+
+        $.ajax({
+            url:'../myReside/upDateMyReside',
+            type:'post',
+            contentType:'application/json',
+            data:JSON.stringify({
+                'id':id,
+                'mytopimg':mytopimg,
+                'info':info,
+
+            }),
+            dataType:'json',
+            success:function (data) {
+                initMyReside();
+                layer.closeAll();
+            }
+        })
+
+    })
+
+
+
+
+
+    //文件域的id
+    $("#butOne").uploadify({
+        //前台请求后台的url 不可忽略的参数
+        'uploader' :"../upload/upImg",
+        //插件自带 不可忽略的参数
+        'swf' : "../uploadify/uploadify.swf",
+        //撤销按钮的图片路径
+        'cancelImg' : "../uploadify/uploadify-cancel.png",
+        //如果为true 为自动上传 在文件后 为false 那么它就要我们自己手动点上传按钮
+        'auto' : true,
+        //可以同时选择多个文件 默认为true 不可忽略
+        'multi' : false,
+        //给上传按钮设置文字
+        'buttonText' : "上传头像",
+        //上传后队列是否消失
+        'removeCompleted' : true,
+        'removeTimeout' : 1,
+        //上传文件的个数
+        'uploadLimit' : 2,
+        'fileTypeExts' : "*.jpg;*.jpge;*.gif;*.png",
+        'fileSizeLimit' : "2MB",
+        //给div的进度条加背景 不可忽略
+        'queueID' : "showBars",
+        // controller层方法中接收文件的参数名--------artImg
+        'fileObjName' : "artImg",
+        //上传成功后的回调函数
+        'onUploadSuccess' : function(file, data, response) {
+            $("#mytopimgf").prop("src",data);
+            $("#mytopimg").val(data);
+        }
+    })
+
+
+
+</script>
+</html>

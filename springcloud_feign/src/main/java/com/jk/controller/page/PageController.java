@@ -34,33 +34,45 @@ public class PageController {
      */
     @RequestMapping("toPersonalLayUi")
     public  String toPersonalLayUi(){
-        return "personal/personalLayUi";
+        return "personal/tree/personalLayUi";
     }
 
 
     /**
-     * 跳转个人资料树页面
+     * 跳转个人资料页面
      */
     @RequestMapping("toPersonal")
     public  String toPersonal(){
-        return "personal/myPersonal";
+        return "personal/myPersonals/myPersonal";
     }
+
+
+    /**
+     * 跳转个人资料页面
+     */
+    @RequestMapping("upDatePersonal")
+    public  String upDatePersonal(){
+        return "personal/myPersonals/upDatePersonal";
+    }
+
+
+
 
     /**
      * 跳转个人地址管理
      */
-    @RequestMapping("toMyreside")
-    public  String toMyreside(){
-        return "personal/myreside";
+    @RequestMapping("toMyReside")
+    public  String toMyReside(){
+        return "personal/myReside/myReside";
     }
 
 
     /**
-     * 跳转个人地址管理
+     * 跳转添加个人地址
      */
     @RequestMapping("toAddMyReside")
     public  String toAddMyReside(){
-        return "personal/addMyReside";
+        return "personal/myReside/addMyReside";
     }
 
     /**
@@ -69,6 +81,8 @@ public class PageController {
     @RequestMapping("toUpdeMyReside")
     public String toUpdeMyReside(){
 
-        return "personal/updateMyReside";
+        return "personal/myReside/updateMyReside";
     }
+
+
 }

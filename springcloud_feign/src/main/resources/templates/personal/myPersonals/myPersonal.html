@@ -21,6 +21,7 @@
             </table>
     </div>
 </div>
+
 </body>
 <script>
 
@@ -60,16 +61,18 @@
     }
 
     function updatePersonal(data) {
-      alert(data)
+
         $.post('../page/toUpDatePersonal',{},function (str) {
             layer.open({
                 title : "编辑资料",
                 type : 1,
                 area: ['580px', '500px'],
-                content:str
+                content:str,
                 success : function() {
+
                     $('.id').val(data.id);
                     $('.mytopimg').val(data.mytopimg);
+                    $('.mytopimgf').prop('src',data.mytopimg);
                     $('.info').val(data.info);
 
                     layui.use('form',function(){
@@ -77,11 +80,8 @@
                         form.render();
                     });
                 }
-
             });
-
         })
-
     }
     
     

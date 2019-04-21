@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../js/css/common.css">
+    <link rel="stylesheet" href="../js/css/css.css">
+    <script src="js/jQuery-2.js"></script>
+    <script src="js/layer.js"></script><link rel="stylesheet" href="css/layer.css" id="layui_layer_skinlayercss" style="">
+    <link rel="shortcut  icon" type="image/x-icon" href="http://www.xb1y.com/index.php/Home/Goods/favicon.ico" media="screen">
+    <link rel="stylesheet" href="../js/css/navregister.css">
+
+    <title>Title</title>
+    <!-- 引入juquery -->
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <!-- 引入bootstrap的css,js -->
+    <link rel="stylesheet" href="../js/bootstrap3/css/bootstrap.css">
+    <script src="../js/bootstrap3/js/bootstrap.js"></script>
+    <!--引入table的css，js  -->
+    <link rel="stylesheet" href="../js/bootstrap-table/bootstrap-table.css">
+    <script src="../js/bootstrap-table/bootstrap-table.js"></script>
+    <script src="../js/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <!-- 引入bootbox的js -->
+    <script src="../js/bootstrap-bootbox/bootbox.js"></script>
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini" id="app">
+<!--我的购物车-->
+<div class="myshopcar-bigbox">
+    <h3>我的购物车</h3>
+    <table id="shopTable" bgcolor="#faebd7" border="0"></table>
+
+    <form method="post" action="/index.php/Home/Goods/user_cart2.html" id="form_id">
+        <div style="height:100px;line-height:100px;text-align:center;"><font size="4px">购物车还没达到上限， 前去<a href="http://192.168.101.134:8090/page/toMain" target="_blank" style="color:red;">浏览商品</a></font></div>    <ul class="myshopcar-topbox" style="margin:20px 0;">
+        <li class="myshop-guige"><a href="javascript:delMany();"><font color="red">批量删除</font></a></li>
+        <li class="myshop-guige"><a href="javascript:saveCollection(2);"><font color="#8a2be2">加入收藏夹</font></a></li>
+        <li class="myshop-procom"><a href="http://localhost:8021/toHomePage">继续购物</a></li>
+        <li class="myshop-proper" style="width: 200px;">已选商品：<span style="color: #ff1c1c;padding:0 10px;font-weight: bold" id="jianshu">0</span>件</li>
+        <li class="myshop-discount" style="width: 280px">合计(不含运费)：<span style="color: #ff1c1c;padding:0 10px;font-weight: bold;font-size: 16px">￥<span id="total"></span></span></li>
+        <li class="myshop-money"><a href="javascript:jiesuan();" id="bill" >结算</a></li>
+    </ul>
+    </form>
+</div>
+</body>
+<script>
+    $(function(){
+        initShop();
+    })
+    /*//结账
+    $('#bill').click(function(){
+        var name;
+        $(':checked').each(function() {
+            name = $(this).attr('name');
+        });
+        if(name==null){
+            layer.alert('请选择要购买的商品');
+            return false;
+        }
+        alert("您还不是企业采购商");
+        //$('#form_id').submit();
+    });*/
+    function jiesuan(){
+        var money = $("#total").text();
+        location.href = "../pay/pay?money="+money;
+        /*$.ajax({
+            url:'../pay/pay',
+            data: {
+                money:money
+            },
+            success:function(){
+
+            }
+        })*/
+
+    }
+
+
+    var number = 0;  //数量
+    var danjia = 0;  //单价
+    function initShop() {
+        $("#shopTable").bootstrapTable({
+            url: "../user/findShop",
+            data: {},
+            columns: [
+                {field: "check", checkbox: true,},
+                {field: "id", title: '主键id'},
+                {field: 'name', title: '商品名称'},
+                {field: 'peisong', title: '配送费'},
+                {
+                    field: 'price', title: '单价', formatter: function (value, row, index) {
+                        return value;
+                    }
+                },
+                /* <input type="text" id="text_box" value="'+ss+'" size="3px" >*/
+                {
+                    field: 'count', title: '数量', formatter: function (value, row, index) {
+                        var ss = value;
+                        return '<input type="button" onclick="jia(' + row.id + ',' + row.count + ',' + row.price + ')" style="width: 20px;height:25px;color: #c93333" value="+"><input type="text"   id= "text_box' + row.id + '" value="' + value + '" size="3px"><input type="button"  style="width: 20px;height:25px;color: #c93333"  value="-" onclick="jian(' + row.id + ',' + row.count + ',' + row.price + ')">';
+                    }
+                },
+
+                /* {field:'discount',title:'折扣优惠'},*/
+                {
+                    field: '456', title: '操作', formatter: function (value, row, index) {
+                        var html = "<a href='javascript:delOne(" + row.id + ")'><font color='red'>删除</font></a>";
+                        return html;
+                    }
+                }
+            ],
+            onCheck:function(row){
+                //alert("价格"+row.unitPrice+"数量"+row.numbers)
+                var add = $("#text_box"+row.id).val()
+                number += row.count;
+                //number += add;
+                danjia += add*row.price;
+                $("#jianshu").text(number);
+                $("#total").text(danjia);
+            },
+            onUncheck:function(row){
+                var add = $("#text_box"+row.id).val()
+                number -= add;
+                danjia -= add*row.price;
+                $("#jianshu").text(number);
+                $("#total").text(danjia);
+            }
+
+        })
+    }
+
+    function jia(id,count,price){
+        var con = $("#text_box"+id).val();
+        var aa=con*1+1;
+        $("#text_box"+id).val(aa);
+        var arr = $("#shopTable").bootstrapTable("getSelections")
+        for (var i=0;i<arr.length;i++) {
+            if (arr[i].id == id) {
+                number -= con;
+                danjia -= con * price;
+                number += aa;
+                danjia += aa * price;
+                $("#jianshu").text(number);
+                $("#total").text(danjia);
+            }
+        }
+
+    }
+
+    function jian(id,count,price){
+        var con = $("#text_box"+id).val();
+        var bb=con*1-1;
+        if(bb==0){
+            alert("已经最小值")
+        }else{
+            $("#text_box"+id).val(bb);
+        }
+        var arr = $("#shopTable").bootstrapTable("getSelections")
+        for (var i=0;i<arr.length;i++) {
+            if (arr[i].id == id) {
+                number -= 1;
+
+                danjia = number * price;
+                // number += aa;
+                //price += aa * unitPrice;
+                $("#jianshu").text(number);
+                $("#total").text(danjia);
+            }
+        }
+    }
+
+    //单删
+    function delOne(id){
+        bootbox.confirm({
+            size: "small",
+            title: "提示！",
+            message: "确定删除选中信息吗？",
+            buttons: {
+                confirm: {
+                    label: '确定',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: '取消',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function(result){
+                if (result) {
+                    $.ajax({
+                        url:'../user/delOne/'+id,
+                        type:'delete',
+                        success:function(){
+                            $('#shopTable').bootstrapTable('refresh');
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+
+
+</script>
+
+</html>

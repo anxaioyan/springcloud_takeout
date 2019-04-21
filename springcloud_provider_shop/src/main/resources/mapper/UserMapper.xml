@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.user.UserMapper">
+
+    <!--登录-->
+    <select id="findUserInfoByAccount" parameterType="string" resultType="com.jk.model.user.UserBean">
+        select * from t_reg where account = #{value}
+    </select>
+    <select id="queryReg" parameterType="string" resultType="int">
+        select * from t_reg where account=#{account}
+    </select>
+    <!--注册-->
+    <insert id="reg" parameterType="com.jk.model.user.UserBean">
+        insert into t_reg (account,password) values (#{account},#{password})
+    </insert>
+
+    <!--用户名查询-->
+    <select id="getUserInfoByAccount" parameterType="string" resultType="int">
+        select count(*) from t_reg where account=#{account}
+    </select>
+    <!--首页分页查询-->
+    <select id="findMerchantCount" parameterType="com.jk.model.shop.MerchantBean" resultType="int">
+        select count(*) from yy_merchants m where 1=1
+        <include refid="marketWhere"></include>
+    </select>
+    <select id="findMenchant" resultType="com.jk.model.shop.MerchantBean">
+        select * from yy_merchants m where 1=1
+        <include refid="marketWhere"></include>
+        limit #{start},#{rows}
+    </select>
+    <!--商品回显-->
+    <select id="findXiangqingById" parameterType="int" resultType="com.jk.model.shop.MerchantBean">
+        select m.id,m.store,m.pingfen,m.area,m.peisong,m.times,m.image,m.goodReputation,
+               m.name,m.price,m.counts
+        from yy_merchants m where m.id=#{id}
+    </select>
+    <!--  加入购物车-->
+    <insert id="saveShops" parameterType="com.jk.model.shop.ShopBean">
+        insert into t_shop (name,peisong,count,price) values(#{name},#{peisong},#{count},#{price})
+    </insert>
+    <!--购物车-->
+    <select id="findShopListById" parameterType="int" resultType="com.jk.model.shop.ShopBean">
+        select  s.id,s.name,s.peisong,s.price,s.count from t_shop s where s.id=#{id}
+    </select>
+    <!--查看购物车页面-->
+    <select id="findShop" parameterType="com.jk.model.shop.ShopBean" resultType="com.jk.model.shop.ShopBean">
+        select  * from t_shop
+    </select>
+    <!--删除购物车内容-->
+    <delete id="delOne" parameterType="int">
+        delete from t_shop  where id =#{id}
+    </delete>
+
+
+    <sql id="marketWhere">
+        <if test="merchantBean.type !=null and merchantBean.type !=''">
+            and m.type = #{merchantBean.type}
+        </if>
+        <if test="merchantBean.status !=null and merchantBean.status !=''">
+            and m.status = #{merchantBean.status}
+        </if>
+        order by peisong
+        <if test="merchantBean.pingfen == 1 ">
+            ,m.pingfen asc
+        </if>
+        <if test="merchantBean.pingfen == 2 ">
+            ,m.pingfen desc
+        </if>
+        <if test="merchantBean.peoplebuy == 1 ">
+            ,m.peoplebuy asc
+        </if>
+        <if test="merchantBean.peoplebuy == 2 ">
+            ,m.peoplebuy desc
+        </if>
+        <if test="merchantBean.price == 1 ">
+            ,m.price asc
+        </if>
+        <if test="merchantBean.price == 2 ">
+            ,m.price desc
+        </if>
+    </sql>
+
+</mapper>

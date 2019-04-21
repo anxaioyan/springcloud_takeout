@@ -12,6 +12,7 @@ package com.jk.service.personal.mypersonaltree
         ;
 
 import com.jk.mapper.personal.mypersonaltree.MyPersonalMapper;
+import com.jk.model.personal.myMaterial.MyPersonalBean;
 import com.jk.model.personal.myMaterial.MyResideBean;
 import com.jk.model.personal.mypersonaltree.MyPersonalTreeBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +93,28 @@ public class MyPersonalServiceController implements MyPersonalTreeApiService{
     @Override
     public void upDateMyReside(MyResideBean myResideBean) {
         myPersonalMapper.upDateMyReside(myResideBean);
+    }
+
+
+    /**
+     * 通过用户id查询资料
+     * @param id
+     * @return
+     */
+    @Override
+    public MyPersonalBean findMyPersonal(Integer id) {
+
+        return myPersonalMapper.findMyPersonal(id);
+    }
+
+
+    /**
+     * 修改个人资料
+     * @param myPersonalBean
+     */
+    @Override
+    public void upDatePersonal(MyPersonalBean myPersonalBean) {
+        myPersonalMapper.upDatePersonal(myPersonalBean);
     }
 
     private List<MyPersonalTreeBean> getNodes(Integer pid) {

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery/jquery-1.9.1.js"  ></script>
+    <script src="../js/layui/layui.all.js"></script>
+    <link rel="stylesheet" href="../js/layui/css/layui.css">
+
+</head>
+<body>
+    <div class="layui-card-body">
+
+            <div class="layui-container">
+                <div class="layui-row">
+                    <div   style="width: 900px;height: 70px; background:#F7F7F7 ;margin: auto;  " >
+                        <p style="margin-left: 10%; line-height: 70px">当前账户余额:    <span style="font-size: 20px;color: red; "><b>0</b></span><button type="button" style="margin-left: 50px" class="layui-btn   layui-btn-normal"   id="txBtn">提现</button></p>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <div class="layui-row" style="width: 900px; margin: auto;">
+                    <h3><b>账户资产明细</b></h3>
+                    <p>
+                    <spam style="background: #ffffff; color:#D5D5D5"><button style="border: 0" class="layui-btn layui-btn-primary">分类</button></spam>
+                    <span><button style="border: 0" class="layui-btn layui-btn-primary">全部</button></span>
+                    <span><button style="border: 0" class="layui-btn layui-btn-primary">充值</button></span>
+                    <span><button style="border: 0" class="layui-btn layui-btn-primary">余额消费</button></span>
+                    <span><button style="border: 0" class="layui-btn layui-btn-primary">第三方支付消费</button></span>
+                    <span><button style="border: 0" class="layui-btn layui-btn-primary">支付失败退款</button></span>
+                    <span><button style="border: 0" class="layui-btn layui-btn-primary">订单退款</button></span>
+                    <span><button style="border: 0" class="layui-btn layui-btn-primary">提现</button></span>
+                </p>
+                    <p>
+                        <span style="background: #ffffff; color:#D5D5D5"><button style="border: 0" class="layui-btn layui-btn-primary">时间</button></span>
+                        <span><button style="border: 0" class="layui-btn layui-btn-primary">今天</button></span>
+                        <span><button style="border: 0" class="layui-btn layui-btn-primary">近7天</button></span>
+                        <span><button style="border: 0" class="layui-btn layui-btn-primary">近15天</button></span>
+                        <span><button style="border: 0" class="layui-btn layui-btn-primary">1个月</button></span>
+                    </p>
+                </div>
+                <br/>
+                <br/>
+                <table class="layui-row"  style="width: 900px; margin: auto; text-align: center">
+                    <tr style="background:#F7F7F7; ">
+                        <td>创建时间</td>
+                        <td>交易类型</td>
+                        <td>金额变动</td>
+                        <td>余额</td>
+                    </tr>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <div class="layui-row"  style="width: 900px; margin: auto; text-align: center">
+
+                    <img src="../img/a.png" height="269" width="428"/>
+                </div>
+
+            </div>
+    </div>
+</body>
+<script>
+
+
+    $("#txBtn").click(function () {
+        alert("暂无提现功能")
+    })
+
+
+
+
+</script>
+</html>

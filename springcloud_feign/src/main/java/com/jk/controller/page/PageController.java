@@ -66,16 +66,16 @@ public class PageController {
     /**
      * 跳转个人资料页面
      */
-    @RequestMapping("toPersonal")
+    @RequestMapping("toMyPersonal")
     public  String toPersonal(){
         return "personal/myPersonals/myPersonal";
     }
 
 
     /**
-     * 跳转个人资料页面
+     * 跳转修改个人资料页面
      */
-    @RequestMapping("upDatePersonal")
+    @RequestMapping("toUpDatePersonal")
     public  String upDatePersonal(){
         return "personal/myPersonals/upDatePersonal";
     }
@@ -130,5 +130,46 @@ public class PageController {
         return "gouwu";
     }
 
+
+    /**
+     * 跳转红包
+     */
+    @RequestMapping("toMyRedb")
+    public String toMyRedb(){
+        return "personal/myAssets/myRedb";
+    }
+
+
+    /**
+     * 跳转余额
+     */
+    @RequestMapping("toMyBalance")
+    public String toMyBalance(){
+        return "personal/myAssets/myBalance";
+    }
+
+    /**
+     * 跳转金币
+     */
+    @RequestMapping("toMyGold")
+    public String toMyGold(){
+        return "personal/myAssets/myGold";
+    }
+
+    /**
+     * 跳转近期订单
+     */
+    @RequestMapping("toMyOrder")
+    public String toMyOrder(){
+        return "personal/myOrder/myOrder";
+    }
+
+    /**
+     * 跳转近期订单
+     */
+    @RequestMapping("toMyCollection")
+    public String toMyCollection(){
+        return "personal/myCollection/myCollection";
+    }
 
 }

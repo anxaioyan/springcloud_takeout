@@ -12,6 +12,7 @@
 package com.jk.controller.page;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -106,6 +107,27 @@ public class PageController {
     public String toUpdeMyReside(){
 
         return "personal/myReside/updateMyReside";
+    }
+
+    @RequestMapping("toShop")
+    public  String toShop(){
+        return "shop";
+    }
+
+    //到详情页面
+    @RequestMapping("toXiangqing")
+    public String toShowInfo(Integer id, Model md){
+        md.addAttribute("id",id);
+        return "xiangqing";
+        //   return "商品详情";
+    }
+    @RequestMapping("toPingjia")
+    public  String toPingjia(){
+        return "pingjia";
+    }
+    @RequestMapping("toGouwu")
+    public  String toGouwu(){
+        return "gouwu";
     }
 
 

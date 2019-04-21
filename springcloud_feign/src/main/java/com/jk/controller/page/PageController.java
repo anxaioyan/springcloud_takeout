@@ -1,4 +1,5 @@
 /**
+<<<<<<< HEAD
  * Copyright (C), 2015-2019,金科教育
  * FileName: PageController
  * Author:  张成元
@@ -52,6 +53,60 @@ public class PageController {
     }
 
 
+    /**
+     * 跳转个人资料树页面
+     */
+    @RequestMapping("toPersonalLayUi")
+    public  String toPersonalLayUi(){
+        return "personal/tree/personalLayUi";
+    }
+
+
+    /**
+     * 跳转个人资料页面
+     */
+    @RequestMapping("toPersonal")
+    public  String toPersonal(){
+        return "personal/myPersonals/myPersonal";
+    }
+
+
+    /**
+     * 跳转个人资料页面
+     */
+    @RequestMapping("upDatePersonal")
+    public  String upDatePersonal(){
+        return "personal/myPersonals/upDatePersonal";
+    }
+
+
+
+
+    /**
+     * 跳转个人地址管理
+     */
+    @RequestMapping("toMyReside")
+    public  String toMyReside(){
+        return "personal/myReside/myReside";
+    }
+
+
+    /**
+     * 跳转添加个人地址
+     */
+    @RequestMapping("toAddMyReside")
+    public  String toAddMyReside(){
+        return "personal/myReside/addMyReside";
+    }
+
+    /**
+     * 跳转修改
+     */
+    @RequestMapping("toUpdeMyReside")
+    public String toUpdeMyReside(){
+
+        return "personal/myReside/updateMyReside";
+    }
 
 
 }

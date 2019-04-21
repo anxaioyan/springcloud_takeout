@@ -31,5 +31,11 @@
         update t_myreside t set t.surName=#{surName},t.sex=#{sex},t.areaReside=#{areaReside},t.address=#{address},t.tel=#{tel} where t.id=#{id}
     </update>
 
+    <!--查询个人资料-->
+    <select id="findMyPersonal" resultType="com.jk.model.personal.myMaterial.MyPersonalBean" parameterType="int">
+        select t.id,t.mytopimg,t.info from t_mypersonal t where t.id=#{value}
+    </select>
+
+
 
 </mapper>

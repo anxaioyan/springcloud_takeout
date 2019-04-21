@@ -44,7 +44,7 @@ $(function () {
                             element.tabChange('tabs', node.id);// 切换到已有的选项卡
                         } else {//如果没打开就新建一个选项卡
                             if (node.url!=null) {
-                                alert(node.name+"11111111111")
+
 
                                     element.tabAdd('tabs', {
                                         title:node.name,//选项卡的名称

@@ -10,6 +10,7 @@
  */
 package com.jk.mapper.personal.mypersonaltree;
 
+import com.jk.model.personal.myMaterial.MyPersonalBean;
 import com.jk.model.personal.myMaterial.MyResideBean;
 import com.jk.model.personal.mypersonaltree.MyPersonalTreeBean;
 
@@ -36,4 +37,6 @@ public interface MyPersonalMapper {
     MyResideBean findUpdeMyResideById(Integer id);
 
     void upDateMyReside(MyResideBean myResideBean);
+
+    MyPersonalBean findMyPersonal(Integer id);
 }

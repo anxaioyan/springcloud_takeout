@@ -65,16 +65,16 @@ public class PageController {
     /**
      * 跳转个人资料页面
      */
-    @RequestMapping("toPersonal")
+    @RequestMapping("toMyPersonal")
     public  String toPersonal(){
         return "personal/myPersonals/myPersonal";
     }
 
 
     /**
-     * 跳转个人资料页面
+     * 跳转修改个人资料页面
      */
-    @RequestMapping("upDatePersonal")
+    @RequestMapping("toUpDatePersonal")
     public  String upDatePersonal(){
         return "personal/myPersonals/upDatePersonal";
     }
@@ -107,6 +107,8 @@ public class PageController {
 
         return "personal/myReside/updateMyReside";
     }
+
+
 
 
 }

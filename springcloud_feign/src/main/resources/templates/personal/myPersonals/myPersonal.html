@@ -20,7 +20,9 @@
             <table id="myPersonal">
             </table>
     </div>
+
 </div>
+
 </body>
 <script>
 
@@ -41,7 +43,7 @@
                  obj=JSON.stringify(data);
                     var html="<tr>"+"<td>"+name+"</td>"+
                          "<td>" +
-                           "<img style='border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;' src='"+data.mytopimg+"' alt='头像' width='190px' height='190px'>"+
+                           "<img style='border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;' src='"+"../"+data.mytopimg+"' alt='头像' width='190px' height='190px'>"+
                         "</td>"
                          +"</tr>"+
                          "<tr>"+
@@ -60,16 +62,18 @@
     }
 
     function updatePersonal(data) {
-      alert(data)
+
         $.post('../page/toUpDatePersonal',{},function (str) {
             layer.open({
                 title : "编辑资料",
                 type : 1,
                 area: ['580px', '500px'],
-                content:str
+                content:str,
                 success : function() {
+
                     $('.id').val(data.id);
                     $('.mytopimg').val(data.mytopimg);
+                    $('.mytopimgf').prop('src',data.mytopimg);
                     $('.info').val(data.info);
 
                     layui.use('form',function(){
@@ -77,11 +81,8 @@
                         form.render();
                     });
                 }
-
             });
-
         })
-
     }
     
     

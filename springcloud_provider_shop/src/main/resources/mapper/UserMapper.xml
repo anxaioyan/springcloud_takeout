@@ -60,6 +60,12 @@
     </delete>
 
 
+    <!--手机验证码登录-->
+    <!-- 根据登录账号查询用户信息 -->
+    <select id="findUserByLoginNumber" parameterType="string" resultType="com.jk.model.user.UserBean">
+        select * from t_reg u where u.account=#{account}
+    </select>
+
     <sql id="marketWhere">
         <if test="merchantBean.type !=null and merchantBean.type !=''">
             and m.type = #{merchantBean.type}

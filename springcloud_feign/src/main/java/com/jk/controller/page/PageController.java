@@ -32,6 +32,11 @@ public class PageController {
         return "login";
     }
 
+    @RequestMapping("toTelLogin")
+    public  String toTelLogin(){
+        return "tellogin";
+    }
+
     //注册
     @RequestMapping("toReg")
     public  String toReg(){

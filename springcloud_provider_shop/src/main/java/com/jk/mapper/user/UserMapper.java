@@ -51,5 +51,7 @@ public interface UserMapper {
 
     void delOne(Integer id);
 
+    UserBean findUserByLoginNumber(String phoneNumber);
+
     void deleteMany(@Param("ids") Integer[] ids);
 }

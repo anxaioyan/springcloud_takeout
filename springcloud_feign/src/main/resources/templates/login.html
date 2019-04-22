@@ -26,6 +26,9 @@
         <div class="layui-input-inline login-btn">
             <button type="button" id="plogBtn" lay-filter="login" class="layui-btn">登录</button>
         </div>
+        <div class="layui-input-inline">
+            <button type="button" id="telBtn" class="layui-btn layui-btn-primary">使用手机验证码登录</button>
+        </div>
         <hr/>
         <div class="layui-input-inline">
             <button type="button" class="layui-btn layui-btn-primary">QQ登录</button>
@@ -33,12 +36,20 @@
         <div class="layui-input-inline">
             <button type="button" class="layui-btn layui-btn-normal">微信登录</button>
         </div>
-        <p><a href="register.html" class="fl">立即注册</a><a href="javascript:;" class="fr">忘记密码？</a></p>
+        <p><a href="javascript:toReg();" class="fl">立即注册</a></p>
     </form>
 </div>
 </body>
 <script src="../js/layui/layui.js"></script>
 <script type="text/javascript">
+    function toReg(){
+        location.href = "../page/toReg";
+    }
+
+    $("#telBtn").click(function (){
+        location.href = "../page/toTelLogin";
+    })
+
     $("#plogBtn").click(function () {
         var account=$("#accounts").val();
         var password=$("#passwords").val();

@@ -101,7 +101,14 @@
 <div class="place-tab clearfix container ng-scope"><div class="place-fetchtakeout ng-isolate-scope" show-fetch-takeout-dialog="">
 </div></div>
 <!--右侧的导航条-->
-<div class="sidebar" role="complementary" ng-hide="layoutState &amp;&amp; layoutState.hideSidebar"><div class="sidebar-tabs"><div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close" href="https://www.ele.me/profile/order" hardjump="" tooltip="我的订单" tooltip-placement="left" ubt-click="toolbar_order"></a><div class="toolbar-separator"></div><a class="toolbar-cartbtn icon-cart toolbar-open" href="../page/toGouwu" template="cart" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;cart&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-cartbtn-shownum&#39;: foodCount.count}" ubt-click="390">购物车<!-- ngIf: foodCount.count --></a><div class="toolbar-separator"></div><a class="toolbar-btn icon-notice toolbar-open modal-hide" href="javascript:" template="message" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;message&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-open&#39;: user, &#39;modal-hide&#39;: user}" tooltip="我的信息" tooltip-placement="left" ubt-click="392"><!-- ngIf: messageCount.count --></a></div><div class="toolbar-tabs-bottom"><div class="toolbar-btn icon-QR-code"><div class="dropbox toolbar-tabs-dropbox"><a href="http://static11.elemecdn.com/eleme/desktop/mobile/index.html" target="_blank"><img src="http://localhost:8082/404" alt="下载手机应用"><p>下载手机应用</p><p class="icon-QR-code-bonus">即可参加分享红包活动</p></a></div></div><a class="toolbar-btn sidebar-btn-backtop icon-top" tooltip="回到顶部" title="回到顶部" href="javascript:" tooltip-placement="left" style="visibility: hidden;"></a></div></div><div class="sidebar-content"><!-- ngInclude: activeTemplate ? ('/common/page/_block/sidebar/sidebar-'+ activeTemplate + '/sidebar-'+ activeTemplate + '.html') : '' --></div></div>
+<div class="sidebar" role="complementary" ng-hide="layoutState &amp;&amp; layoutState.hideSidebar"><div class="sidebar-tabs"><div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close" href="https://www.ele.me/profile/order" hardjump="" tooltip="我的订单" tooltip-placement="left" ubt-click="toolbar_order"></a><div class="toolbar-separator"></div><a class="toolbar-cartbtn icon-cart toolbar-open" href="../page/toGouwu" template="cart" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;cart&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-cartbtn-shownum&#39;: foodCount.count}" ubt-click="390">购物车<!-- ngIf: foodCount.count --></a><div class="toolbar-separator"></div><a class="toolbar-btn icon-notice toolbar-open modal-hide" href="javascript:" template="message" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;message&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-open&#39;: user, &#39;modal-hide&#39;: user}" tooltip="我的信息" tooltip-placement="left" ubt-click="392"><!-- ngIf: messageCount.count --></a></div><div class="toolbar-tabs-bottom"><div class="toolbar-btn icon-QR-code"><div class="dropbox toolbar-tabs-dropbox"><a href="http://static11.elemecdn.com/eleme/desktop/mobile/index.html" target="_blank"><img src="http://localhost:8082/404" alt="下载手机应用"><p>下载手机应用</p><p class="icon-QR-code-bonus">即可参加分享红包活动</p></a></div></div><a class="toolbar-btn sidebar-btn-backtop icon-top" tooltip="回到顶部" title="回到顶部" href="javascript:" tooltip-placement="left" style="visibility: hidden;"></a></div></div><div class="sidebar-content"><!-- ngInclude: activeTemplate ? ('/common/page/_block/sidebar/sidebar-'+ activeTemplate + '/sidebar-'+ activeTemplate + '.html') : '' --></div>
+    <!--红包-->
+    <div onclick="receiveRed()" style="position:fixed;text-align: center; right: 0;bottom:0;width: 220px; height:150px">
+        <img src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/20190422152508.gif"  >
+        <p style="color: #FFF;font-size: 25px;font-family: '楷体'" >买好吃的了</p>
+    </div>
+
+</div>
 <style type="text/css">
     /* box */
 
@@ -199,11 +206,7 @@
     </div>
 </div>
 <input type="hidden" id="hiddStatus" value="6" />
-<!--红包-->
-<div style="position:fixed;text-align: center; left: 80%;top:60%;width: 220px; height:150px">
-    <img src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/20190422152508.gif"  >
-    <p style="color: #FFF;font-size: 25px;font-family: '楷体'" >买好吃的了</p>
-</div>
+
 </body>
 <!--商品-->
 
@@ -353,6 +356,34 @@
         }
     };
 
+    
+    function receiveRed() {
+         $.ajax({
+             url:'../myPersonal/upDateRed',
+             type:'get',
+             datatype:'json',
+             success:function (data) {
+                 if (data.code!=0){
+                     if (data.code==2){
+                         if (confirm("您还没有登录，点击下方登录")){
+                             alert("登录页面");
+                         }
+                         return;
+                     }else {
+                         alert(data.reg);
+                         return;
+                     }
+                 }else {
+                     alert(data.reg);
+                     return;
+                 }
+             }
+         })
+    }
+    
+    
+    
+    
 </script>
 <hr/>
 <!--&lt;!&ndash;最下面的导航条&ndash;&gt;-->

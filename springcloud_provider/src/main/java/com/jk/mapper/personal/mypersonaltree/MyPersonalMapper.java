@@ -13,7 +13,9 @@ package com.jk.mapper.personal.mypersonaltree;
 import com.jk.model.personal.myMaterial.MyPersonalBean;
 import com.jk.model.personal.myMaterial.MyResideBean;
 import com.jk.model.personal.mypersonaltree.MyPersonalTreeBean;
+import com.jk.model.personal.mypersonaltree.MyRedNumberBean;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 /**
@@ -41,4 +43,10 @@ public interface MyPersonalMapper {
     MyPersonalBean findMyPersonal(Integer id);
 
     void upDatePersonal(MyPersonalBean myPersonalBean);
+
+    void upDateRed(Integer userId, Integer redNumber);
+
+    int findRedCount(Integer userId);
+
+    List<MyRedNumberBean> findRedNumber(Integer id);
 }

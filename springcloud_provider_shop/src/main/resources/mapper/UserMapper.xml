@@ -51,6 +51,14 @@
         delete from t_shop  where id =#{id}
     </delete>
 
+    <!--批量删除-->
+    <delete id="deleteMany">
+        delete from t_shop  where id in
+        <foreach collection="ids" separator="," open="(" close=")" item="item">
+            #{item}
+        </foreach>
+    </delete>
+
 
     <sql id="marketWhere">
         <if test="merchantBean.type !=null and merchantBean.type !=''">

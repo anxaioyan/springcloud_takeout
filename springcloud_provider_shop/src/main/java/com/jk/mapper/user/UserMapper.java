@@ -50,4 +50,6 @@ public interface UserMapper {
     List<ShopBean> findShop();
 
     void delOne(Integer id);
+
+    void deleteMany(@Param("ids") Integer[] ids);
 }

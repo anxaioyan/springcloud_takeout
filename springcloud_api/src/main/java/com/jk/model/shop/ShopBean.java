@@ -1,8 +1,10 @@
 package com.jk.model.shop;
 
 
+import java.io.Serializable;
+
 //@Document(collection = "t_shop")
-public class ShopBean {
+public class ShopBean implements Serializable {
 
   //  private String id;
    private Integer id;

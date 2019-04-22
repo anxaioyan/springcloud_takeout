@@ -8,7 +8,6 @@
     <script src="js/layer.js"></script><link rel="stylesheet" href="css/layer.css" id="layui_layer_skinlayercss" style="">
     <link rel="shortcut  icon" type="image/x-icon" href="http://www.xb1y.com/index.php/Home/Goods/favicon.ico" media="screen">
     <link rel="stylesheet" href="../js/css/navregister.css">
-
     <title>Title</title>
     <!-- 引入juquery -->
     <script src="../js/jquery-1.9.1.min.js"></script>
@@ -22,18 +21,44 @@
     <!-- 引入bootbox的js -->
     <script src="../js/bootstrap-bootbox/bootbox.js"></script>
 
+    <link rel="stylesheet" href="../js/layui/css/style.css">
+    <link rel="stylesheet" href="../js/layui/css/layui.css">
+    <script src="../js/layui/layui.js"></script>
+    <script src="../js/jquery.tabs.js"></script>
+    <script src="../js/jquery.lazyload.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini" id="app">
+<!--最上面的导航条-->
+<ul  class="layui-nav layui-bg-blue" lay-filter="">
+    <li class="layui-nav-item">
+        <h1><a href="#" hardjump="" class="topbar-logo icon-logo"><span>饿了么</span></a></h1>
+    </li>
+    <li class="layui-nav-item">
+        <a href="">首页<span class="layui-badge-dot"></span></a>
+    </li>
+    <li class="layui-nav-item">
+        <a href="">个人中心<span class="layui-badge-dot"></span></a>
+    </li>
+    <li class="layui-nav-item">
+        <a href="">我的订单<span class="layui-badge-dot"></span></a>
+    </li>
+    <li class="layui-nav-item">
+        <a href="">加盟合作<span class="layui-badge-dot"></span></a>
+    </li>
+    <li class="layui-nav-item">
+        <a href="">我的客服<span class="layui-badge-dot"></span></a>
+    </li>
+</ul>
+
 <!--我的购物车-->
 <div class="myshopcar-bigbox">
-    <h3>我的购物车</h3>
+    <div style="color: red"><h3>我的购物车</h3></div>
     <table id="shopTable" bgcolor="#faebd7" border="0"></table>
 
     <form method="post" action="/index.php/Home/Goods/user_cart2.html" id="form_id">
-        <div style="height:100px;line-height:100px;text-align:center;"><font size="4px">购物车还没达到上限， 前去<a href="http://192.168.101.134:8090/page/toMain" target="_blank" style="color:red;">浏览商品</a></font></div>    <ul class="myshopcar-topbox" style="margin:20px 0;">
+        <div style="height:100px;line-height:100px;text-align:center;"><font size="4px">购物车还没达到上限， 前去<a href="../page/toMyIndex" target="_blank" style="color:red;">浏览商品</a></font></div>    <ul class="myshopcar-topbox" style="margin:20px 0;">
         <li class="myshop-guige"><a href="javascript:delMany();"><font color="red">批量删除</font></a></li>
-        <li class="myshop-guige"><a href="javascript:saveCollection(2);"><font color="#8a2be2">加入收藏夹</font></a></li>
-        <li class="myshop-procom"><a href="http://localhost:8021/toHomePage">继续购物</a></li>
+        <li class="myshop-procom"><a href="localhost/page/toMyIndex"><font color="blue">再来一单</font></a></li>
         <li class="myshop-proper" style="width: 200px;">已选商品：<span style="color: #ff1c1c;padding:0 10px;font-weight: bold" id="jianshu">0</span>件</li>
         <li class="myshop-discount" style="width: 280px">合计(不含运费)：<span style="color: #ff1c1c;padding:0 10px;font-weight: bold;font-size: 16px">￥<span id="total"></span></span></li>
         <li class="myshop-money"><a href="javascript:jiesuan();" id="bill" >结算</a></li>
@@ -196,7 +221,75 @@
         })
     }
 
+    //批量删除
+    function delMany(){
+        var rows = $('#shopTable').bootstrapTable('getSelections'); //获取表选择的行
+        if(rows.length<=0){
+            // 没选择
+            bootbox.alert({
+                size: "small",
+                title: "提示",
+                message: "请选择至少一行数据",
+                callback: function(){},
+                buttons: {
+                    ok: {
+                        label: '确定',
+                        className: 'btn-success'
+                    }
+                }
+            })
+        }else{
+            //提示确认是否删除
+            bootbox.confirm({
+                size: "small",
+                title:"提示",
+                message: "是否确认删除?",
+                buttons: {
+                    confirm: {
+                        label: '确定',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: '取消',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if(result){
+                        var ids="";
+                        for(var i=0;i<rows.length;i++){
+                            ids+=ids==""?rows[i].id:","+rows[i].id;
+                        }
+                        //后台ajax删除
+                        $.ajax({
+                            url:"../user/deleteMany",
+                            type:"delete",
+                            data:{
+                                ids:ids
+                            },
+                            success:function(data){
+                                bootbox.alert({
+                                    size: "small",
+                                    title: "提示",
+                                    message: "删除成功！",
+                                    callback: function(){},
+                                    buttons: {
+                                        ok: {
+                                            label: '确定',
+                                            className: 'btn-success'
+                                        }
+                                    }
+                                })
+                                //刷新表格
+                                $('#shopTable').bootstrapTable('refresh');
+                            }
+                        })
 
+                    }
+                }
+            })
+        }
+    }
 
 </script>
 

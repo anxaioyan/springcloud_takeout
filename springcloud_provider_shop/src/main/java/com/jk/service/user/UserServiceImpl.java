@@ -15,6 +15,7 @@ import com.jk.mapper.user.UserMapper;
 import com.jk.model.shop.MerchantBean;
 import com.jk.model.shop.ShopBean;
 import com.jk.model.user.UserBean;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -168,4 +169,12 @@ public class UserServiceImpl implements  UserService{
     public void delOne(Integer id) {
         userMapper.delOne(id);
     }
+
+    @Override
+    @ResponseBody
+    public void deleteMany(Integer[] ids) {
+        userMapper.deleteMany(ids);
+    }
+
+
 }

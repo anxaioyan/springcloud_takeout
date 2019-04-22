@@ -67,4 +67,7 @@ public interface UserService {
     @ResponseBody
     void delOne(@PathVariable("id") Integer id);
 
+    @DeleteMapping("deleteMany")
+    @ResponseBody
+    void deleteMany(@RequestParam("ids") Integer[] ids);
 }

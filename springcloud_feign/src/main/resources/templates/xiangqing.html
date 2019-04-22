@@ -41,8 +41,8 @@
         <header class="topbar shoptopbar" role="navigation" ng-class="{shoptopbar: state.type === 'shop'}">
             <div class="container clearfix">
                 <h1><a href="https://www.ele.me/" hardjump="" class="topbar-logo icon-logo"><span>饿了么</span></a></h1>
-                <a href="#" hardjump="" class="topbar-item topbar-homepage" ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a>
-                <a href="#" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a>
+                <a href="../page/toMyIndex" hardjump="" class="topbar-item topbar-homepage" ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a>
+                <a href="../page/toGouwu" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">购物车</a>
                 <a href="#" target="_blank" class="topbar-item cooperation">加盟合作</a>
                 <a href="https://help.ele.me/pc/" target="_blank" class="topbar-item cooperation">我的客服</a>
                 <nav class="topbar-nav">
@@ -201,8 +201,8 @@
         <div class="shopnav">
             <div class="container clearfix">
                 <div class="shopnav-left">
-                    <a class="shopnav-tab active" href="https://www.ele.me/shop/E13225239603205588383" ng-class="{active: shop.tab === 'index'}">所有商品</a>
-                    <a class="shopnav-tab" ng-class="{active: shop.tab === 'rate'}" href="javascript:pingjia();" >评价</a>
+                    <a class="shopnav-tab active" href="#" ng-class="{active: shop.tab === 'index'}">所有商品</a>
+                    <a class="shopnav-tab" ng-class="{active: shop.tab === 'rate'}" href="#" >评价</a>
                     <a class="shopnav-tab" href="https://www.ele.me/shop/E13225239603205588383/info" ng-class="{active: shop.tab === 'info'}">商家资质</a>
 
                     <ul class="zs-shaixuan">
@@ -289,7 +289,7 @@
 </div>
 
 <!--商家公告-->
-<div class="shopmain-right ng-isolate-scope" shop-bulletin="" data="shop">
+<!--<div class="shopmain-right ng-isolate-scope" shop-bulletin="" data="shop">
     <div class="shopbulletin">
         <div class="shopbulletin-section">
             <h3 class="shopbulletin-section-title">商家公告</h3>
@@ -317,10 +317,10 @@
         </div>
     </div>
 </div>
-</div>
+</div>-->
 <div class="sidetools" side-tools="">
     <a href="" class="sidetools-item icon-visit-history" target="_blank" title="我要开店" tooltip="我要开店" tooltip-placement="left"></a>
-    <a href="../page/toGouwu">购物车</a>
+    <a href="../page/toGouwu" class="toolbar-cartbtn icon-cart toolbar-open"  title="购物车" tooltip="购物车" tooltip-placement="left" target="_blank"></a>
     <a href="javascript:" class="sidetools-item icon-arrow-up" title="回到顶部" tooltip="回到顶部" tooltip-placement="left" ng-click="backToTop()"></a>
 </div>
 </div>
@@ -434,7 +434,7 @@
                             "<a  data-rst-id=\"E8511232894373335604\" data-bidding=\"\" target=\"_blank\" class=\"rstblock\">"+
                             "<div class=\"rstblock-logo\">" +
                             "<img src=\'"+image+"\' " +
-                            "alt=\"图片尚未完善\" class=\"rstblock-logo-icon\" width=\"70\" height=\"70\"></div>" +
+                            "alt=\"正在加载\" class=\"rstblock-logo-icon\" width=\"70\" height=\"70\"></div>" +
                             "<div class=\"rstblock-content\"><div class=\"rstblock-title\">"+name+"</div>" +
                             "<div class=\"rstblock-cost\">月售<font color='blur'>"+peoplebuy+"</font>份,评分<font color='yello'>"+pingfen+"</font>颗星</div>" +
                             "<div class=\"rstblock-cost\">￥<font color='red'>"+price+"</font>元</div>" +

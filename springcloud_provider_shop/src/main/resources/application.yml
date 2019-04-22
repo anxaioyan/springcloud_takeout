@@ -12,6 +12,7 @@ spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://192.168.0.125:8066/PROJECT?ServerTimezone=HongKong&useUnicode=true&characterEncoding=utf-8
+    #url: jdbc:mysql://localhost/1809?ServerTimezone=HongKong&useUnicode=true&characterEncoding=utf-8
     username: root
     password: root
 mybatis:

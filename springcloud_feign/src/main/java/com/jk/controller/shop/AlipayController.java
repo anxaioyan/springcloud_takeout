@@ -8,6 +8,7 @@ import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.jk.config.AlipayConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +43,7 @@ public class AlipayController {
      */
 
     @RequestMapping("/pay")
-    public void pay(HttpServletRequest request, HttpServletResponse response,String money) throws Exception {
+    public void pay(HttpServletRequest request, HttpServletResponse response,@RequestParam("money") String money) throws Exception {
         // 模拟从前台传来的数据
         /*String orderNo =(String)((Math.random()*9+1)*1000000000);*/
         String orderNo = new Date()+"123"; // 生成订单号// 生成订单号

@@ -6,12 +6,12 @@ eureka:
       defaultZone: http://localhost:8080/eureka/
 spring:
   application:
-    name: provider-user
+    name: provider-shop
 
 
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.0.125:3306/takeout-project?ServerTimezone=HongKong&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://192.168.0.125:8066/PROJECT?ServerTimezone=HongKong&useUnicode=true&characterEncoding=utf-8
     username: root
     password: root
 mybatis:

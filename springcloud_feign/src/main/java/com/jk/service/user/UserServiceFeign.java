@@ -8,9 +8,8 @@
  * <author>          <time>          <version>          <desc>
  * 张成元           修改时间           版本号              描述
  */
-package com.jk.Service.user;
+package com.jk.service.user;
 
-import com.jk.service.user.UserService;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
@@ -21,7 +20,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @create 2019/4/16
  * @since 1.0.0
  */
-@FeignClient("service-user")
+@FeignClient("provider-shop")
 public interface UserServiceFeign extends UserService {
 
 }

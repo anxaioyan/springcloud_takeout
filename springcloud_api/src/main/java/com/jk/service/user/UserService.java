@@ -10,6 +10,8 @@
  */
 package com.jk.service.user;
 
+import com.jk.model.shop.MerchantBean;
+import com.jk.model.shop.ShopBean;
 import com.jk.model.user.UserBean;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,5 +41,30 @@ public interface UserService {
     @PostMapping("reg")
     @ResponseBody
     Boolean reg(@RequestBody UserBean userBean);
+
+    @GetMapping("findMenchant")
+    @ResponseBody
+    HashMap<String, Object> findMenchant(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows,@RequestParam("searchList")String searchList);
+
+    @GetMapping("findXiangqingById/{id}")
+    @ResponseBody
+    MerchantBean findXiangqingById(@PathVariable("id") Integer id);
+
+    @PostMapping("saveShops")
+    @ResponseBody
+    void saveShops(@RequestParam("id")Integer id,@RequestParam("counts") Integer counts);
+
+
+    @GetMapping("findShopListById/{id}")
+    @ResponseBody
+    ShopBean findShopListById(@PathVariable("id")Integer id);
+
+    @GetMapping("findShop")
+    @ResponseBody
+    List<ShopBean> findShop();
+
+    @DeleteMapping("delOne/{id}")
+    @ResponseBody
+    void delOne(@PathVariable("id") Integer id);
 
 }

@@ -10,10 +10,10 @@
  */
 package com.jk.controller.user;
 
-import com.jk.service.user.UserServiceFeign;
 import com.jk.model.shop.MerchantBean;
 import com.jk.model.shop.ShopBean;
 import com.jk.model.user.UserBean;
+import com.jk.service.user.UserServiceFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -114,5 +114,20 @@ public class UserController {
     @ResponseBody
     public  void delOne(@PathVariable("id") Integer id){
         userService.delOne(id);
+    }
+
+
+
+    //手机验证码
+    @GetMapping("gainMessgerCode")
+    @ResponseBody
+    public String gainMessgerCode(@RequestParam("account") String account){
+        return userService.gainMessgerCode(account);
+    }
+
+    @GetMapping("messagelogin")
+    @ResponseBody
+    public HashMap<String, Object> messagelogin(@RequestParam("account") String account, @RequestParam("messageCode") String messageCode){
+        return userService.messagelogin(account,messageCode);
     }
 }

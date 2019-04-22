@@ -12,3 +12,7 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     cache: false
+
+feign:
+  httpclient:
+    enabled: true

@@ -16,12 +16,16 @@ import com.jk.model.shop.MerchantBean;
 import com.jk.model.shop.ShopBean;
 import com.jk.model.user.UserBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -36,6 +40,9 @@ public class UserServiceImpl implements  UserService{
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
 
     @Override
@@ -167,5 +174,82 @@ public class UserServiceImpl implements  UserService{
     @ResponseBody
     public void delOne(Integer id) {
         userMapper.delOne(id);
+    }
+
+
+    @Override
+    @ResponseBody
+    public String gainMessgerCode(String account) {
+        Object yanzhengma = redisTemplate.opsForValue().get(account);
+        if (yanzhengma == null || yanzhengma.equals("")) {
+            String createRandom = createRandom();
+            System.out.println("手机验证码为:" + createRandom);
+            redisTemplate.opsForValue().set(account, createRandom);
+            redisTemplate.expire(account, 5, TimeUnit.MINUTES);
+            /*HashMap<String, Object> params = new HashMap<String, Object>();
+            params.put("accountSid", CommonConst.ACCOUNT_SID);
+            params.put("templateid", CommonConst.TEMPLATE_ID);
+            String createRandom = createRandom();
+            params.put("param", createRandom + "," + 5);
+            System.out.println("手机验证码为:" + createRandom);
+            params.put("to", account);
+            String timestamp = DateUtil.dataString(new Date(), null);
+            params.put("timestamp", timestamp);
+            String md532 = Md5Util.getMd532(CommonConst.ACCOUNT_SID + CommonConst.AUTH_TOKEN + timestamp);
+            params.put("sig", md532);
+            String returnStr = HttpClientUtil.post("https://api.miaodiyun.com/20150822/industrySMS/sendSMS", params);
+            System.out.println(returnStr);
+            JSONObject parseObject = JSON.parseObject(returnStr);
+            String respCode = parseObject.getString("respCode");
+            if(respCode.equals("00000")){
+                redisTemplate.opsForValue().set(account, createRandom);
+                redisTemplate.expire(account, 5, TimeUnit.MINUTES);
+            }*/
+            return "1";
+        } else {
+            return "0";
+        }
+    }
+
+    public String createRandom(){
+        String number = "";
+        for(int i = 0;i<6;i++){
+            number = number + (int) (Math.random() * 9);
+        }
+        return number;
+    }
+
+    @Override
+    @ResponseBody
+    public HashMap<String, Object> messagelogin(String account, String messageCode) {
+        HashMap<String, Object> result=new HashMap<>();
+//        HttpSession session = request.getSession();
+        //验证手机号是否存在
+        UserBean user = userMapper.findUserByLoginNumber(account);
+        if(user==null){
+            result.put("code", 1);
+            result.put("msg", "手机号不存在");
+            return result;
+        }
+        //验证短信验证码是否正确
+        //判断key是否存在
+        if(!redisTemplate.hasKey(account)){
+            result.put("code", 2);
+            result.put("msg", "验证码已过期");
+            return result;
+        }
+        String yanzhengma = redisTemplate.opsForValue().get(account).toString();
+        if(!messageCode.equals(yanzhengma)){
+                result.put("code", 3);
+                result.put("msg", "手机验证码错误");
+                return result;
+        }
+        //登录成功
+        result.put("code", 0);
+        result.put("msg", "登陆成功");
+//        session.setAttribute(session.getId(),user);
+        //清redis缓存
+        redisTemplate.delete(account);
+        return result;
     }
 }

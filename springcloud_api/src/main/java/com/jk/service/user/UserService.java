@@ -67,4 +67,14 @@ public interface UserService {
     @ResponseBody
     void delOne(@PathVariable("id") Integer id);
 
+
+    //手机验证码
+    @GetMapping("gainMessgerCode")
+    @ResponseBody
+    String gainMessgerCode(@RequestParam("account") String account);
+
+    @GetMapping("messagelogin")
+    @ResponseBody
+//    HashMap<String, Object> messagelogin(@RequestParam("name") String name, HttpSession session);
+    HashMap<String, Object> messagelogin(@RequestParam("account") String account, @RequestParam("messageCode") String messageCode);
 }

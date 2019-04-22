@@ -55,7 +55,6 @@ public class UserController {
     public  Boolean reg(@RequestBody UserBean userBean){
         try {
             return userService.reg(userBean);
-
         } catch (Exception e) {
             e.printStackTrace();
             return false;

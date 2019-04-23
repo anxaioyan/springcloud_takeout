@@ -185,4 +185,12 @@ public class PageController {
     public String toComment(){
         return "comment";
     }
+
+    /**
+     * 跳转骑手页面
+     */
+    @RequestMapping("toRoom")
+    public String toRoom(){
+        return "room";
+    }
 }

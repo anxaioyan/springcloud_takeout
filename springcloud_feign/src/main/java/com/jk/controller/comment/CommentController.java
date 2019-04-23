@@ -40,7 +40,8 @@ public class CommentController {
     @PostMapping ("queryComment")
     @ResponseBody
     public responseComment queryComment(@RequestParam("page") Integer page, @RequestParam("limit") Integer rows){
-        return commentServcieFeign.queryComment(page, rows);
+        responseComment responseComment = commentServcieFeign.queryComment(page, rows);
+        return responseComment;
     }
 
     @RequestMapping("saveComment")

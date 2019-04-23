@@ -327,6 +327,9 @@
                 var html = innhtml(list);
                 $('#comment_list').html(html);
                 fda();
+            },
+            error:function(){
+                alert("1111")
             }
         })
     }
@@ -412,7 +415,7 @@
         //显示文字
         rate.render({
             elem: '#test1'
-            ,value: 2 //初始值
+            ,value: 0 //初始值
             ,text: true //开启文本
             ,setText: function(value) {
                 $("#testCype").val(value);

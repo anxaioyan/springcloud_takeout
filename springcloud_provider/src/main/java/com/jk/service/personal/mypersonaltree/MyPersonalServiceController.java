@@ -120,6 +120,11 @@ public class MyPersonalServiceController implements MyPersonalTreeApiService{
         myPersonalMapper.upDatePersonal(myPersonalBean);
     }
 
+    /**
+     * 获取红包
+     * @param userId
+     * @return
+     */
     @Override
     public HashMap<String ,Object> upDateRed(Integer userId) {
         HashMap<String, Object>  parameter = new HashMap<>();
@@ -144,9 +149,24 @@ public class MyPersonalServiceController implements MyPersonalTreeApiService{
         return parameter;
     }
 
+    /**
+     * 查询红包
+     * @param id
+     * @return
+     */
     @Override
     public List<MyRedNumberBean> findRedNumber(Integer id) {
         return myPersonalMapper.findRedNumber(id);
+    }
+
+    /**
+     * 查询金币
+     * @param id
+     * @return
+     */
+    @Override
+    public Integer findMyGold(Integer id) {
+        return myPersonalMapper.findMyGold(id);
     }
 
 

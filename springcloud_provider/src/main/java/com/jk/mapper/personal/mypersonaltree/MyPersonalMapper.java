@@ -49,4 +49,6 @@ public interface MyPersonalMapper {
     int findRedCount(Integer userId);
 
     List<MyRedNumberBean> findRedNumber(Integer id);
+
+    Integer findMyGold(Integer id);
 }

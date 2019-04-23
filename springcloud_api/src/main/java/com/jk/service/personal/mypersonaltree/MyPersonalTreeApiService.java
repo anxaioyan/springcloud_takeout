@@ -57,4 +57,8 @@ public interface MyPersonalTreeApiService {
     @GetMapping("findRedNumber/{id}")
     @ResponseBody
     List<MyRedNumberBean> findRedNumber(@PathVariable("id") Integer id);
+
+    @GetMapping("findMyGold/{id}")
+    @ResponseBody
+    Integer findMyGold(@PathVariable("id") Integer id);
 }

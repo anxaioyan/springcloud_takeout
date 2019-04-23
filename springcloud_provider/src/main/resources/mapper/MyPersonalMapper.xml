@@ -56,4 +56,10 @@
         select t.redNumber from t_myrednumber t where t.userId=#{value}
     </select>
 
+
+    <!--查询金币-->
+    <select id="findMyGold" resultType="int" parameterType="int">
+        select t.gold from t_gold t where t.userid=#{value}
+    </select>
+
 </mapper>

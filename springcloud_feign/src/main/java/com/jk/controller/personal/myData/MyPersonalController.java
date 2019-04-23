@@ -96,6 +96,18 @@ public class MyPersonalController {
         Integer id=1;
         return personal.findRedNumber(id);
 
-    }
+        }
+
+
+    /**
+     * 查询金币
+     */
+    @GetMapping("findMyGold")
+    @ResponseBody
+    public Integer findMyGold(){
+        Integer id=1;
+        return personal.findMyGold(id);
+
+        }
 
 }

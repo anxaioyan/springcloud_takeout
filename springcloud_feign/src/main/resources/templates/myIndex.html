@@ -56,9 +56,7 @@
     <li class="layui-nav-item">
         <h3><a href="../page/toMyIndex" hardjump=""  ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a></h3>
     </li>
-    <li class="layui-nav-item">
-       <a href="">个人中心<span class="layui-badge-dot"></span></a>
-    </li>
+
     <li class="layui-nav-item">
         <h2><a href="">我的订单<span class="layui-badge-dot"></span></a></h2>
     </li>
@@ -86,7 +84,7 @@
          <a  target="_blank" href="../page/toReg">登录/注册</a></span>
    </li>
     <li class="layui-nav-item">
-        <a  target="_blank" href="../page/">个人中心</a></span>
+        <a  target="_blank" href="javascript:;" onclick="myPers()">个人中心</a></span>
     </li>
 
 </ul>
@@ -168,8 +166,9 @@
     }
 </style>
 <!--中间的内容-->
-<!--tab选项卡-->
-<div class="layui-tab layui-tab-card">
+<!--tab选项卡 开始了-->
+
+<div class="layui-tab layui-tab-card" id="myGe">
     <ul class="layui-tab-title">
         <li class="layui-this"><a onclick="assignFistCatalog(1)">全部商家</a></li>
         <li  onclick="assignFistCatalog(1)">美食</li>
@@ -204,14 +203,18 @@
         <div class="layui-tab-item">面包蛋糕 甜品 奶茶果汁 炸鸡小吃 水果</div>
         <div class="layui-tab-item">盖浇饭 川湘菜 奶茶果汁 炸鸡炸串 麻辣烫 汉堡</div>
     </div>
+    <div id="contentcen"></div>
 </div>
+ <iframe src="../page/toPersonalLayUi" scrolling="no" frameborder="0" id="myXs" style="margin: auto;display: none;" width="100%" height="900"></iframe>
 <input type="hidden" id="hiddStatus" value="6" />
 
 </body>
 <!--商品-->
 
 <!--中间的内容-->
-<div id="contentcen"></div>
+
+
+<!--结束-->
 <script type="text/javascript">
     $(function () {
        initDrugList(1,12);
@@ -277,7 +280,7 @@
                             '<span style="float:left;width:45px;text-align:right">名称：</span>'+
                             '<span style="float:left;width:155px;">'+store+'</span>'+
                             '</p>'+
-                            '<p class="cp-p" >'+
+                            '<p  class="cp-p" >'+
                             '<span style="float:left;width:45px;text-align:right">配送费：</span>'+
                             '<span style="float:left;width:155px;">'+peisong+'</span>'+
                             '</p>'+
@@ -381,9 +384,7 @@
          })
     }
     
-    
-    
-    
+
 </script>
 <hr/>
 <!--&lt;!&ndash;最下面的导航条&ndash;&gt;-->
@@ -391,3 +392,11 @@
     关于我们</h3><a class="footer-link-item" href="https://www.ele.me/support/about" target="_blank">饿了么介绍</a> <a class="footer-link-item" href="http://jobs.ele.me/" target="_blank">加入我们</a> <a class="footer-link-item" href="https://www.ele.me/support/about/contact" target="_blank">联系我们</a> <a class="footer-link-item" ng-href="//h5.ele.me/service/agreement/#HEAEDER_SHOW=1" target="_blank" href="http://h5.ele.me/service/agreement/#HEAEDER_SHOW=1">规则中心</a> <a class="footer-link-item" ng-href="//h5.ele.me/service/agreement/#HEAEDER_SHOW=1&amp;key=ruleQue50" target="_blank" href="http://h5.ele.me/service/agreement/#HEAEDER_SHOW=1&amp;key=ruleQue50">隐私政策</a></div><div class="footer-contect"><div class="footer-contect-item">24小时客服热线 : <a class="inherit" href="tel:10105757">10105757</a></div><div class="footer-contect-item">关注我们 :<div href="JavaScript:" class="icon-wechat" ubt-click="402"><div class="dropbox dropbox-bottom footer-contect-dropbox" ubt-visit="402"><img src="http://localhost:8082/404" alt="微信号: elemeorder"><p>微信号: elemeorder</p><p>饿了么网上订餐</p></div></div><a href="http://e.weibo.com/elemeorder" class="icon-weibo" target="_blank"></a></div></div><div class="footer-mobile"><a href="https://h.ele.me/landing" target="_blank"><img src="http://localhost:8082/404" class="footer-mobile-icon" alt="扫一扫下载饿了么手机 App"></a><div class="footer-mobile-content"><h3>下载手机版</h3><p>扫一扫,手机订餐方便</p></div></div><div class="footer-copyright serif"><h5 class="owner">所有方：上海拉扎斯信息科技有限公司 <a href="https://www.ele.me/activity/license">| 营业执照</a></h5><p>增值电信业务许可证 : <a href="http://www.shca.gov.cn/" target="_blank">沪B2-20150033</a> | <a href="http://www.miibeian.gov.cn/" target="_blank">沪ICP备 09007032</a> | <a href="http://www.sgs.gov.cn/lz/licenseLink.do?method=licenceView&amp;entyId=20120305173227823" target="_blank">上海工商行政管理</a> Copyright ©2008-2018 ele.me, All Rights Reserved.互联网药品信息服务资格证书 编号：（沪）-经营性-2016-0011</p></div><div class="footer-police container"><a href="http://www.zx110.org/picp/?sn=310100103568" rel="nofollow" target="_blank"><img alt="已通过沪公网备案，备案号 310100103568" src="http://localhost:8082/404" height="30"></a></div></div></footer>
 
 </html>
+
+<script>
+    function myPers() {
+        $("#myGe").css("display","none");
+
+       $("#myXs").css("display","block");
+    }
+</script>

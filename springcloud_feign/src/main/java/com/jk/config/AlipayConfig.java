@@ -11,7 +11,7 @@ public class AlipayConfig {
     public static String notify_url = "http://www.linhongcun.com/SpringBootPay-0.0.1-SNAPSHOT/pay/notifyUrl";
 
     //Controller Mapping:得放到服务器上，且使用域名解析 IP
-    public static String return_url = "http://127.0.0.1:8082/page/tologin";
+    public static String return_url = "http://192.168.0.125:8082/page/togold";
 
     //开发者中心 / 研发服务 / 沙箱环境 / 沙箱应用/ 信息配置/ 必看部分/ 支付宝网关（注意沙箱alipaydev，正式则为 alipay）
     public static String url = "https://openapi.alipaydev.com/gateway.do";

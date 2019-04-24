@@ -260,5 +260,27 @@ public class UserServiceImpl implements  UserService{
         userMapper.deleteMany(ids);
     }
 
+    /* @Override
+     public Integer queryfingById(String userCode) {
+         return userMapper.queryfingById(userCode);
+     }
+
+     @Override
+     public String queryList(Integer id) {
+         return userMapper.queryList(id);
+     }
+ */
+    @Override
+    @ResponseBody
+    public UserBean queryUserByName(String account) {
+        return userMapper.queryUserByName(account);
+    }
+
+    @Override
+    @ResponseBody
+    public List<String> queryUserId(String string) {
+        return userMapper.queryUserId(string);
+    }
+
 
 }

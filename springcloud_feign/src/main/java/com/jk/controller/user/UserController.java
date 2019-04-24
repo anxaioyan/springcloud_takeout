@@ -14,12 +14,16 @@ import com.jk.model.shop.MerchantBean;
 import com.jk.model.shop.ShopBean;
 import com.jk.model.user.UserBean;
 import com.jk.service.user.UserServiceFeign;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -159,5 +163,24 @@ public class UserController {
     @ResponseBody
     public HashMap<String, Object> messagelogin(@RequestParam("account") String account, @RequestParam("messageCode") String messageCode){
         return userService.messagelogin(account,messageCode);
+    }
+
+
+
+    //shiro登录
+
+    @RequestMapping("login2")
+    public String login2(HttpServletRequest request, Model model) {
+        ////获得验证的异常信息的名称，提示用户是账号错误还是密码错误
+        String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
+        if(UnknownAccountException.class.getName().equals(exceptionClassName)|| AuthenticationException.class.getName().equals(exceptionClassName)){
+            model.addAttribute("message","UnknownAccountException -- > 账号不存在：");
+
+        }else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
+            model.addAttribute("message","：IncorrectCredentialsException密码错误");
+        }
+        //登录失败之后 再跳转回登录页面
+        //访问其他页面时 只要不是登录成功状态 都会跳转到登录页面
+        return "login2";
     }
 }

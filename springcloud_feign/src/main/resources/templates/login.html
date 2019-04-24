@@ -14,9 +14,9 @@
 
 <div class="login-main">
     <header class="layui-elip">登录</header>
-    <form class="layui-form" id="login">
+    <form class="layui-form" id="login" action="../login2" method="post">
         <div class="layui-input-inline">
-            <input type="text" name="account" id="accounts" required lay-verify="required" placeholder="用户名" autocomplete="off"
+            <input type="text" name="username" id="accounts" required lay-verify="required" placeholder="用户名" autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-input-inline">
@@ -24,7 +24,7 @@
                    class="layui-input">
         </div>
         <div class="layui-input-inline login-btn">
-            <button type="button" id="plogBtn" lay-filter="login" class="layui-btn">登录</button>
+            <button type="submit" id="plogBtn" lay-filter="login" class="layui-btn">登录</button>
         </div>
         <div class="layui-input-inline">
             <button type="button" id="telBtn" class="layui-btn layui-btn-primary">使用手机验证码登录</button>
@@ -42,6 +42,7 @@
 </body>
 <script src="../js/layui/layui.js"></script>
 <script type="text/javascript">
+/*
     function toReg(){
         location.href = "../page/toReg";
     }
@@ -78,6 +79,7 @@
             })
         }
     })
+*/
 
     /*ayui.use(['form','layer','jquery'], function () {
 

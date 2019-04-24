@@ -81,4 +81,20 @@ public interface UserService {
     @DeleteMapping("deleteMany")
     @ResponseBody
     void deleteMany(@RequestParam("ids") Integer[] ids);
+
+    /*@GetMapping("queryfingById")
+    @ResponseBody
+    Integer queryfingById(String userCode);*/
+
+   /* @GetMapping("queryList")
+    @ResponseBody
+    String queryList(Integer id);
+*/
+    @GetMapping("queryUserByName")
+    @ResponseBody
+    UserBean queryUserByName(@RequestParam("account") String account);
+
+    @GetMapping("queryUserId")
+    @ResponseBody
+    List<String> queryUserId(@RequestParam("string") String string);
 }

@@ -14,6 +14,7 @@ import com.jk.model.shop.MerchantBean;
 import com.jk.model.shop.ShopBean;
 import com.jk.model.user.UserBean;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -54,4 +55,12 @@ public interface UserMapper {
     UserBean findUserByLoginNumber(String phoneNumber);
 
     void deleteMany(@Param("ids") Integer[] ids);
+
+
+
+    @Select("select * from t_reg t where t.account=#{account}")
+    UserBean queryUserByName(@Param("account") String account);
+
+    @Select("select * from t_reg t where t.account=#{account}")
+    List<String> queryUserId(String string);
 }

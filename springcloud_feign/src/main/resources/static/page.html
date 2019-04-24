@@ -1,0 +1,53 @@
+
+ 		<center>
+    		<a href="javaScript:toPage(1)">首页</a>
+			<a href="javaScript:toPage(2)">上一页</a>
+			<a href="javaScript:toPage(3)">下一页</a>
+			<a href="javaScript:toPage(4)">尾页</a>
+    	</center>
+    	
+    	<script type="text/javascript">
+			function toPage(flag){
+				//获取当前页对象
+				var currentPageObj = document.getElementById("currentPageId");
+				//获取每页显示条数对象
+				var pageSizeObj = document.getElementById("pageSizeId");
+				//获取总页数
+				var totalPage = document.getElementById("totalPageId").value;
+
+				if(flag==0){
+					debugger;
+					pageSizeObj.value = document.getElementById("pageSize_select").value;
+				}
+				if(flag==1){
+					if(currentPageObj.value==1){
+						alert("当前已为首页！！！");
+						return ;
+					}
+					currentPageObj.value=1;
+				}
+				if(flag==2){
+					if(currentPageObj.value==1){
+						alert("当前已为第一页！！！");
+						return ;
+					}
+					currentPageObj.value--;
+				}
+				if(flag==3){
+					if(currentPageObj.value==totalPage){
+						alert("当前已为最后一页！！！");
+						return ;
+					}
+					currentPageObj.value++;
+				}
+				if(flag==4){
+					if(currentPageObj.value==totalPage){
+						alert("当前已为尾页！！！");
+						return ;
+					}
+					currentPageObj.value=totalPage;
+				}
+				//通过表单的id 获取对应表单对象进行 表单提交
+				document.getElementById("pageForm").submit();
+			}
+		</script>

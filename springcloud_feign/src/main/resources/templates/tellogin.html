@@ -28,6 +28,9 @@
         <div class="layui-input-inline login-btn">
             <button type="button" id="plogBtn" lay-filter="login" class="layui-btn">登录</button>
         </div>
+        <div class="layui-input-inline">
+            <button type="button" id="telBtn" class="layui-btn layui-btn-primary">使用账号密码登录</button>
+        </div>
         <hr/>
         <p><a href="register.html" class="fl">立即注册</a><a href="javascript:;" class="fr">忘记密码？</a></p>
     </form>
@@ -35,6 +38,12 @@
 </body>
 <script src="../js/layui/layui.js"></script>
 <script type="text/javascript">
+
+    $("#telBtn").click(function (){
+        location.href = "../page/tologin";
+    })
+
+
     $("#plogBtn").click(function () {
         var account=$("#accounts").val();
         var yan=$("#yan").val();

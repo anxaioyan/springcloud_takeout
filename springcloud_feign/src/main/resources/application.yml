@@ -21,3 +21,5 @@ feign:
     enabled: true
 
 
+  hystrix:
+    enabled=false:

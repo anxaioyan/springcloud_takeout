@@ -52,7 +52,7 @@ public class AlipayController {
         String subject = "ITAEMBook"; // 订单名称
         System.out.println("订单名称"+subject);
         String body = "reading"; // 商品描述
-        // 封装请求客户端
+        // 封装 请求客户端
         AlipayClient client = new DefaultAlipayClient(url, app_id, private_key, format, charset, public_key, signtype);
         // 支付请求
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();

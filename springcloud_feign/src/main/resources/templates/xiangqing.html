@@ -56,7 +56,7 @@
                     </div>
                     <div topbar-profilebox="">
                         <div class="topbar-profilebox">
-                            <span ng-show="!$root.user.username" class="ng-hide"><a ng-href="//h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fshop%2FE13225239603205588383" target="_blank" href="https://h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fshop%2FE13225239603205588383">登录/注册</a></span>
+                            <span ng-show="!$root.user.username" class="ng-hide"><a ng-href="//h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fshop%2FE13225239603205588383" target="_blank" href="../page/toReg">登录/注册</a></span>
                             <span class="topbar-profilebox-wrapper" ng-show="$root.user.username">
                             <span class="topbar-profilebox-username ng-binding"></span>
                             <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span>
@@ -230,7 +230,7 @@
                 <div class="shopnav-search">
                     <form class="place-search ng-pristine ng-valid" role="search" ng-submit="search()">
                         <button class="place-search-btn icon-search" ubt-click="403" ng-attr-ubt-data-keyword="{{searchText}}" title="搜索商家或美食" ubt-data-keyword=""></button>
-                        <label for="globalsearch">搜索商家或美食</label>
+                        <label for="globalsearch">搜索美食</label>
                         <input id="globalsearch" class="place-search-input ng-pristine ng-valid" ng-model="searchText" autocomplete="" placeholder="搜索商家,美食..." />
                     </form>
                 </div>
@@ -324,6 +324,7 @@
     <a href="javascript:" class="sidetools-item icon-arrow-up" title="回到顶部" tooltip="回到顶部" tooltip-placement="left" ng-click="backToTop()"></a>
 </div>
 </div>
+<hr/>
 <footer class="footer" role="contentinfo">
     <div class="container clearfix">
         <div class="footer-link">
@@ -382,15 +383,15 @@
 </body>
 <script>
     $(function(){
-        initDrugList(1,12);
+        initDrugList(1,18);
     })
     //条查
     function searchInvestment(){
-        initDrugList(1,12);
+        initDrugList(1,18);
     }
     function searchStatus(status){
         $('#hiddStatus').val(status);
-        initDrugList(1,12);
+        initDrugList(1,18);
     }
     function initDrugList(page,rows) {
         $.ajax({

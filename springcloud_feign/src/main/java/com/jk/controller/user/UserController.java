@@ -14,15 +14,24 @@ import com.jk.model.shop.MerchantBean;
 import com.jk.model.shop.ShopBean;
 import com.jk.model.user.UserBean;
 import com.jk.service.user.UserServiceFeign;
+import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -41,6 +50,9 @@ public class UserController {
 
     @Autowired
    private RedisTemplate redisTemplate;
+
+    @Autowired
+    private SolrClient client;
 
 
     @PostMapping("login")
@@ -160,4 +172,107 @@ public class UserController {
     public HashMap<String, Object> messagelogin(@RequestParam("account") String account, @RequestParam("messageCode") String messageCode){
         return userService.messagelogin(account,messageCode);
     }
+
+    /*solr搜索*/
+    @RequestMapping("search")
+    @ResponseBody
+    public Map<String,Object> merchantList(MerchantBean merchant, Integer page, Integer rows,HttpServletRequest request) throws IOException, SolrServerException {
+        System.out.println("---"+merchant.getName());
+        //因为使用easyui返回数据
+        Map<String,Object> mSolr=new HashMap<String,Object>();
+        //把所有查询的高亮显示内容发到list中
+        List<MerchantBean> merchantList=new ArrayList<>();
+        //查询条件的对象
+        SolrQuery params = new SolrQuery();
+        //判断前台传递的关键字是否为空
+        if(!"".equals(merchant.getName()) && merchant.getName()!=null ){
+            //不为空设置条件为关键字
+            params.set("q", merchant.getName());
+        }else{//如果为空查询所有
+            params.set("q", "*:*");
+
+        }
+        //默认查询字段  一般默认指定
+        params.set("df", "name");
+        //指定查询结果返回哪些字段
+        params.set("fl", "id,name,info,price,peisong,image");
+        // 设置高亮字段
+        params.addHighlightField("name"); // 高亮字段
+        //分页
+        if(page==null){
+            params.setStart(0);
+        }else {
+            params.setStart((page-1)*rows);
+        }
+        if(rows==null){
+            params.setRows(5);
+        }else {
+            params.setRows(rows);
+        }
+
+
+
+        //高亮
+        //打开开关
+        params.setHighlight(true);
+        //设置前缀
+        params.setHighlightSimplePre("<span style='color:red'>");
+        //设置后缀
+        params.setHighlightSimplePost("</span>");
+        //QueryResponse是查询返回的对象数据   client.query("core1",params)  查询的是哪个索引库和条件
+        QueryResponse queryResponse = client.query("core1",params);
+        ///查询返回的结果list对象   不包括高亮
+        SolrDocumentList results = queryResponse.getResults();
+        //查询出来总条数
+        long numFound = results.getNumFound();
+        //查询返回的高亮结果
+        Map<String, Map<String, List<String>>> highlight = queryResponse.getHighlighting();
+        //循环查询的所有结果
+        for (SolrDocument result : results) {
+            //创建对象接收循环的对象数据
+            MerchantBean merchant1=new MerchantBean();
+            //设置高亮的字段
+            String highname="";
+            //根据id获得高亮的内容
+            Map<String, List<String>> map = highlight.get(result.get("id"));
+            //根据高亮字段拿到数据
+            List<String> list = map.get("name");
+            //判断数据是否为空
+            if(list==null){
+                //如果为空把普通字段放到对象中
+                highname=(String)result.get("name");
+            }else{
+                //获得高亮字段查询的值放到变量
+                highname=list.get(0);
+            }
+            merchant1.setId(Integer.parseInt((String) result.get("id")));
+            merchant1.setName(highname);
+            merchant1.setInfo((String)result.get("info"));
+            merchant1.setPrice((Double)result.get("price"));
+            merchant1.setPeisong((String)result.get("peisong"));
+            merchant1.setImage((String)result.get("image"));
+            merchantList.add(merchant1);
+        }
+        mSolr.put("total",numFound);
+        mSolr.put("rows",merchantList);
+       String key = "keys";
+        redisTemplate.opsForValue().set(key,merchantList);
+        return mSolr;
+    }
+
+    @RequestMapping("findSearch")
+    @ResponseBody
+    public List<MerchantBean> findSearch(HttpServletRequest request){
+        String key = "keys";
+        List<MerchantBean> list= (List<MerchantBean>)redisTemplate.opsForValue().get(key);
+        for (MerchantBean li:list) {
+            System.out.println(li.getName());
+            System.out.println("==========="+li.getPrice());
+            System.out.println("==========="+li.getImage());
+        }
+        redisTemplate.delete(key);
+        return list;
+    }
+
+
 }

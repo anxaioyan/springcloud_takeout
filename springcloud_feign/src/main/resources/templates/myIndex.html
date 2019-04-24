@@ -57,9 +57,6 @@
         <h3><a href="../page/toMyIndex" hardjump=""  ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a></h3>
     </li>
     <li class="layui-nav-item">
-       <a href="">个人中心<span class="layui-badge-dot"></span></a>
-    </li>
-    <li class="layui-nav-item">
         <h2><a href="">我的订单<span class="layui-badge-dot"></span></a></h2>
     </li>
     <li class="layui-nav-item">
@@ -91,17 +88,44 @@
 
 </ul>
 <!--承诺-->
-<div class="place-pro clearfix container ng-scope" ng-if="isBeijing"><div class="promise-title"><div>饿了么向消费者郑重承诺</div><a ng-href="//h5.ele.me/irregularshop/?latitude=0&amp;longitude=0&amp;city_id=3" href="https://h5.ele.me/irregularshop/?latitude=0&amp;longitude=0&amp;city_id=3">下线名单公示专栏</a></div><div class="promise-content">我平台已经对入网餐饮服务提供者的食品经营许可证进行严格的实地审查，并保证入网餐饮服务提供者食品经营许可证载明的经营者名称、经营场所、主体业态、经营项目、有效期等许可信息合法、真实、准确、有效。</div></div><!-- end ngIf: isBeijing --><div class="location" ng-style="{visibility: geohash ? '' : 'hidden'}" role="navigation" location="">
+<div class="place-pro clearfix container ng-scope" ng-if="isBeijing"><div class="promise-title"><div>饿了么向消费者郑重承诺</div><a ng-href="//h5.ele.me/irregularshop/?latitude=0&amp;longitude=0&amp;city_id=3" href="https://h5.ele.me/irregularshop/?latitude=0&amp;longitude=0&amp;city_id=3">下线名单公示专栏</a></div><div class="promise-content">我平台已经对入网餐饮服务提供者的食品经营许可证进行严格的实地审查，并保证入网餐饮服务提供者食品经营许可证载明的经营者名称、经营场所、主体业态、经营项目、有效期等许可信息合法、真实、准确、有效。</div></div><div class="location" ng-style="{visibility: geohash ? '' : 'hidden'}" role="navigation" location="">
     <span>当前位置:</span> <span class="location-current"><a class="inherit ng-binding" ng-href="/place/wx4ez77bybbs" ubt-click="401" ng-bind="place.name || place.address" href="https://www.ele.me/place/wx4ez77bybbs">北京明园大学</a></span>
     <span class="location-change" ng-class="{ 'location-hashistory': user.username &amp;&amp; userPlaces &amp;&amp; userPlaces.length &gt; 0 }"><a ng-href="/home" ubt-click="400" hardjump="" href="https://www.ele.me/home">[切换地址]</a>
         <ul class="dropbox location-dropbox" ubt-visit="398"><li class="arrow"></li>
             <li class="changelocation"><a ng-href="/home" hardjump="" href="https://www.ele.me/home">修改收货地址<span class="icon-location"></span></a></li>
-        </ul></span> <span ng-transclude=""></span></div><div class="place-search" role="search" search-input=""><a class="place-search-btn icon-search" ubt-click="403" ng-attr-ubt-data-keyword="{{searchText}}" title="搜索商家或美食" ubt-data-keyword=""></a>
-    <label for="globalsearch">搜索商家或美食</label><input id="globalsearch" class="place-search-input ng-pristine ng-valid" ng-model="searchText" autocomplete="" placeholder="搜索商家,美食..."><div class="searchbox"><div class="searchbox-list searchbox-rstlist ng-hide" ng-show="searchRestaurants &amp;&amp; searchRestaurants.length &gt; 0" ng-class="{ 'show-separator': searchFoods &amp;&amp; searchFoods.length &gt; 0 }"><ul><!-- ngRepeat: restaurant in searchRestaurants | orderBy: [ '-is_opening', 'order_lead_time' ] | limitTo: 5 --></ul></div><div class="searchbox-list searchbox-foodlist ng-hide" ng-show="searchFoods &amp;&amp; searchFoods.length &gt; 0"><ul><!-- ngRepeat: food in searchFoods  | limitTo: 5 --></ul></div></div></div></div><
+        </ul>
+    </span>
+    <span ng-transclude=""></span>
+</div>
+ <!--<div class="place-search" role="search" search-input=""><a class="place-search-btn icon-search" ubt-click="403" ng-attr-ubt-data-keyword="{{searchText}}" title="搜索商家或美食" ubt-data-keyword=""></a>
+    <label for="nsss"></label>
+        <input id="nsss" name="name" class="place-search-input ng-pristine ng-valid" ng-model="searchText" autocomplete="" placeholder="搜索商家,美食...">
+          <div class="searchbox">
+              &lt;!&ndash;<div class="searchbox-list searchbox-rstlist ng-hide" ng-show="searchRestaurants &amp;&amp; searchRestaurants.length &gt; 0" ng-class="{ 'show-separator': searchFoods &amp;&amp; searchFoods.length &gt; 0 }"><ul></ul></div>
+              <div class="searchbox-list searchbox-foodlist ng-hide" ng-show="searchFoods &amp;&amp; searchFoods.length &gt; 0"><ul></ul></div>&ndash;&gt;
+              <button type="button" onclick="query()">搜索</button>
+          </div>
+    </div>-->
+<div class="place-search" role="search">
+    <form id="serach_form" method="get">
+        <label for="nsss"></label>
+        <input id="nsss" name="name" class="place-search-input ng-pristine ng-valid" ng-model="searchText" autocomplete="" placeholder="搜索商家,美食...">
+        <input type="button" onclick="query()" value="搜索">
+
+    </form>
+</div>
+</div>
 <div class="place-tab clearfix container ng-scope"><div class="place-fetchtakeout ng-isolate-scope" show-fetch-takeout-dialog="">
 </div></div>
 <!--右侧的导航条-->
-<div class="sidebar" role="complementary" ng-hide="layoutState &amp;&amp; layoutState.hideSidebar"><div class="sidebar-tabs"><div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close" href="https://www.ele.me/profile/order" hardjump="" tooltip="我的订单" tooltip-placement="left" ubt-click="toolbar_order"></a><div class="toolbar-separator"></div><a class="toolbar-cartbtn icon-cart toolbar-open" href="../page/toGouwu" template="cart" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;cart&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-cartbtn-shownum&#39;: foodCount.count}" ubt-click="390">购物车<!-- ngIf: foodCount.count --></a><div class="toolbar-separator"></div><a class="toolbar-btn icon-notice toolbar-open modal-hide" href="javascript:" template="message" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;message&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-open&#39;: user, &#39;modal-hide&#39;: user}" tooltip="我的信息" tooltip-placement="left" ubt-click="392"><!-- ngIf: messageCount.count --></a></div><div class="toolbar-tabs-bottom"><div class="toolbar-btn icon-QR-code"><div class="dropbox toolbar-tabs-dropbox"><a href="http://static11.elemecdn.com/eleme/desktop/mobile/index.html" target="_blank"><img src="http://localhost:8082/404" alt="下载手机应用"><p>下载手机应用</p><p class="icon-QR-code-bonus">即可参加分享红包活动</p></a></div></div><a class="toolbar-btn sidebar-btn-backtop icon-top" tooltip="回到顶部" title="回到顶部" href="javascript:" tooltip-placement="left" style="visibility: hidden;"></a></div></div><div class="sidebar-content"><!-- ngInclude: activeTemplate ? ('/common/page/_block/sidebar/sidebar-'+ activeTemplate + '/sidebar-'+ activeTemplate + '.html') : '' --></div></div>
+<div class="sidebar" role="complementary" ng-hide="layoutState &amp;&amp; layoutState.hideSidebar"><div class="sidebar-tabs"><div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close" href="https://www.ele.me/profile/order" hardjump="" tooltip="我的订单" tooltip-placement="left" ubt-click="toolbar_order"></a><div class="toolbar-separator"></div><a class="toolbar-cartbtn icon-cart toolbar-open" href="../page/toGouwu" template="cart" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;cart&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-cartbtn-shownum&#39;: foodCount.count}" ubt-click="390">购物车<!-- ngIf: foodCount.count --></a><div class="toolbar-separator"></div><a class="toolbar-btn icon-notice toolbar-open modal-hide" href="javascript:" template="message" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;message&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-open&#39;: user, &#39;modal-hide&#39;: user}" tooltip="我的信息" tooltip-placement="left" ubt-click="392"><!-- ngIf: messageCount.count --></a></div><div class="toolbar-tabs-bottom"><div class="toolbar-btn icon-QR-code"><div class="dropbox toolbar-tabs-dropbox"><a href="http://static11.elemecdn.com/eleme/desktop/mobile/index.html" target="_blank"><img src="http://localhost:8082/404" alt="下载手机应用"><p>下载手机应用</p><p class="icon-QR-code-bonus">即可参加分享红包活动</p></a></div></div><a class="toolbar-btn sidebar-btn-backtop icon-top" tooltip="回到顶部" title="回到顶部" href="javascript:" tooltip-placement="left" style="visibility: hidden;"></a></div></div><div class="sidebar-content"><!-- ngInclude: activeTemplate ? ('/common/page/_block/sidebar/sidebar-'+ activeTemplate + '/sidebar-'+ activeTemplate + '.html') : '' -->
+</div>
+    <!--红包-->
+    <div style="position:fixed;text-align: center; left: 80%;top:60%;width: 220px; height:150px">
+        <img src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/20190422152508.gif"  >
+        <p style="color: #FFF;font-size: 25px;font-family: '楷体'" >买好吃的了</p>
+    </div>
+</div>
 <style type="text/css">
     /* box */
 
@@ -164,7 +188,7 @@
 <!--tab选项卡-->
 <div class="layui-tab layui-tab-card">
     <ul class="layui-tab-title">
-        <li class="layui-this"><a onclick="assignFistCatalog(1)">全部商家</a></li>
+        <li class="layui-this"></li>
         <li  onclick="assignFistCatalog(1)">美食</li>
         <li  onclick="assignFistCatalog(2)">快餐便当</li>
         <li onclick="assignFistCatalog(3)">特色菜系</li>
@@ -198,33 +222,26 @@
         <div class="layui-tab-item">盖浇饭 川湘菜 奶茶果汁 炸鸡炸串 麻辣烫 汉堡</div>
     </div>
 </div>
-<input type="hidden" id="hiddStatus" value="6" />
-<!--红包-->
-<div style="position:fixed;text-align: center; left: 80%;top:60%;width: 220px; height:150px">
-    <img src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/20190422152508.gif"  >
-    <p style="color: #FFF;font-size: 25px;font-family: '楷体'" >买好吃的了</p>
-</div>
+<input type="hidden" id="hiddStatus" value="1" />
 </body>
-<!--商品-->
-
 <!--中间的内容-->
 <div id="contentcen"></div>
 <script type="text/javascript">
     $(function () {
-       initDrugList(1,12);
+       initDrugList(1,18);
     })
     function assignFistCatalog(type) {
         $('#hiddStatus').val(type);
-        initDrugList(1,12)
+        initDrugList(1,18)
     }
     <!--商品 鼠标滑过事件 详情-->
-    function hover(id){
+   /* function hover(id){
         $('.cp-show'+id).css('zIndex',2)
 
     }
     function out(id){
         $('.cp-show'+id).css('zIndex',-2)
-    }
+    }*/
 
     function initDrugList(page,rows) {
         var firstCatalog = $('#firstCatalog').val();
@@ -250,6 +267,8 @@
                         '<p style="color:red;font-size:14px;"><a href="javascript:;">猜您喜欢：</a></p>';
                 } else {
                     for (var i = 0; i < data.length; i++) {
+                        var id = data[i].id;
+                        var name=data[i].name;
                         var image = data[i].image;
                         var store = data[i].store;
                         var peisong = data[i].peisong;
@@ -259,7 +278,7 @@
                         var area = data[i].area;
                         var info= data[i].info;
                         var times=data[i].times;
-                        html += '<li style="position:relative" onmouseover="hover('+data[i].id+')" onmouseout="out('+data[i].id+')" >'+
+                       html += '<li style="position:relative" onmouseover="hover('+data[i].id+')" onmouseout="out('+data[i].id+')" >'+
                             '<a href="#" class="classtopimg-tit" target="_blank">'+
                             "<a href=\"http://localhost:8082/page/toXiangqing?id="+data[i].id+"\" data-rst-id=\"E8511232894373335604\" data-bidding=\"\" target=\"_blank\" class=\"rstblock\">"+
                             "<div class=\"rstblock-logo\">" +
@@ -269,9 +288,9 @@
                             "<div class=\"starrating icon-star\"><span class=\"icon-star\" style=\"width:92%;\"></span></div>" +
                             "<div class=\"rstblock-cost\">" + peisong + "</div><div class=\"rstblock-activity\"><i style=\"background:#fff;color:#999999;border:1px solid;padding:0;\">保</i></div></div></a>"+
                                //划过
-                            '<div class="cp-show'+data[i].id+'" style="position:absolute;width:20%;height:150px;;left:0;top:0;z-index:-1;background-color:rgba(51,57,57,0.8);padding:25px 10px;color:#fff;box-sizing:border-box">'+
+                            '<div class="cp-show'+id+'" style="position:absolute;width:33%;height:130px;;left:0;top:0;z-index:-1;background-color:rgba(51,57,57,0.8);padding:25px 10px;color:#fff;box-sizing:border-box">'+
                             '<p class="cp-p" >'+
-                            '<span style="float:left;width:45px;text-align:right">名称：</span>'+
+                            '<span style="float:left;width:45px;text-align:right">名称:</span>'+
                             '<span style="float:left;width:155px;">'+store+'</span>'+
                             '</p>'+
                             '<p class="cp-p" >'+
@@ -279,7 +298,7 @@
                             '<span style="float:left;width:155px;">'+peisong+'</span>'+
                             '</p>'+
                             '<p class="cp-p" >'+
-                            '<span style="float:left;width:45px;text-align:right">内容：</span>'+
+                            '<span style="float:left;width:45px;text-align:right">内容</span>'+
                             '<span style="float:left;width:155px;">'+invoicecontents+'</span>'+
                             '</p>'+
                             '<p class="cp-p" >'+
@@ -295,6 +314,26 @@
                     }
                 }
                 $("#contentcen").html(html);
+            }
+        })
+    }
+
+    //solr搜索
+    //搜索
+    function query(){
+        var produ = $("#nsss").val();
+        $.ajax({
+            url:'../user/search',
+            pagination:true,
+            pageNumber:1,
+            pageSize:1,
+            pageList:[1,2,10],
+            method:"post",
+            data:{
+                name:produ
+            },
+            success:function (data) {
+                window.location.href="../page/toSousuo";
             }
         })
     }

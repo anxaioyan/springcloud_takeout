@@ -177,4 +177,12 @@ public class PageController {
         return "personal/myCollection/myCollection";
     }
 
+    /**
+     * 跳转到搜索页面
+     */
+    @RequestMapping("toSousuo")
+   public String toSousuo(){
+       return "sousuo";
+   }
+
 }

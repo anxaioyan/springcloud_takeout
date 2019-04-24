@@ -34,13 +34,10 @@
         <h1><a href="#" hardjump="" class="topbar-logo icon-logo"><span>饿了么</span></a></h1>
     </li>
     <li class="layui-nav-item">
-        <a href="">首页<span class="layui-badge-dot"></span></a>
+        <a href="../page/toMyIndex">首页<span class="layui-badge-dot"></span></a>
     </li>
     <li class="layui-nav-item">
-        <a href="">个人中心<span class="layui-badge-dot"></span></a>
-    </li>
-    <li class="layui-nav-item">
-        <a href="">我的订单<span class="layui-badge-dot"></span></a>
+        <a href="../page/toGouwu">我的订单<span class="layui-badge-dot"></span></a>
     </li>
     <li class="layui-nav-item">
         <a href="">加盟合作<span class="layui-badge-dot"></span></a>
@@ -58,9 +55,9 @@
     <form method="post" action="/index.php/Home/Goods/user_cart2.html" id="form_id">
         <div style="height:100px;line-height:100px;text-align:center;"><font size="4px">购物车还没达到上限， 前去<a href="../page/toMyIndex" target="_blank" style="color:red;">浏览商品</a></font></div>    <ul class="myshopcar-topbox" style="margin:20px 0;">
         <li class="myshop-guige"><a href="javascript:delMany();"><font color="red">批量删除</font></a></li>
-        <li class="myshop-procom"><a href="localhost/page/toMyIndex"><font color="blue">再来一单</font></a></li>
+        <li class="myshop-procom"><a href="../page/toMyIndex"><font color="blue">再来一单</font></a></li>
         <li class="myshop-proper" style="width: 200px;">已选商品：<span style="color: #ff1c1c;padding:0 10px;font-weight: bold" id="jianshu">0</span>件</li>
-        <li class="myshop-discount" style="width: 280px">合计(不含运费)：<span style="color: #ff1c1c;padding:0 10px;font-weight: bold;font-size: 16px">￥<span id="total"></span></span></li>
+        <li class="myshop-discount" style="width: 280px">合to计(不含运费)：<span style="color: #ff1c1c;padding:0 10px;font-weight: bold;font-size: 16px">￥<span id="total"></span></span></li>
         <li class="myshop-money"><a href="javascript:jiesuan();" id="bill" >结算</a></li>
     </ul>
     </form>
@@ -173,7 +170,7 @@
         var con = $("#text_box"+id).val();
         var bb=con*1-1;
         if(bb==0){
-            alert("已经最小值")
+            alert("已经是最小值")
         }else{
             $("#text_box"+id).val(bb);
         }

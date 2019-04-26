@@ -18,8 +18,8 @@
   	<div class="layui-main" style="padding-top: 25px" >
   		<img src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/map-logo.d72989.png" width="130" height="70">
   		<span style="float: right; padding-top: 25px; height: 30px;line-height: 30px">
-  			<img src="default-avatar.38e40d.png" style="border-radius: 50%;vertical-align: middle;" width="28" height="28">
-  			<span style="padding-left: 20px;padding-right: 20px">用户名字</span>
+  			<img src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/%E5%A4%B4%E5%83%8F.png" style="border-radius: 50%;vertical-align: middle;" width="28" height="28">
+  			<span style="padding-left: 20px;padding-right: 20px" onclick="mylogin()">用户名字</span>
   			<input  type="button" class="layui-btn layui-btn-sm" style=" border: 0; background: #5db423;" onclick="openShop()" value="我要开店">
   		</span>
   	</div>	
@@ -47,7 +47,7 @@
 	</div>
 	<!-- 地图 -->
 	<div class="layui-bg-blue" style="width: 100%;background: red; ">
-		<input id="input_city" onkeyup="this.value=this.value.replace(/\s+/g,'')" placeholder="请输入所在市" type="text" name="" style="display: none;">
+		<input id="input_city"  onkeyup="this.value=this.value.replace(/\s+/g,'')" placeholder="请输入所在市" type="text" name="" style="display: none;">
    		<input id="input_address" placeholder="请输入详细地址" type="text" name=""  style="display: none;">
    		<input  type="button" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="input_s" class="layui-btn layui-btn-sm" style=" border: 0; display: none; background: #5db423;" value="搜索">
 		 <div id="map" style="width: 100%; height: 550px;display: none;">
@@ -99,15 +99,21 @@
 	    $("#input_address").css("display","none");
 		$("#input_city").css("display","none");
 		$("#input_s").css("display","none");
+        if ($("#input_city").val()!=null && $("#input_address").val()!=null){
+            $("#city").val($("#isnput_city").val());
+            $("#myGps").val($("#input_address").val());
+        }
 
  }
 
 
  function openShop() {
-	 location.href="";
+	 location.href="http://192.168.0.175:8082/page/toleague";
  }
 
-
+function mylogin() {
+    location.href="../page/tologin";
+}
 
  </script>
 </html>

@@ -49,6 +49,7 @@ $(function () {
                                         id:node.id
                                     });
                                     element.tabChange('tabs', node.id);
+
                             }
                         }
                     }

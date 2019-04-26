@@ -61,6 +61,14 @@ public class PageController {
 
 
     /**
+     * 跳转到主页面
+     */
+    @RequestMapping("toIndex")
+    public String toIndex(){
+        return "personal/myIndex/Index";
+    }
+
+    /**
      * 跳转个人资料树页面
      */
     @RequestMapping("toPersonalLayUi")
@@ -200,5 +208,8 @@ public class PageController {
    public String toSousuo(){
        return "sousuo";
    }
+
+
+
 
 }

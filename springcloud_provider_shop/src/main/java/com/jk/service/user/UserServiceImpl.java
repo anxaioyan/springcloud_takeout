@@ -11,10 +11,15 @@
 package com.jk.service.user;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.jk.mapper.user.UserMapper;
 import com.jk.model.shop.MerchantBean;
 import com.jk.model.shop.ShopBean;
 import com.jk.model.user.UserBean;
+import com.jk.utils.CommonConst;
+import com.jk.utils.DateUtil;
+import com.jk.utils.HttpClientUtil;
+import com.jk.utils.Md5Util;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -24,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -183,11 +189,11 @@ public class UserServiceImpl implements  UserService{
     public String gainMessgerCode(String account) {
         Object yanzhengma = redisTemplate.opsForValue().get(account);
         if (yanzhengma == null || yanzhengma.equals("")) {
-            String createRandom = createRandom();
+            /*String createRandom = createRandom();
             System.out.println("手机验证码为:" + createRandom);
             redisTemplate.opsForValue().set(account, createRandom);
-            redisTemplate.expire(account, 5, TimeUnit.MINUTES);
-            /*HashMap<String, Object> params = new HashMap<String, Object>();
+            redisTemplate.expire(account, 5, TimeUnit.MINUTES);*/
+            HashMap<String, Object> params = new HashMap<String, Object>();
             params.put("accountSid", CommonConst.ACCOUNT_SID);
             params.put("templateid", CommonConst.TEMPLATE_ID);
             String createRandom = createRandom();
@@ -205,7 +211,7 @@ public class UserServiceImpl implements  UserService{
             if(respCode.equals("00000")){
                 redisTemplate.opsForValue().set(account, createRandom);
                 redisTemplate.expire(account, 5, TimeUnit.MINUTES);
-            }*/
+            }
             return "1";
         } else {
             return "0";

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>饿了么</title>
+
+	<script src="../js/jquery/jquery-1.9.1.js"></script>
+	<script src="../js/layui/layui.js"></script>
+	<link rel="stylesheet" href="../js/layui/css/layui.css">
+     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=VNFBZ-JT332-TKQUX-CTEHJ-4FFJH-IEBEY"></script>
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+
+</head>
+<body>
+  <div  id="content" class="layui-bg-blue" style="width: 100%">
+  	<!-- 导航栏 -->
+  	<div class="layui-main" style="padding-top: 25px" >
+  		<img src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/map-logo.d72989.png" width="130" height="70">
+  		<span style="float: right; padding-top: 25px; height: 30px;line-height: 30px">
+  			<img src="default-avatar.38e40d.png" style="border-radius: 50%;vertical-align: middle;" width="28" height="28">
+  			<span style="padding-left: 20px;padding-right: 20px">用户名字</span>
+  			<input  type="button" class="layui-btn layui-btn-sm" style=" border: 0; background: #5db423;" value="我要开店">
+  		</span>
+  	</div>	
+	<!-- 内容 -->
+	<div class="layui-main" style="text-align: center; padding-top: 100px" >
+		<img src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/map-logo.d72989.png" width="225" height="125">
+		<div style="width: 70%;padding-top: 50px;padding-bottom: 300px" class="layui-main" >
+			
+			<div class="layui-container" style="margin: auto; height: 50px;  width: 100%">  
+			 <!--  //常规布局（以中型屏幕桌面为例）： -->
+			  <div class="layui-row" style="height: 100%">
+			  	<div class="layui-col-md1"  style="height: 100%">
+			       <input type="text" readOnly="true" id="city" style="height: 100%;border: 0;font-weight: bolder; font-size: 20px;font-family: '楷体'">
+			    </div>
+			    <div class="layui-col-md9" style="height: 100%; border-left:1px solid #BBBBBB";>
+			      <input type="text" id="myGps" style="height: 100%; width: 100%; border: 0"  placeholder="请输入你的收货地址（写字楼，小区，街道或者学校）" onkeyup="this.value=this.value.replace(/\s+/g,'')" >
+			    </div>
+			    <div class="layui-col-md2" style="height: 100%;">
+			      <button type="button"  style="margin-right: 40px; width: 100px; height: 50px; font-weight: bold; font-size: 20px; background: red;color: #fff;border: 0">搜索</button>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<!-- 地图 -->
+	<div class="layui-bg-blue" style="width: 100%;background: red; ">
+		<input id="input_city" onkeyup="this.value=this.value.replace(/\s+/g,'')" placeholder="请输入所在市" type="text" name="" style="display: none;">
+   		<input id="input_address" placeholder="请输入详细地址" type="text" name=""  style="display: none;">
+   		<input  type="button" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="input_s" class="layui-btn layui-btn-sm" style=" border: 0; display: none; background: #5db423;" value="搜索">
+		 <div id="map" style="width: 100%; height: 550px;display: none;">
+		 	 
+		 </div>
+			<input class="layui-btn layui-btn-sm" type="button" id="fix" value="确定" onclick="shows()" style="display: none;">
+	</div>
+</body>
+<script src="../js/projectConfiguration/myResidecs/GPS.js"></script>
+ <script type="text/javascript">
+ 	$(function () {
+ 		 console.log(returnCitySN,returnCitySN["cip"]+','+returnCitySN["cname"])
+ 		 if(returnCitySN["cname"]=="CHINA"){
+				$("#city").val("北京");
+ 		 }else{
+				$("#city").val(returnCitySN["cname"]);
+ 		 }
+ 		 
+ 	})
+ 	
+ 	$("#myGps").keyup(function(){
+ 		if(event.keyCode == 13){
+			if($("#myGps").val().length!=0&&$("#myGps").val()!=""){
+	 			var ress=$("#myGps").val();
+	 			var city=$("#city").val();
+	 			search(ress,city); 
+		       /*$("#map").css("display","block");*/
+		       $("#content").slideUp("slow");
+		       $("#map").slideDown("slow");
+		       $("#fix").css("display","block");
+		       $("#input_address").css("display","block");
+		       $("#input_city").css("display","block");
+		        $("#input_s").css("display","block");
+		        
+	 		}
+		}			 
+    });
+ 
+ $("#input_s").click(function() {
+ 	  var address=$("#input_address").val();
+ 	  var city=$("#input_city").val();
+ 	      search(address,city);
+ });
+
+ function shows(){
+ 		$("#content").slideDown("slow");
+	    $("#map").slideUp("slow");
+	    $("#fix").css("display","none");
+	    $("#input_address").css("display","none");
+		$("#input_city").css("display","none");
+		$("#input_s").css("display","none");
+
+ }
+
+ </script>
+</html>
+
+ 

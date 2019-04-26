@@ -40,7 +40,7 @@
         <a href="../page/toMyIndex" hardjump="" class="topbar-item topbar-homepage focus" ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a>
         <a href="../page/" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a>
         <a href="../" target="_blank" class="topbar-item cooperation" ng-class="{'focus': $root.locationpath[1] === 'order'}">加盟合作</a>
-        <a href="../page/" target="_blank" class="topbar-item cooperation">我的客服</a><nav class="topbar-nav">
+        <a href="../page/toRobot" target="_blank" class="topbar-item cooperation">我的客服</a><nav class="topbar-nav">
             <a ng-href="//h5.localhost/service/agreement/#HEAEDER_SHOW=1" hardjump="" class="topbar-nav-link" target="_blank" href="http://h5.localhost/service/agreement/#HEAEDER_SHOW=1">规则中心</a>
             <div class="topbar-nav-link"><i class="topbar-nav-icon icon-mobile"></i>手机应用<div class="dropbox topbar-mobile-dropbox"><span>扫一扫, 手机订餐更方便</span>
                 <img src="./出错啦 _ 饿了么网上订餐_files/appqc.95e532.png" class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div></div><div topbar-profilebox=""><div class="topbar-profilebox">
@@ -60,10 +60,10 @@
         <h2><a href="">我的订单<span class="layui-badge-dot"></span></a></h2>
     </li>
     <li class="layui-nav-item">
-        <h2><a href="">加盟合作<span class="layui-badge-dot"></span></a></h2>
+        <h2><a href="http://192.168.0.100:8082/page/toleague">加盟合作<span class="layui-badge-dot"></span></a></h2>
     </li>
     <li class="layui-nav-item">
-        <h2> <a href="">我的客服<span class="layui-badge-dot"></span></a></h2>
+        <h2> <a href="http://192.168.0.100:8082/page/toRobot">我的客服<span class="layui-badge-dot"></span></a></h2>
     </li>
     <li class="layui-nav-item">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -118,7 +118,7 @@
 <div class="place-tab clearfix container ng-scope"><div class="place-fetchtakeout ng-isolate-scope" show-fetch-takeout-dialog="">
 </div></div>
 <!--右侧的导航条-->
-<div class="sidebar" role="complementary" ng-hide="layoutState &amp;&amp; layoutState.hideSidebar"><div class="sidebar-tabs"><div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close" href="https://www.ele.me/profile/order" hardjump="" tooltip="我的订单" tooltip-placement="left" ubt-click="toolbar_order"></a><div class="toolbar-separator"></div><a class="toolbar-cartbtn icon-cart toolbar-open" href="../page/toGouwu" template="cart" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;cart&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-cartbtn-shownum&#39;: foodCount.count}" ubt-click="390">购物车<!-- ngIf: foodCount.count --></a><div class="toolbar-separator"></div><a class="toolbar-btn icon-notice toolbar-open modal-hide" href="javascript:" template="message" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;message&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-open&#39;: user, &#39;modal-hide&#39;: user}" tooltip="我的信息" tooltip-placement="left" ubt-click="392"><!-- ngIf: messageCount.count --></a></div><div class="toolbar-tabs-bottom"><div class="toolbar-btn icon-QR-code"><div class="dropbox toolbar-tabs-dropbox"><a href="http://static11.elemecdn.com/eleme/desktop/mobile/index.html" target="_blank"><img src="http://localhost:8082/404" alt="下载手机应用"><p>下载手机应用</p><p class="icon-QR-code-bonus">即可参加分享红包活动</p></a></div></div><a class="toolbar-btn sidebar-btn-backtop icon-top" tooltip="回到顶部" title="回到顶部" href="javascript:" tooltip-placement="left" style="visibility: hidden;"></a></div></div><div class="sidebar-content"><!-- ngInclude: activeTemplate ? ('/common/page/_block/sidebar/sidebar-'+ activeTemplate + '/sidebar-'+ activeTemplate + '.html') : '' --></div>
+<div class="sidebar" role="complementary" ng-hide="layoutState &amp;&amp; layoutState.hideSidebar"><div class="sidebar-tabs"><div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close"  onclick="myPers()"  href="javascript:;" hardjump="" tooltip="我的订单" tooltip-placement="left" ubt-click="toolbar_order"></a><div class="toolbar-separator"></div><a class="toolbar-cartbtn icon-cart toolbar-open" href="../page/toGouwu" template="cart" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;cart&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-cartbtn-shownum&#39;: foodCount.count}" ubt-click="390">购物车<!-- ngIf: foodCount.count --></a><div class="toolbar-separator"></div><a class="toolbar-btn icon-notice toolbar-open modal-hide" href="javascript:" template="message" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;message&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-open&#39;: user, &#39;modal-hide&#39;: user}" tooltip="我的信息" tooltip-placement="left" ubt-click="392"><!-- ngIf: messageCount.count --></a></div><div class="toolbar-tabs-bottom"><div class="toolbar-btn icon-QR-code"><div class="dropbox toolbar-tabs-dropbox"><a href="http://static11.elemecdn.com/eleme/desktop/mobile/index.html" target="_blank"><img src="http://localhost:8082/404" alt="下载手机应用"><p>下载手机应用</p><p class="icon-QR-code-bonus">即可参加分享红包活动</p></a></div></div><a class="toolbar-btn sidebar-btn-backtop icon-top" tooltip="回到顶部" title="回到顶部" href="javascript:" tooltip-placement="left" style="visibility: hidden;"></a></div></div><div class="sidebar-content"><!-- ngInclude: activeTemplate ? ('/common/page/_block/sidebar/sidebar-'+ activeTemplate + '/sidebar-'+ activeTemplate + '.html') : '' --></div>
     <!--红包-->
     <div onclick="receiveRed()" style="position:fixed;text-align: center; right: 0;bottom:0;width: 220px; height:150px">
         <img src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/20190422152508.gif"  >
@@ -435,7 +435,6 @@
 <script>
     function myPers() {
         $("#myGe").css("display","none");
-
        $("#myXs").css("display","block");
     }
 </script>

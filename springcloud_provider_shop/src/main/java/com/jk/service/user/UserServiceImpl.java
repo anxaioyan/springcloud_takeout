@@ -10,20 +10,20 @@
  */
 package com.jk.service.user;
 
+
 import com.alibaba.fastjson.JSON;
 import com.jk.mapper.user.UserMapper;
-import com.jk.model.shop.MerchantBean;
+import com.jk.model.shop.GoodBean;
+import com.jk.model.shop.ShangBean;
 import com.jk.model.shop.ShopBean;
 import com.jk.model.user.UserBean;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -96,64 +96,49 @@ public class UserServiceImpl implements  UserService{
 
     @Override
     @ResponseBody
-    public List<UserBean> queryReg(String account) {
-        return   userMapper.queryReg(account);
-    }
-
-    //查询商品
-    @Override
-    @ResponseBody
-    public HashMap<String, Object> findMenchant(Integer page,Integer rows,String searchList) {
-        MerchantBean merchantBean = JSON.parseObject(searchList,MerchantBean.class);
+    public HashMap<String, Object> findMenchant(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows,@RequestParam("searchList")String searchList) {
+        ShangBean shangBean = JSON.parseObject(searchList, ShangBean.class);
         HashMap<String, Object> hashMap = new HashMap<>();
         //查询总条数
-        int total = userMapper.findMerchantCount(merchantBean);
+        int total = userMapper.findMerchantCount(shangBean);
         //分页查询
         int start = (page-1)*rows;
-        List<MerchantBean> list = userMapper.findMenchant(start,rows,merchantBean);
+        List<ShangBean> list = userMapper.findMenchant(start,rows,shangBean);
         hashMap.put("total", total);
         hashMap.put("rows", list);
         return hashMap;
     }
 
+
     @Override
     @ResponseBody
-    public MerchantBean findXiangqingById(Integer id) {
-        return userMapper.findXiangqingById(id);
+    public List<UserBean> queryReg(String account) {
+        return   userMapper.queryReg(account);
     }
 
-    /*@Override
-    @ResponseBody
-    public void saveShop(@RequestParam("id") Integer id,@RequestParam("counts")  Integer counts) {
-        MerchantBean merchantBean = userMapper.findXiangqingById(id);
-        ShopBean shopBean = new ShopBean();
-        Integer id1 = merchantBean.getId();
-        shopBean.setSid(id1);
-        String name = merchantBean.getName();
-        shopBean.setName(name);
-        String peisong = merchantBean.getPeisong();
-        shopBean.setPeisong(peisong);
-        Integer counts1 = merchantBean.getCounts();
-        shopBean.setCount(counts1);
-        double price = merchantBean.getPrice();
-        shopBean.setPrice(price);
-        mongoTemplate.save(shopBean);
-    }*/
+    //查询商品
 
     @Override
     @ResponseBody
+    public ShangBean findXiangqingById(Integer id) {
+        ShangBean xiangqingById = userMapper.findXiangqingById(id);
+        return xiangqingById;
+    }
+
+  @Override
+    @ResponseBody
     public void saveShops(@RequestParam("id") Integer id, @RequestParam("counts")  Integer counts) {
-        MerchantBean merchantBean = userMapper.findXiangqingById(id);
-        ShopBean shopBean = new ShopBean();
-        Integer id1 = merchantBean.getId();
+      GoodBean goodBean = userMapper.findGoodById(id);
+       ShopBean shopBean = new ShopBean();
+        Integer id1 = goodBean.getId();
         shopBean.setId(id1);
-        String name = merchantBean.getName();
+        String name = goodBean.getName();
         shopBean.setName(name);
-        String peisong = merchantBean.getPeisong();
+        String peisong = goodBean.getPeisong();
         shopBean.setPeisong(peisong);
-        Integer counts1 = merchantBean.getCounts();
+        Integer counts1 = goodBean.getCounts();
         shopBean.setCount(counts1);
-        double price = merchantBean.getPrice();
+        double price = goodBean.getPrice();
         shopBean.setPrice(price);
         userMapper.saveShops(shopBean);
     }
@@ -261,4 +246,17 @@ public class UserServiceImpl implements  UserService{
     }
 
 
+    @Override
+    @ResponseBody
+    public List<GoodBean> findShang(Integer id,String search) {
+        GoodBean goodBean = JSON.parseObject(search, GoodBean.class);
+        return userMapper.findShang(id,goodBean);
+    }
+
+    //回显商品
+    @Override
+    @ResponseBody
+    public GoodBean findGoodById(Integer id) {
+        return userMapper.findGoodById(id);
+    }
 }

@@ -1,3 +1,4 @@
+package com.jk.controller.user;
 /**
  * Copyright (C), 2015-2019,金科教育
  * FileName: UserController
@@ -8,9 +9,10 @@
  * <author>          <time>          <version>          <desc>
  * 张成元           修改时间           版本号              描述
  */
-package com.jk.controller.user;
 
-import com.jk.model.shop.MerchantBean;
+
+import com.jk.model.shop.GoodBean;
+import com.jk.model.shop.ShangBean;
 import com.jk.model.shop.ShopBean;
 import com.jk.model.user.UserBean;
 import com.jk.service.user.UserServiceFeign;
@@ -34,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈〉
  *
  * @author 张成元
@@ -49,7 +51,7 @@ public class UserController {
     private UserServiceFeign userService;
 
     @Autowired
-   private RedisTemplate redisTemplate;
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private SolrClient client;
@@ -58,21 +60,21 @@ public class UserController {
     @PostMapping("login")
     @ResponseBody
     public HashMap<String, Object> login(@RequestParam("name") String name) {
-        HashMap<String, Object> result=userService.login(name);
-        System.out.println("----------------------------------------------s"+name);
+        HashMap<String, Object> result = userService.login(name);
+        System.out.println("----------------------------------------------s" + name);
 
         return result;
     }
 
     @GetMapping("queryReg")
     @ResponseBody
-    public List<UserBean> queryReg(@RequestParam("account")String account) {
-        return  userService.queryReg(account);
+    public List<UserBean> queryReg(@RequestParam("account") String account) {
+        return userService.queryReg(account);
     }
 
     @PostMapping("reg")
     @ResponseBody
-    public  Boolean reg(@RequestBody UserBean userBean){
+    public Boolean reg(@RequestBody UserBean userBean) {
         try {
             return userService.reg(userBean);
         } catch (Exception e) {
@@ -83,50 +85,53 @@ public class UserController {
 
     @GetMapping("findMenchant")
     @ResponseBody
-    public HashMap<String,Object> findMenchant(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows,@RequestParam("searchList")String searchList) {
-        return  userService.findMenchant(page,rows,searchList);
+    public HashMap<String, Object> findMenchant(@RequestParam("page") Integer page, @RequestParam("rows") Integer rows,@RequestParam("searchList") String searchList) {
+        return userService.findMenchant(page, rows,searchList);
     }
+
     //到详情页面
     @RequestMapping("toXiangqing")
-    public String toShowInfo(Integer id, Model md){
-        md.addAttribute("id",id);
+    public String toShowInfo(Integer id, Model md) {
+        md.addAttribute("id", id);
         return "xiangqing";
         //   return "商品详情";
     }
+
+
     @GetMapping("findXiangqingById/{id}")
     @ResponseBody
-    public MerchantBean findXiangqingById(@PathVariable("id") Integer id){
+    public ShangBean findXiangqingById(@PathVariable("id") Integer id) {
         return userService.findXiangqingById(id);
     }
 
     @PostMapping("saveShops")
-    @ResponseBody
-    public void saveShops(@RequestParam("id") Integer id,@RequestParam("counts")Integer counts){
+     @ResponseBody
+    public void saveShops(@RequestParam("id") Integer id, @RequestParam("counts") Integer counts) {
         deleteRedis();
-        userService.saveShops(id,counts);
+        userService.saveShops(id, counts);
     }
 
 
     @GetMapping("findShopListById/{id}")
     @ResponseBody
-    public ShopBean findShopListById(@PathVariable("id") Integer id){
+    public ShopBean findShopListById(@PathVariable("id") Integer id) {
         return userService.findShopListById(id);
     }
 
     @GetMapping("findShop")
     @ResponseBody
-    public  List<ShopBean> findShop(){
+    public List<ShopBean> findShop() {
         List<ShopBean> shopList = new ArrayList<>();
 //1、定义缓冲key
-        String key="shopKey";
+        String key = "shopKey";
         //2、从缓冲中查找是否有当前用户的权限树
         if (!redisTemplate.hasKey(key)) {
             System.out.println("-----------走数据库");
             //3、如果没有：a.从数据库查  b. 把数据缓冲到redis
-            shopList=userService.findShop();
+            shopList = userService.findShop();
             //b. 把数据缓冲到redis
             redisTemplate.opsForValue().set(key, shopList);
-        }else {
+        } else {
             System.out.println("-----------走缓冲");
             //4、如果有：从缓冲中获取返回数据
             shopList = (List<ShopBean>) redisTemplate.opsForValue().get(key);
@@ -137,7 +142,7 @@ public class UserController {
     //删除redis缓存
     @RequestMapping("deleteRedis")
     @ResponseBody
-    public void deleteRedis(){
+    public void deleteRedis() {
         redisTemplate.delete("shopKey");
     }
 
@@ -145,7 +150,7 @@ public class UserController {
     //购物车删除
     @DeleteMapping("delOne/{id}")
     @ResponseBody
-    public  void delOne(@PathVariable("id") Integer id){
+    public void delOne(@PathVariable("id") Integer id) {
         deleteRedis();
         userService.delOne(id);
     }
@@ -153,42 +158,41 @@ public class UserController {
     //删除
     @DeleteMapping("deleteMany")
     @ResponseBody
-    public void   deleteMany(@RequestParam("ids") Integer[] ids) {
+    public void deleteMany(@RequestParam("ids") Integer[] ids) {
         deleteRedis();
         userService.deleteMany(ids);
     }
 
 
-
     //手机验证码
     @GetMapping("gainMessgerCode")
     @ResponseBody
-    public String gainMessgerCode(@RequestParam("account") String account){
+    public String gainMessgerCode(@RequestParam("account") String account) {
         return userService.gainMessgerCode(account);
     }
 
     @GetMapping("messagelogin")
     @ResponseBody
-    public HashMap<String, Object> messagelogin(@RequestParam("account") String account, @RequestParam("messageCode") String messageCode){
-        return userService.messagelogin(account,messageCode);
+    public HashMap<String, Object> messagelogin(@RequestParam("account") String account, @RequestParam("messageCode") String messageCode) {
+        return userService.messagelogin(account, messageCode);
     }
 
     /*solr搜索*/
     @RequestMapping("search")
     @ResponseBody
-    public Map<String,Object> merchantList(MerchantBean merchant, Integer page, Integer rows,HttpServletRequest request) throws IOException, SolrServerException {
-        System.out.println("---"+merchant.getName());
+    public Map<String, Object> merchantList(GoodBean good, Integer page, Integer rows, HttpServletRequest request) throws IOException, SolrServerException {
+        System.out.println("---" + good.getName());
         //因为使用easyui返回数据
-        Map<String,Object> mSolr=new HashMap<String,Object>();
+        Map<String, Object> mSolr = new HashMap<String, Object>();
         //把所有查询的高亮显示内容发到list中
-        List<MerchantBean> merchantList=new ArrayList<>();
+        List<GoodBean> goodList = new ArrayList<>();
         //查询条件的对象
         SolrQuery params = new SolrQuery();
         //判断前台传递的关键字是否为空
-        if(!"".equals(merchant.getName()) && merchant.getName()!=null ){
+        if (!"".equals(good.getName()) && good.getName() != null) {
             //不为空设置条件为关键字
-            params.set("q", merchant.getName());
-        }else{//如果为空查询所有
+            params.set("q", good.getName());
+        } else {//如果为空查询所有
             params.set("q", "*:*");
 
         }
@@ -199,19 +203,16 @@ public class UserController {
         // 设置高亮字段
         params.addHighlightField("name"); // 高亮字段
         //分页
-        if(page==null){
+        if (page == null) {
             params.setStart(0);
-        }else {
-            params.setStart((page-1)*rows);
+        } else {
+            params.setStart((page - 1) * rows);
         }
-        if(rows==null){
+        if (rows == null) {
             params.setRows(5);
-        }else {
+        } else {
             params.setRows(rows);
         }
-
-
-
         //高亮
         //打开开关
         params.setHighlight(true);
@@ -220,7 +221,7 @@ public class UserController {
         //设置后缀
         params.setHighlightSimplePost("</span>");
         //QueryResponse是查询返回的对象数据   client.query("core1",params)  查询的是哪个索引库和条件
-        QueryResponse queryResponse = client.query("core1",params);
+        QueryResponse queryResponse = client.query("core1", params);
         ///查询返回的结果list对象   不包括高亮
         SolrDocumentList results = queryResponse.getResults();
         //查询出来总条数
@@ -230,49 +231,60 @@ public class UserController {
         //循环查询的所有结果
         for (SolrDocument result : results) {
             //创建对象接收循环的对象数据
-            MerchantBean merchant1=new MerchantBean();
+            GoodBean goodBean1 = new GoodBean();
             //设置高亮的字段
-            String highname="";
+            String highname = "";
             //根据id获得高亮的内容
             Map<String, List<String>> map = highlight.get(result.get("id"));
             //根据高亮字段拿到数据
             List<String> list = map.get("name");
             //判断数据是否为空
-            if(list==null){
+            if (list == null) {
                 //如果为空把普通字段放到对象中
-                highname=(String)result.get("name");
-            }else{
+                highname = (String) result.get("name");
+            } else {
                 //获得高亮字段查询的值放到变量
-                highname=list.get(0);
+                highname = list.get(0);
             }
-            merchant1.setId(Integer.parseInt((String) result.get("id")));
-            merchant1.setName(highname);
-            merchant1.setInfo((String)result.get("info"));
-            merchant1.setPrice((Double)result.get("price"));
-            merchant1.setPeisong((String)result.get("peisong"));
-            merchant1.setImage((String)result.get("image"));
-            merchantList.add(merchant1);
+            goodBean1.setId(Integer.parseInt((String) result.get("id")));
+            goodBean1.setName(highname);
+            goodBean1.setInfo((String) result.get("info"));
+            goodBean1.setPrice((Double) result.get("price"));
+            goodBean1.setPeisong((String) result.get("peisong"));
+            goodBean1.setImage((String) result.get("image"));
+            goodList.add(goodBean1);
         }
-        mSolr.put("total",numFound);
-        mSolr.put("rows",merchantList);
-       String key = "keys";
-        redisTemplate.opsForValue().set(key,merchantList);
+        mSolr.put("total", numFound);
+        mSolr.put("rows", goodList);
+        String key = "keys";
+        redisTemplate.opsForValue().set(key, goodList);
         return mSolr;
     }
 
     @RequestMapping("findSearch")
     @ResponseBody
-    public List<MerchantBean> findSearch(HttpServletRequest request){
+    public List<GoodBean> findSearch(HttpServletRequest request) {
         String key = "keys";
-        List<MerchantBean> list= (List<MerchantBean>)redisTemplate.opsForValue().get(key);
-        for (MerchantBean li:list) {
+        List<GoodBean> list = (List<GoodBean>) redisTemplate.opsForValue().get(key);
+        for (GoodBean li : list) {
             System.out.println(li.getName());
-            System.out.println("==========="+li.getPrice());
-            System.out.println("==========="+li.getImage());
+            System.out.println("===========" + li.getPrice());
+            System.out.println("===========" + li.getImage());
         }
         redisTemplate.delete(key);
         return list;
     }
 
+    //根据商铺id查询商品
+    @GetMapping("findShang/{id}")
+    @ResponseBody
+    public List<GoodBean> findShang(@PathVariable("id") Integer id,@RequestParam("search") String search) {
+        return userService.findShang(id,search);
+    }
+    @GetMapping("findGoodById/{id}")
+    @ResponseBody
+    public GoodBean findGoodById(@PathVariable("id") Integer id){
+        return userService.findGoodById(id);
+    }
 
 }

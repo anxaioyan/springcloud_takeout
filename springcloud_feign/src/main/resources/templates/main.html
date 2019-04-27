@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="../css.css">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="../js/layui/css/style.css">
+<link rel="stylesheet" href="../js/layui/css/layui.css">
+<script src="../js/layui/layui.js"></script>
+<script src="../js/jquery.tabs.js"></script>
+<script src="../js/jquery.lazyload.js"></script>
+<!-- 引入juquery -->
+<script src="../js/jquery-1.9.1.min.js"></script>
+<!-- 引入bootstrap的css,js -->
+<link rel="stylesheet" href="../js/bootstrap3/css/bootstrap.css">
+<script src="../js/bootstrap3/js/bootstrap.js"></script>
+<!--引入table的css，js  -->
+<link rel="stylesheet" href="../js/bootstrap-table/bootstrap-table.css">
+<script src="../js/bootstrap-table/bootstrap-table.js"></script>
+<script src="../js/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<!-- 引入bootbox的js -->
+<script src="../js/bootstrap-bootbox/bootbox.js"></script>
+<link rel="apple-touch-icon-precomposed" href="https://static2.ele.me/apple-touch-icon.png?v=2">
+<link href="../js/layui/vendor.css" rel="stylesheet">
+<link href="../js/layui/main.css" rel="stylesheet">
+<script src="../js/layui/api" data-ref="API_CONFIG"></script>
+<script src="../js/layui/perf.js.下载" type="text/javascript" crossorigin="anonymous"></script>
+<script src="../js/layui/vendor.js.下载" type="text/javascript" crossorigin="anonymous"></script>
+<script src="../js/layui/main.js.下载" type="text/javascript" crossorigin="anonymous"></script>
+<meta name="mobile-agent" content="format=html5; url=http://m.ele.me/place/7zzz">
+<meta name="description" content="”饿了么”2008年创立于上海，是中国领先的本地生活平台。截至目前，饿了么在线外卖交易平台已覆盖全国2000个城市，加盟餐厅130万家，用户量达2.6亿">
+<meta name="keywords" content="北京明园大学美食，北京明园大学商家，北京明园大学外卖">
+</head>
+<div cute-title="" ng-class="{hidesidebar: layoutState &amp;&amp; layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}" style="position: relative;">
+    <!--最上面的导航条-->
+    <ul  class="layui-nav layui-bg-blue" lay-filter="">
+        <li class="layui-nav-item">
+            <h1><a href="#" hardjump="" class="topbar-logo icon-logo"><span>饿了么</span></a></h1>
+        </li>
+        <li class="layui-nav-item">
+            <h3><a href="../page/toMyIndex" hardjump=""  ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a></h3>
+        </li>
+        <li class="layui-nav-item">
+            <h2><a href="">我的订单<span class="layui-badge-dot"></span></a></h2>
+        </li>
+        <li class="layui-nav-item">
+            <h2><a href="">加盟合作<span class="layui-badge-dot"></span></a></h2>
+        </li>
+        <li class="layui-nav-item">
+            <h2> <a href="">我的客服<span class="layui-badge-dot"></span></a></h2>
+        </li>
+        <li class="layui-nav-item">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </li>
+        <li class="layui-nav-item">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </li>
+        <li class="layui-nav-item">
+            <h2> <a href="">规则应用<span class="layui-badge-dot"></span></a></h2>
+        </li>
+        <li class="layui-nav-item">
+            <h2> <a href="">手机应用<span class="layui-badge-dot"></span></a></h2>
+
+        <li class="layui-nav-item">
+            <a  target="_blank" href="../page/toReg">登录/注册</a></span>
+        </li>
+        <li class="layui-nav-item">
+            <a  target="_blank" href="javascript:;" onclick="myPers()">个人中心</a></span>
+        </li>
+    </ul>
+</div>
+<!--&lt;!&ndash;承诺&ndash;&gt;
+<div class="place-pro clearfix container ng-scope" ng-if="isBeijing"><div class="promise-title"><div>饿了么向消费者郑重承诺</div><a ng-href="//h5.ele.me/irregularshop/?latitude=0&amp;longitude=0&amp;city_id=3" href="https://h5.ele.me/irregularshop/?latitude=0&amp;longitude=0&amp;city_id=3">下线名单公示专栏</a></div>
+    <div class="promise-content">我平台已经对入网餐饮服务提供者的食品经营许可证进行严格的实地审查，并保证入网餐饮服务提供者食品经营许可证载明的经营者名称、经营场所、主体业态、经营项目、有效期等许可信息合法、真实、准确、有效。</div>
+</div>-->
+<!--切换地址-->
+<div style="width: 300px;height: 40px;margin-left:60px;margin-top:15px;color: #0bac84">
+    <span>当前位置:</span> <span class="location-current"><a class="inherit ng-binding" ng-href="/place/wx4ez77bybbs" ubt-click="401" ng-bind="place.name || place.address" href="https://www.ele.me/place/wx4ez77bybbs">北京明园大学</a></span>
+    <span class="location-change" ng-class="{ 'location-hashistory': user.username &amp;&amp; userPlaces &amp;&amp; userPlaces.length &gt; 0 }"><a ng-href="/home" ubt-click="400" hardjump="" href="https://www.ele.me/home">[切换地址]</a></span>
+</div>
+<!--搜索-->
+<div class="place-search" role="search" style="text-align: right;margin-reght:60px;margin-top: -45px">
+    <form id="serach_form" method="get" >
+        <label for="nsss"></label>
+        <input id="nsss" name="name" class="place-search-input ng-pristine ng-valid" ng-model="searchText" autocomplete="" placeholder="搜索商家,美食...">
+        <input type="button" value="搜索" onclick="query()" style="background: #00A2CA; height: 31px;">
+    </form>
+</div>
+<!--右侧的导航条-->
+<div class="sidebar" role="complementary" ng-hide="layoutState &amp;&amp; layoutState.hideSidebar"><div class="sidebar-tabs"><div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close" href="https://www.ele.me/profile/order" hardjump="" tooltip="我的订单" tooltip-placement="left" ubt-click="toolbar_order"></a><div class="toolbar-separator"></div><a class="toolbar-cartbtn icon-cart toolbar-open" href="../page/toGouwu" template="cart" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;cart&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-cartbtn-shownum&#39;: foodCount.count}" ubt-click="390">购物车<!-- ngIf: foodCount.count --></a><div class="toolbar-separator"></div><a class="toolbar-btn icon-notice toolbar-open modal-hide" href="javascript:" template="message" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;message&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-open&#39;: user, &#39;modal-hide&#39;: user}" tooltip="我的信息" tooltip-placement="left" ubt-click="392"><!-- ngIf: messageCount.count --></a></div><div class="toolbar-tabs-bottom"><div class="toolbar-btn icon-QR-code"><div class="dropbox toolbar-tabs-dropbox"><a href="http://static11.elemecdn.com/eleme/desktop/mobile/index.html" target="_blank"><img src="http://localhost:8082/404" alt="下载手机应用"><p>下载手机应用</p><p class="icon-QR-code-bonus">即可参加分享红包活动</p></a></div></div><a class="toolbar-btn sidebar-btn-backtop icon-top" tooltip="回到顶部" title="回到顶部" href="javascript:" tooltip-placement="left" style="visibility: hidden;"></a></div></div><div class="sidebar-content"><!-- ngInclude: activeTemplate ? ('/common/page/_block/sidebar/sidebar-'+ activeTemplate + '/sidebar-'+ activeTemplate + '.html') : '' --></div>
+    <!--红包-->
+    <div onclick="receiveRed()" style="position:fixed;text-align: center; right: 0;bottom:0;width: 220px; height:150px">
+        <img src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/20190422152508.gif"  >
+        <p style="color: #FFF;font-size: 25px;font-family: '楷体'" >买好吃的了</p>
+    </div>
+</div>
+<div style="width: 1192px;height: 250px">
+    <img src="../img/a1.jpg" style="width: 100%;height: 250px">
+</div>
+<!--tab选项卡 开始了-->
+<div class="layui-tab layi-tab-card" id="myGe">
+    <ul class="layui-tab-title" style="background:red">
+        <li>&nbsp;</li>
+        <li  onclick="assignFistCatalog(1)">美食</li>
+        <li  onclick="assignFistCatalog(2)">快餐便当</li>
+        <li onclick="assignFistCatalog(3)">特色菜系</li>
+        <li onclick="assignFistCatalog(4)">异国料理</li>
+        <li onclick="assignFistCatalog(5)">小吃夜宵</li>
+        <li onclick="assignFistCatalog(6)">甜品饮品</li>
+        <li onclick="assignFistCatalog(7)">果蔬生鲜</li>
+        <li onclick="assignFistCatalog(8)">商店超市</li>
+        <li onclick="assignFistCatalog(9)">鲜花绿植</li>
+        <li onclick="assignFistCatalog(10)">医疗健康</li>
+        <li onclick="assignFistCatalog(11)">早餐</li>
+        <li onclick="assignFistCatalog(12)">午餐</li>
+        <li onclick="assignFistCatalog(13)">下午茶</li>
+        <li onclick="assignFistCatalog(14)">晚餐</li>
+    </ul>
+</div>
+<!--中间轮播图-->
+<div style="width:90%;higth:600;float:left;margin-left: 100px">
+    <div id="myCarousel" class="carousel slide">
+        <!-- 轮播（Carousel）指标 -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <!-- 轮播（Carousel）项目 -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="../img/bb.jpg"  style="height:400px; width:90%">
+            </div>
+            <div class="item">
+                <img src="../img/d.jpg" style="height:400px; width:90%">
+            </div>
+            <div class="item">
+                <img src="../img/e.jpg" style="height:400px; width:90%">
+            </div>
+        </div>
+    </div>
+</div>
+<hr/>
+<div id="goods"></div>
+<input type="hidden" id="hiddStatus" value="1" />
+<hr/>
+<!--最下方的导航条-->
+<!--<footer class="footer" role="contentinfo"><div class="container clearfix"><div class="footer-link"><h3 class="footer-link-title">用户帮助</h3><a class="footer-link-item" href="https://help.ele.me/pc/" target="_blank">我的客服</a></div><div class="footer-link"><h3 class="footer-link-title">商务合作</h3><a class="footer-link-item" href="https://kaidian.ele.me/" target="_blank">我要开店</a> <a class="footer-link-item" href="http://localhost:8082/404" target="_blank">加盟指南</a> <a class="footer-link-item" href="https://www.ele.me/support/about/contact" target="_blank">市场合作</a> <a class="footer-link-item" href="http://openapi.eleme.io/" target="_blank">开放平台</a></div><div class="footer-link"><h3 class="footer-link-title"&ndash;&gt;
+    关于我们</h3><a class="footer-link-item" href="https://www.ele.me/support/about" target="_blank">饿了么介绍</a> <a class="footer-link-item" href="http://jobs.ele.me/" target="_blank">加入我们</a> <a class="footer-link-item" href="https://www.ele.me/support/about/contact" target="_blank">联系我们</a> <a class="footer-link-item" ng-href="//h5.ele.me/service/agreement/#HEAEDER_SHOW=1" target="_blank" href="http://h5.ele.me/service/agreement/#HEAEDER_SHOW=1">规则中心</a> <a class="footer-link-item" ng-href="//h5.ele.me/service/agreement/#HEAEDER_SHOW=1&amp;key=ruleQue50" target="_blank" href="http://h5.ele.me/service/agreement/#HEAEDER_SHOW=1&amp;key=ruleQue50">隐私政策</a></div><div class="footer-contect"><div class="footer-contect-item">24小时客服热线 : <a class="inherit" href="tel:10105757">10105757</a></div><div class="footer-contect-item">关注我们 :<div href="JavaScript:" class="icon-wechat" ubt-click="402"><div class="dropbox dropbox-bottom footer-contect-dropbox" ubt-visit="402"><img src="http://localhost:8082/404" alt="微信号: elemeorder"><p>微信号: elemeorder</p><p>饿了么网上订餐</p></div></div><a href="http://e.weibo.com/elemeorder" class="icon-weibo" target="_blank"></a></div></div><div class="footer-mobile"><a href="https://h.ele.me/landing" target="_blank">
+  <div class="footer-mobile-content"><h3>下载手机版</h3><p>扫一扫,手机订餐方便</p></div><div class="footer-copyright serif"><h5 class="owner">所有方：上海拉扎斯信息科技有限公司 <a href="https://www.ele.me/activity/license">| 营业执照</a></h5><p>增值电信业务许可证 : <a href="http://www.shca.gov.cn/" target="_blank">沪B2-20150033</a> | <a href="http://www.miibeian.gov.cn/" target="_blank">沪ICP备 09007032</a> | <a href="http://www.sgs.gov.cn/lz/licenseLink.do?method=licenceView&amp;entyId=20120305173227823" target="_blank">上海工商行政管理</a> Copyright ©2008-2018 ele.me, All Rights Reserved.互联网药品信息服务资格证书 编号：（沪）-经营性-2016-0011</p></div><div class="footer-police container"><a href="http://www.zx110.org/picp/?sn=310100103568" rel="nofollow" target="_blank"></a></div></div></footer>
+-->
+<!--个人中心-->
+<iframe src="../page/toPersonalLayUi" scrolling="no" frameborder="0" id="myXs" style="margin: auto;display: none;" width="100%" height="900"></iframe>
+</body>
+
+</body>
+
+<script type="text/javascript">
+    $(function () {
+        initDrugList(1,18);
+    })
+    function assignFistCatalog(type) {
+        $('#hiddStatus').val(type);
+        initDrugList(1,18)
+    }
+    <!--商品 鼠标滑过事件 详情-->
+    /* function hover(id){
+         $('.cp-show'+id).css('zIndex',2)
+
+     }
+     function out(id){
+         $('.cp-show'+id).css('zIndex',-2)
+     }*/
+
+    function initDrugList(page,rows) {
+        var firstCatalog = $('#firstCatalog').val();
+        $.ajax({
+            url: '../user/findMenchant',
+            type: 'get',
+            data: {
+                page: page,
+                rows: rows,
+                searchList:JSON.stringify({
+                    /*"constant":1,//上架时间最近一周
+                    "salesVolume":3,//按时间倒叙排列*/
+                    "type":$("#hiddStatus").val()
+                })
+            },
+            dataType: 'json',
+
+            success: function (result) {
+                var data = result.rows;
+                var html = "";
+                if (data.length == 0) {
+                    html += '<p style="text-align:center;color:red;font-size:30px;"><b>分类下还没有商品</b></p>' +
+                        '<p style="color:red;font-size:14px;"><a href="javascript:;">猜您喜欢：</a></p>';
+                } else {
+                    for (var i = 0; i < data.length; i++) {
+                        var id = data[i].id;
+                        var shangName=data[i].name;
+                        var image = data[i].image;
+                        var peisong = data[i].peisong;
+                        var type = data[i].type;
+                        var info = data[i].info;
+                        html += '<li style="position:relative" onmouseover="hover('+data[i].id+')" onmouseout="out('+data[i].id+')" >'+
+                            '<a href="#" class="classtopimg-tit" target="_blank">'+
+                            "<a href=\"http://localhost:8082/page/toXiangqing?id="+data[i].id+"\" data-rst-id=\"E8511232894373335604\" data-bidding=\"\" target=\"_blank\" class=\"rstblock\">"+
+                            "<div class=\"rstblock-logo\">" +
+                            "<img src=\'"+image+"\' " +
+                            "alt=\"正在加载\" class=\"rstblock-logo-icon\" width=\"70\" height=\"70\"><span>" + shangName + "</span></div>" +
+                            "<div class=\"rstblock-content\"><div class=\"rstblock-title\">" + shangName + "</div>" +
+                            "<div class=\"starrating icon-star\"><span class=\"icon-star\" style=\"width:92%;\"></span></div>" +
+                            "<div class=\"rstblock-cost\">" + peisong + "</div><div class=\"rstblock-activity\"><i style=\"background:#fff;color:#999999;border:1px solid;padding:0;\">保</i></div></div></a>"+
+                            //划过
+                            '<div class="cp-show'+id+'" style="position:absolute;width:33%;height:130px;;left:0;top:0;z-index:-1;background-color:rgba(51,57,57,0.8);padding:25px 10px;color:#fff;box-sizing:border-box">'+
+                            '<p class="cp-p" >'+
+                            '<span style="float:left;width:45px;text-align:right">名称:</span>'+
+                            '<span style="float:left;width:155px;">'+store+'</span>'+
+                            '</p>'+
+                            '<p  class="cp-p" >'+
+                            '<span style="float:left;width:45px;text-align:right">配送费：</span>'+
+                            '<span style="float:left;width:155px;">'+peisong+'</span>'+
+                            '</p>'+
+                            '<p class="cp-p" >'+
+                            '<span style="float:left;width:45px;text-align:right">内容：</span>'+
+                            '<span style="float:left;width:155px;">'+invoicecontents+'</span>'+
+                            '</p>'+
+                            '<p class="cp-p" >'+
+                            '<span style="float:left;width:45px;text-align:right">描述：</span>'+
+                            '<span style="float:left;width:155px;">'+info+'</span>'+
+                            '</p>'+
+                            '<p class="cp-p" style="position:absolute;right:10px;bottom:10px;">'+
+                            '<a style="float:left;width:100%;text-align:right;color:#fff;padding:3px 0;margin-top:2px;" href="../user/toXiangqing?id='+data[i].id+'" target="_self" onclick="window.onload()">查看详情</a>'+
+                            '</p>'+
+                            '</div>'+
+                            "</li>"
+                        ;
+                    }
+                }
+                $("#goods").html(html);
+            }
+        })
+    }
+
+    //solr搜索
+    //搜索
+    function query(){
+        var produ = $("#nsss").val();
+        $.ajax({
+            url:'../user/search',
+            pagination:true,
+            pageNumber:1,
+            pageSize:1,
+            pageList:[1,2,10],
+            method:"post",
+            data:{
+                name:produ
+            },
+            success:function (data) {
+                window.location.href="../page/toSousuo";
+            }
+        })
+    }
+</script>
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+
+        element.on('tab(table_box)', function (data) {
+            console.log(data);
+            if (data.index == 0 || data.index == 1 || data.index == 2) {
+                //这里的index表示有多少个选项卡
+                $(document).resize()
+            }
+        });
+    });
+
+</script>
+<script>
+
+    $('.cp-list').hover(function(){
+        $(this).find($('.cp-show')).css('zIndex',2)
+    },function(){
+        $(this).find($('.cp-show')).css('zIndex',-2)
+    })
+
+    function calcPageHeight (doc) {
+        var	sHeight = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight)+190;
+
+        return sHeight.toString();
+    };
+    calcPageHeight(document);
+
+    window.onload = function () {
+        if (top && top.location !== self.location) {
+            if ((navigator.appName === 'Microsoft Internet Explorer' && navigator.appVersion .split(';')[1].replace(/[ ]/g, '') === 'MSIE7.0') ||
+                (navigator.appName === 'Microsoft Internet Explorer' && navigator.appVersion .split(';')[1].replace(/[ ]/g, '') === 'MSIE6.0')) {
+                if (top.name) {
+                    top.name = calcPageHeight(document);
+                }
+            }
+            else {
+                if (top.postMessage) {
+                    window.attachEvent ? window.attachEvent('onmessage', function (event) {
+                        top.postMessage(calcPageHeight(document) + 'px', '*');
+                    }) : window.addEventListener('message', function (event) {
+                        top.postMessage(calcPageHeight(document) + 'px', '*');
+                    }, false);
+                    top.postMessage(0, '*');
+                }
+                else if (top.name) {
+                    top.name = calcPageHeight(document);
+                }
+            }
+        }
+    };
+
+
+    function receiveRed() {
+        $.ajax({
+            url:'../myPersonal/upDateRed',
+            type:'get',
+            datatype:'json',
+            success:function (data) {
+                if (data.code!=0){
+                    if (data.code==2){
+                        if (confirm("您还没有登录，点击下方登录")){
+                            alert("登录页面");
+                        }
+                        return;
+                    }else {
+                        alert(data.reg);
+                        return;
+                    }
+                }else {
+                    alert(data.reg);
+                    return;
+                }
+            }
+        })
+    }
+
+
+</script>
+<hr/>
+<!--&lt;!&ndash;最下面的导航条&ndash;&gt;-->
+<footer class="footer" role="contentinfo"><div class="container clearfix"><div class="footer-link"><h3 class="footer-link-title">用户帮助</h3><a class="footer-link-item" href="https://help.ele.me/pc/" target="_blank">我的客服</a></div><div class="footer-link"><h3 class="footer-link-title">商务合作</h3><a class="footer-link-item" href="https://kaidian.ele.me/" target="_blank">我要开店</a> <a class="footer-link-item" href="http://localhost:8082/404" target="_blank">加盟指南</a> <a class="footer-link-item" href="https://www.ele.me/support/about/contact" target="_blank">市场合作</a> <a class="footer-link-item" href="http://openapi.eleme.io/" target="_blank">开放平台</a></div><div class="footer-link"><h3 class="footer-link-title"-->
+    关于我们</h3><a class="footer-link-item" href="https://www.ele.me/support/about" target="_blank">饿了么介绍</a> <a class="footer-link-item" href="http://jobs.ele.me/" target="_blank">加入我们</a> <a class="footer-link-item" href="https://www.ele.me/support/about/contact" target="_blank">联系我们</a> <a class="footer-link-item" ng-href="//h5.ele.me/service/agreement/#HEAEDER_SHOW=1" target="_blank" href="http://h5.ele.me/service/agreement/#HEAEDER_SHOW=1">规则中心</a> <a class="footer-link-item" ng-href="//h5.ele.me/service/agreement/#HEAEDER_SHOW=1&amp;key=ruleQue50" target="_blank" href="http://h5.ele.me/service/agreement/#HEAEDER_SHOW=1&amp;key=ruleQue50">隐私政策</a></div><div class="footer-contect"><div class="footer-contect-item">24小时客服热线 : <a class="inherit" href="tel:10105757">10105757</a></div><div class="footer-contect-item">关注我们 :<div href="JavaScript:" class="icon-wechat" ubt-click="402"><div class="dropbox dropbox-bottom footer-contect-dropbox" ubt-visit="402"><img src="http://localhost:8082/404" alt="微信号: elemeorder"><p>微信号: elemeorder</p><p>饿了么网上订餐</p></div></div><a href="http://e.weibo.com/elemeorder" class="icon-weibo" target="_blank"></a></div></div><div class="footer-mobile"><a href="https://h.ele.me/landing" target="_blank"><img src="http://localhost:8082/404" class="footer-mobile-icon" alt="扫一扫下载饿了么手机 App"></a><div class="footer-mobile-content"><h3>下载手机版</h3><p>扫一扫,手机订餐方便</p></div></div><div class="footer-copyright serif"><h5 class="owner">所有方：上海拉扎斯信息科技有限公司 <a href="https://www.ele.me/activity/license">| 营业执照</a></h5><p>增值电信业务许可证 : <a href="http://www.shca.gov.cn/" target="_blank">沪B2-20150033</a> | <a href="http://www.miibeian.gov.cn/" target="_blank">沪ICP备 09007032</a> | <a href="http://www.sgs.gov.cn/lz/licenseLink.do?method=licenceView&amp;entyId=20120305173227823" target="_blank">上海工商行政管理</a> Copyright ©2008-2018 ele.me, All Rights Reserved.互联网药品信息服务资格证书 编号：（沪）-经营性-2016-0011</p></div><div class="footer-police container"><a href="http://www.zx110.org/picp/?sn=310100103568" rel="nofollow" target="_blank"><img alt="已通过沪公网备案，备案号 310100103568" src="http://localhost:8082/404" height="30"></a></div></div></footer>
+
+</html>
+
+<script>
+    function myPers() {
+        $("#myGe").css("display","none");
+
+        $("#myXs").css("display","block");
+    }
+</script>

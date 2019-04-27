@@ -28,12 +28,14 @@
 <meta name="mobile-agent" content="format=html5; url=http://m.ele.me/place/7zzz">
 <meta name="description" content="”饿了么”2008年创立于上海，是中国领先的本地生活平台。截至目前，饿了么在线外卖交易平台已覆盖全国2000个城市，加盟餐厅130万家，用户量达2.6亿">
 <meta name="keywords" content="北京明园大学美食，北京明园大学商家，北京明园大学外卖">
-    </head>
+</head>
+<body>
+
 <div cute-title="" ng-class="{hidesidebar: layoutState &amp;&amp; layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}" style="position: relative;">
 <!--最上面的导航条-->
 <ul  class="layui-nav layui-bg-blue" lay-filter="">
     <li class="layui-nav-item">
-        <h1><a href="#" hardjump="" class="topbar-logo icon-logo"><span>饿了么</span></a></h1>
+        <h1><a href="javascript:;" onclick="ptgHome()" hardjump="" class="topbar-logo icon-logo"><span>饿了么</span></a></h1>
     </li>
     <li class="layui-nav-item">
         <h3><a href="../page/toMyIndex" hardjump=""  ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a></h3>
@@ -71,6 +73,9 @@
 <div class="place-pro clearfix container ng-scope" ng-if="isBeijing"><div class="promise-title"><div>饿了么向消费者郑重承诺</div><a ng-href="//h5.ele.me/irregularshop/?latitude=0&amp;longitude=0&amp;city_id=3" href="https://h5.ele.me/irregularshop/?latitude=0&amp;longitude=0&amp;city_id=3">下线名单公示专栏</a></div>
     <div class="promise-content">我平台已经对入网餐饮服务提供者的食品经营许可证进行严格的实地审查，并保证入网餐饮服务提供者食品经营许可证载明的经营者名称、经营场所、主体业态、经营项目、有效期等许可信息合法、真实、准确、有效。</div>
 </div>-->
+<!--中间内容-->
+<div   id="divzjnr">
+
     <!--切换地址-->
    <div style="width: 300px;height: 40px;margin-left:60px;margin-top:15px;color: #0bac84">
     <!--<span>当前位置:</span> <span class="location-current"><a class="inherit ng-binding" ng-href="/place/wx4ez77bybbs" ubt-click="401" ng-bind="place.name || place.address" href="https://www.ele.me/place/wx4ez77bybbs">北京明园大学</a></span>
@@ -143,9 +148,13 @@
           </div>
     </div>
 <hr/>
+
 <div id="goods"></div>
 <input type="hidden" id="hiddStatus" value="1" />
 <hr/>
+</div>
+<!--个人中心-->
+<iframe src="../page/toPersonalLayUi" scrolling="no" frameborder="0" id="myXs" style="margin: auto;display: none;" width="100%" height="900"></iframe>
 <footer class="footer" role="contentinfo">
     <div class="container clearfix">
         <div class="footer-link">
@@ -207,10 +216,9 @@
                     alt="已通过沪公网备案，备案号 310100103568" src="#" height="30"/></a>
         </div>
     </div>
-    <input type="text" id="diZhi">
+    <input type="hidden" id="diZhi">
 </footer>
-<!--个人中心-->
-<iframe src="../page/toPersonalLayUi" scrolling="no" frameborder="0" id="myXs" style="margin: auto;display: none;" width="100%" height="900"></iframe>
+
 </body>
 
 <script type="text/javascript">
@@ -324,13 +332,13 @@
         })
     }
     
-    
+    /*骑手*/
     function myRider() {
             layui.use('layer', function(){
                 layer.open({
                     type: 1,
                     area: ['1000px', '500px'],
-                    content: createJsp("http://192.168.0.155:8082/page/toRoom") //这里content是一个普通的String
+                    content: createJsp("../page/toRoom") //这里content是一个普通的String
                 });
             })
         }
@@ -342,7 +350,12 @@
 </html>
 <script>
     function myPers() {
-        $("#myGe").css("display","none");
+        $("#divzjnr").css("display","none");
        $("#myXs").css("display","block");
     }
+
+    function ptgHome() {
+        location.href="../page/toIndex";
+    }
+
 </script>

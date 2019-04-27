@@ -99,8 +99,9 @@
 	    $("#input_address").css("display","none");
 		$("#input_city").css("display","none");
 		$("#input_s").css("display","none");
-        if ($("#input_city").val()!=null && $("#input_address").val()!=null){
-            $("#city").val($("#isnput_city").val());
+
+        if ($("#input_city").val().length!=0 && $("#input_address").val().length!=0){
+            $("#city").val($("#input_city").val());
             $("#myGps").val($("#input_address").val());
         }
 

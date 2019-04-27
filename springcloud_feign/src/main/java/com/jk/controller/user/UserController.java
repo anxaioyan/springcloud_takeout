@@ -86,6 +86,7 @@ public class UserController {
     @GetMapping("findMenchant")
     @ResponseBody
     public HashMap<String, Object> findMenchant(@RequestParam("page") Integer page, @RequestParam("rows") Integer rows,@RequestParam("searchList") String searchList) {
+
         return userService.findMenchant(page, rows,searchList);
     }
 

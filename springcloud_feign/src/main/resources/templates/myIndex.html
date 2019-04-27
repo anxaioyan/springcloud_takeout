@@ -72,9 +72,9 @@
     <div class="promise-content">我平台已经对入网餐饮服务提供者的食品经营许可证进行严格的实地审查，并保证入网餐饮服务提供者食品经营许可证载明的经营者名称、经营场所、主体业态、经营项目、有效期等许可信息合法、真实、准确、有效。</div>
 </div>-->
     <!--切换地址-->
-    <div style="width: 300px;height: 40px;margin-left:60px;margin-top:15px;color: #0bac84">
-    <span>当前位置:</span> <span class="location-current"><a class="inherit ng-binding" ng-href="/place/wx4ez77bybbs" ubt-click="401" ng-bind="place.name || place.address" href="https://www.ele.me/place/wx4ez77bybbs">北京明园大学</a></span>
-    <span class="location-change" ng-class="{ 'location-hashistory': user.username &amp;&amp; userPlaces &amp;&amp; userPlaces.length &gt; 0 }"><a ng-href="/home" ubt-click="400" hardjump="" href="https://www.ele.me/home">[切换地址]</a></span>
+   <div style="width: 300px;height: 40px;margin-left:60px;margin-top:15px;color: #0bac84">
+    <!--<span>当前位置:</span> <span class="location-current"><a class="inherit ng-binding" ng-href="/place/wx4ez77bybbs" ubt-click="401" ng-bind="place.name || place.address" href="https://www.ele.me/place/wx4ez77bybbs">北京明园大学</a></span>
+    <span class="location-change" ng-class="{ 'location-hashistory': user.username &amp;&amp; userPlaces &amp;&amp; userPlaces.length &gt; 0 }"><a ng-href="/home" ubt-click="400" hardjump="" href="https://www.ele.me/home">[切换地址]</a></span>-->
     </div>
     <!--搜索-->
  <div class="place-search" role="search" style="text-align: right;margin-reght:60px;margin-top: -45px">
@@ -88,9 +88,9 @@
     <div class="sidebar" role="complementary" ng-hide="layoutState &amp;&amp; layoutState.hideSidebar"><div class="sidebar-tabs"><div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close" href="https://www.ele.me/profile/order" hardjump="" tooltip="我的订单" tooltip-placement="left" ubt-click="toolbar_order"></a><div class="toolbar-separator"></div><a class="toolbar-cartbtn icon-cart toolbar-open" href="../page/toGouwu" template="cart" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;cart&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-cartbtn-shownum&#39;: foodCount.count}" ubt-click="390">购物车<!-- ngIf: foodCount.count --></a><div class="toolbar-separator"></div><a class="toolbar-btn icon-notice toolbar-open modal-hide" href="javascript:" template="message" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;message&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-open&#39;: user, &#39;modal-hide&#39;: user}" tooltip="我的信息" tooltip-placement="left" ubt-click="392"><!-- ngIf: messageCount.count --></a></div><div class="toolbar-tabs-bottom"><div class="toolbar-btn icon-QR-code"><div class="dropbox toolbar-tabs-dropbox"><a href="http://static11.elemecdn.com/eleme/desktop/mobile/index.html" target="_blank"><img src="http://localhost:8082/404" alt="下载手机应用"><p>下载手机应用</p><p class="icon-QR-code-bonus">即可参加分享红包活动</p></a></div></div><a class="toolbar-btn sidebar-btn-backtop icon-top" tooltip="回到顶部" title="回到顶部" href="javascript:" tooltip-placement="left" style="visibility: hidden;"></a></div></div><div class="sidebar-content"><!-- ngInclude: activeTemplate ? ('/common/page/_block/sidebar/sidebar-'+ activeTemplate + '/sidebar-'+ activeTemplate + '.html') : '' --></div>
         <div  style="position:fixed;text-align: center; right: 0;bottom:0;width: 320px; height:550px">
             <!--骑手-->
-            <img  onclick="myRider()" width="220" height="150" style="padding-right: 2px;" src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/timg.gif"  >
+            <img  onclick="myRider()" width="220" height="150" style="padding-right: 2px;margin-top: 100px" src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/timg.gif"  >
             <!--红包-->
-            <img   onclick="receiveRed()" style="padding-bottom: 2px;padding-top: 170px;padding-right: 0px" src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/20190422152508.gif"  >
+            <img   onclick="receiveRed()" style="padding-bottom: 2px;padding-top: 70px;padding-right: 0px" src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/20190422152508.gif"  >
         </div>
 
 
@@ -338,7 +338,6 @@
         function createJsp(url){
             return '<iframe scrolling="auto" frameborder="0"  src="'+ url + '" style="width:100%;height:100%;"></iframe>';
     }
-
 </script>
 </html>
 <script>

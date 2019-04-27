@@ -8,7 +8,7 @@
  * <author>          <time>          <version>          <desc>
  * 作者姓名           修改时间           版本号              描述
  */
-package com.jk.model;
+package com.jk.utils;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,14 +18,17 @@ import java.util.List;
  * 〈a〉
  *
  * @author 琪
- * @create 2019/4/21
+ * @create 2019/4/23
  * @since 1.0.0
  */
-public class responseLayui implements Serializable {
-    private static final long serialVersionUID = 1709411237276244377L;
+public class ResponseLayui implements Serializable {
+    private static final long serialVersionUID = 7343697034353681979L;
     private Integer code;
+
     private String msg;
-    private Long count;
+
+    private Integer count;
+
     private List data;
 
     public Integer getCode() {
@@ -44,11 +47,11 @@ public class responseLayui implements Serializable {
         this.msg = msg;
     }
 
-    public Long getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(Long count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 

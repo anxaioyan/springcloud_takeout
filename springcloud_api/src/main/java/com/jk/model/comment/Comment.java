@@ -8,7 +8,7 @@
  * <author>          <time>          <version>          <desc>
  * 作者姓名           修改时间           版本号              描述
  */
-package com.jk.model;
+package com.jk.model.comment;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -28,18 +28,29 @@ public class Comment implements Serializable {
 
     private static final long serialVersionUID = -7745291743413453841L;
     private String  id;
-    private String  commentname;
+
     private Integer grade;
     private String  comment;
     private Date    commentdate;
 
+    private long userid;
+    private long shopid;
 
-    public String getCommentname() {
-        return commentname;
+
+    public long getUserid() {
+        return userid;
     }
 
-    public void setCommentname(String commentname) {
-        this.commentname = commentname;
+    public void setUserid(long userid) {
+        this.userid = userid;
+    }
+
+    public long getShopid() {
+        return shopid;
+    }
+
+    public void setShopid(long shopid) {
+        this.shopid = shopid;
     }
 
     public String getId() {

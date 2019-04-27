@@ -5,35 +5,115 @@
     <title>Title</title>
     <script src="../jquery.min.js" ></script>
     <link rel="stylesheet" href="../layui-v2.4.5/layui/css/layui.css" media="all" />
-    <script src="../layui-v2.4.5/layui/layui.js" ></script>
+    <script src="../layui-v2.4.5/layui/layui.js"></script>
+
+
 </head>
 <body>
-骑手页面
-<table class="layui-hide" id="romm"></table>
-</body>
 
+
+
+<table class="layui-hide" id="room" lay-filter="user"></table>
+
+<script type="text/html" id="barDemo">
+    {{#  if(d.roomstatus ==0){ }}
+    <a class="layui-btn layui-btn-mini" lay-event="examine">查看</a>
+
+    {{# }if(d.roomstatus ==2) { }}
+
+    <a class="layui-btn layui-btn-mini" lay-event="export">骑手配送中...</a>
+    {{# }if(d.roomstatus ==1) { }}
+
+    <a class="layui-btn layui-btn-mini, layui-bg-orange" lay-event="export">等待骑手接单...</a>
+    {{#  } }}
+
+    <ul class="site-doc-icon site-doc-anim">
+        <li>
+            <div class="layui-anim" data-anim="layui-anim-up">从最底部往上滑入</div>
+            <div class="code">layui-anim-up</div>
+        </li>
+
+</script>
+<script type="text/html" id="barDemo1">
+
+    <a class="layui-btn layui-btn-mini" lay-event="examine">已下单</a>
+
+
+</script>
 <script>
     layui.use('table', function(){
         var table = layui.table;
 
         table.render({
-            elem: '#test'
-            ,url:'/demo/table/user/'
-            ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            elem: '#room'
+            ,url:'http://localhost:8082/queryRoom'
+            ,height: 312
+            //开启分页
             ,cols: [
                 [
-                {field:'id', width:80, title: 'ID', sort: true}
-                ,{field:'username', width:80, title: '用户名'}
-                ,{field:'sex', width:80, title: '性别', sort: true}
-                ,{field:'city', width:80, title: '城市'}
-                ,{field:'sign', title: '签名', width: '30%', minWidth: 100} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                ,{field:'experience', title: '积分', sort: true}
-                ,{field:'score', title: '评分', sort: true}
-                ,{field:'classify', title: '职业'}
-                ,{field:'wealth', width:137, title: '财富', sort: true}
+                    {field:'roomid', title: '骑手编号'}
+                    ,{field:'roomname', title: '骑手名字'}
+                    ,{field:'shopid', title: '商品编号'}
+                    ,{field:'shopname', title: '商品名称'}
+                    ,{field:'shopstore', title: '店铺名称'}
+                    ,{field:'shopstatus', title: '商品状态',toolbar: '#barDemo1'}
+                    ,{field:'roomstatus', title: '骑手状态',toolbar: '#barDemo', width:250}
+                ]
             ]
-            ]
+            //,page: true
         });
     });
+
+
+
 </script>
+<!--<script>
+    //页面层-自定义
+
+    function toRoom(){
+    layui.use(['layer','table'], function(){
+        var layer = layui.layer;
+        var table = layui.table; //表格
+            layer.open({
+                type: 1,
+               /* title: '骑手',
+                btnAlign: 'c' ,//按钮居中
+                skin: 'yourclass',
+                shadeClose: true,
+                id: 'LAY_layuipro', //设定一个id，防止重复弹出
+                btn: ['残忍拒绝'],*/
+                area: ['1000px', '300px'],
+
+                content: '<div><table id="room" ></table></div>',
+                success : function(layero, index){
+                    var table = layui.table;
+                    table.render({
+                        elem: '#room'
+                        ,url:'http://localhost:8082/queryRoom'
+                        ,height: 312
+                        //开启分页
+                        ,cols: [
+                            [
+                                {field:'roomid', title: '骑手编号'}
+                                ,{field:'roomname', title: '骑手名字'}
+                                ,{field:'shopid', title: '商品编号'}
+                                ,{field:'shopname', title: '商品名称'}
+                                ,{field:'shopstore', title: '店铺名称'}
+                                ,{field:'shopstatus', title: '商品状态',toolbar: '#barDemo1'}
+                                ,{field:'roomstatus', title: '骑手状态',toolbar: '#barDemo', width:250}
+                            ]
+                        ]
+                        ,page: true
+
+
+
+                    });
+
+                },
+            });
+        });
+    }
+</script>-->
+
+</body>
 </html>

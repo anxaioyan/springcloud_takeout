@@ -18,12 +18,12 @@
     </select>
     <!--首页分页查询-->
     <select id="findMerchantCount" parameterType="com.jk.model.shop.ShangBean" resultType="int" >
-        select count(*) from yz_shang z where 1=1
+        select count(*) from yz_shang z
        <include refid="marketWhere"></include>
     </select>
     <select id="findMenchant" resultType="com.jk.model.shop.ShangBean">
-        select * from yz_shang z where 1=1
-       <include refid="marketWhere"></include>
+        select * from yz_shang z
+        <include refid="marketWhere"></include>
         limit #{start},#{rows}
     </select>
     <!--商品回显-->
@@ -71,9 +71,15 @@
     </select>
 
     <sql id="marketWhere">
-        <if test="shangBean.type !=null and shangBean.type !=''">
-            and z.type = #{shangBean.type}
-        </if>
+        <where>
+            <if test="shangBean.address!=null and shangBean.address!=''">
+                and z.address like '%${shangBean.address}%'
+            </if>
+
+            <if test="shangBean.type !=null and shangBean.type !=''">
+                and z.type = #{shangBean.type}
+            </if>
+        </where>
     </sql>
     <sql id="goodWhere">
         order by counts
@@ -95,6 +101,7 @@
         <if test="goodBean.price == 2 ">
             ,m.price desc
         </if>
+
     </sql>
 
 </mapper>

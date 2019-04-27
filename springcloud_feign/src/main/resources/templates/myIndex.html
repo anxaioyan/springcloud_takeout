@@ -115,11 +115,15 @@
     </div>
     <!--右侧的导航条-->
     <div class="sidebar" role="complementary" ng-hide="layoutState &amp;&amp; layoutState.hideSidebar"><div class="sidebar-tabs"><div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close" href="https://www.ele.me/profile/order" hardjump="" tooltip="我的订单" tooltip-placement="left" ubt-click="toolbar_order"></a><div class="toolbar-separator"></div><a class="toolbar-cartbtn icon-cart toolbar-open" href="../page/toGouwu" template="cart" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;cart&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-cartbtn-shownum&#39;: foodCount.count}" ubt-click="390">购物车<!-- ngIf: foodCount.count --></a><div class="toolbar-separator"></div><a class="toolbar-btn icon-notice toolbar-open modal-hide" href="javascript:" template="message" ng-class="{&#39;focus&#39;: (activeTemplate === &#39;message&#39; &amp;&amp; isSidebarOpen), &#39;toolbar-open&#39;: user, &#39;modal-hide&#39;: user}" tooltip="我的信息" tooltip-placement="left" ubt-click="392"><!-- ngIf: messageCount.count --></a></div><div class="toolbar-tabs-bottom"><div class="toolbar-btn icon-QR-code"><div class="dropbox toolbar-tabs-dropbox"><a href="http://static11.elemecdn.com/eleme/desktop/mobile/index.html" target="_blank"><img src="http://localhost:8082/404" alt="下载手机应用"><p>下载手机应用</p><p class="icon-QR-code-bonus">即可参加分享红包活动</p></a></div></div><a class="toolbar-btn sidebar-btn-backtop icon-top" tooltip="回到顶部" title="回到顶部" href="javascript:" tooltip-placement="left" style="visibility: hidden;"></a></div></div><div class="sidebar-content"><!-- ngInclude: activeTemplate ? ('/common/page/_block/sidebar/sidebar-'+ activeTemplate + '/sidebar-'+ activeTemplate + '.html') : '' --></div>
-        <!--红包-->
-        <div onclick="receiveRed()" style="position:fixed;text-align: center; right: 0;bottom:0;width: 220px; height:150px">
-            <img src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/20190422152508.gif"  >
-            <p style="color: #FFF;font-size: 25px;font-family: '楷体'" >买好吃的了</p>
+        <div  style="position:fixed;text-align: center; right: 0;bottom:0;width: 320px; height:550px">
+            <!--骑手-->
+            <img  onclick="myRider()" width="220" height="150" style="padding-right: 2px;" src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/timg.gif"  >
+            <!--红包-->
+            <img   onclick="receiveRed()" style="padding-bottom: 2px;padding-top: 170px;padding-right: 0px" src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/20190422152508.gif"  >
         </div>
+
+
+
     </div>
 <div style="width: 1192px;height: 250px">
     <img src="../img/a1.jpg" style="width: 100%;height: 250px">
@@ -232,21 +236,28 @@
                     alt="已通过沪公网备案，备案号 310100103568" src="#" height="30"/></a>
         </div>
     </div>
+    <input type="text" id="diZhi">
 </footer>
 <!--个人中心-->
 <iframe src="../page/toPersonalLayUi" scrolling="no" frameborder="0" id="myXs" style="margin: auto;display: none;" width="100%" height="900"></iframe>
 </body>
 
 <script type="text/javascript">
+
     $(function(){
+        var loc = location.href;
+        var n1 = loc.length;//地址的总长度
+        var n2 = loc.indexOf("=");//取得=号的位置
+        var address = decodeURI(loc.substr(n2+1, n1-n2));//从=号后面的内容
+        $("#diZhi").val(address);
         $('#myCarousel').carousel({interval:2000});
+        initDrugList(1,30);
+
     })
-    $(function () {
-       initDrugList(1,30);
-    })
+
     function assignFistCatalog(type) {
         $('#hiddStatus').val(type);
-        initDrugList(1,18)
+        initDrugList(1,30)
     }
     function initDrugList(page,rows) {
         $.ajax({
@@ -255,11 +266,7 @@
             data: {
                 page: page,
                 rows: rows,
-                searchList:JSON.stringify({
-                    /**!*"constant":1,//上架时间最近一周
-                    "salesVolume":3,//按时间倒叙排列*!*/
-                    "type":$("#hiddStatus").val()
-                })
+                searchList:JSON.stringify({'type':$("#hiddStatus").val(),'address':$("#diZhi").val()})
             },
             dataType: 'json',
             success: function (result) {
@@ -345,6 +352,22 @@
             }
         })
     }
+    
+    
+    function myRider() {
+            layui.use('layer', function(){
+                layer.open({
+                    type: 1,
+                    area: ['1000px', '500px'],
+                    content: createJsp("http://192.168.0.155:8082/page/toRoom") //这里content是一个普通的String
+                });
+            })
+        }
+
+        function createJsp(url){
+            return '<iframe scrolling="auto" frameborder="0"  src="'+ url + '" style="width:100%;height:100%;"></iframe>';
+    }
+
 </script>
 </html>
 <script>

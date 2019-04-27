@@ -106,7 +106,12 @@ public class UserServiceImpl implements  UserService{
     @Override
     @ResponseBody
     public HashMap<String, Object> findMenchant(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows,@RequestParam("searchList")String searchList) {
+
+
+
         ShangBean shangBean = JSON.parseObject(searchList, ShangBean.class);
+
+
         HashMap<String, Object> hashMap = new HashMap<>();
         //查询总条数
         int total = userMapper.findMerchantCount(shangBean);

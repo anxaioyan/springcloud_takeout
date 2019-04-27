@@ -116,6 +116,14 @@ function mylogin() {
     location.href="../page/tologin";
 }
 
+	
+	$("#searchrtt").click(function () {
+
+			if ($("#myGps").val().length!=0){
+				location.href="../page/toMyIndex?"+"txt="+encodeURI($("#myGps").val());
+			}
+
+	})
  </script>
 </html>
 

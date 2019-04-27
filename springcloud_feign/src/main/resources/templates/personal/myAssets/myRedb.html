@@ -6,12 +6,42 @@
     <script src="../js/jquery/jquery-1.9.1.js"  ></script>
     <script src="../js/layui/layui.all.js"></script>
     <link rel="stylesheet" href="../js/layui/css/layui.css">
+
 </head>
 <body>
 <div class="layui-card-body">
     <div class="layui-container" style="text-align: center">
-             <img src="../img/hb.png" height="300" width="300"/>
+             <img src="../img/hb.png" height="300" width="300" id="message" style="display: none"/>
+        <table style="color: #00A2CA;font-size: 30px;">
+            <tbody id="redBody">
+
+            </tbody>
+        </table>
     </div>
 </div>
 </body>
+<script>
+    $(function () {
+        $.ajax({
+            url:'../myPersonal/findRedNumber',
+            type:'get',
+            dataType:'json',
+            success:function (data) {
+                if (data.length!=0){
+                    var html="<tr style='height: 50px;line-height: 50px'><td colspan='2'>可用红包"+data.length+"个"+"</td></tr>";
+                    for (var i = 0; i < data.length; i++) {
+                         html+="<tr style='height: 50px;line-height: 50px;font-size: 20px;'>"+
+                                 "<td>可用金额</td>"+
+                                 "<td>"+data[i].redNumber+"元</td>"
+                                +"</tr>";
+                    }
+                    $("#redBody").html(html);
+                }else {
+                    $("#message").css("display","block");
+                }
+            }
+        })
+       /* redBody*/
+    })
+</script>
 </html>

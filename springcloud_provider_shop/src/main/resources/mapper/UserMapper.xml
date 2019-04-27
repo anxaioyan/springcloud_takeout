@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jk.mapper.user.UserMapper">
-
     <!--登录-->
     <select id="findUserInfoByAccount" parameterType="string" resultType="com.jk.model.user.UserBean">
         select * from t_reg where account = #{value}
@@ -13,26 +12,33 @@
     <insert id="reg" parameterType="com.jk.model.user.UserBean">
         insert into t_reg (account,password) values (#{account},#{password})
     </insert>
-
     <!--用户名查询-->
     <select id="getUserInfoByAccount" parameterType="string" resultType="int">
         select count(*) from t_reg where account=#{account}
     </select>
     <!--首页分页查询-->
-    <select id="findMerchantCount" parameterType="com.jk.model.shop.MerchantBean" resultType="int">
-        select count(*) from yy_merchants m where 1=1
-        <include refid="marketWhere"></include>
+    <select id="findMerchantCount" parameterType="com.jk.model.shop.ShangBean" resultType="int" >
+        select count(*) from yz_shang z where 1=1
+       <include refid="marketWhere"></include>
     </select>
-    <select id="findMenchant" resultType="com.jk.model.shop.MerchantBean">
-        select * from yy_merchants m where 1=1
-        <include refid="marketWhere"></include>
+    <select id="findMenchant" resultType="com.jk.model.shop.ShangBean">
+        select * from yz_shang z where 1=1
+       <include refid="marketWhere"></include>
         limit #{start},#{rows}
     </select>
     <!--商品回显-->
-    <select id="findXiangqingById" parameterType="int" resultType="com.jk.model.shop.MerchantBean">
-        select m.id,m.store,m.pingfen,m.area,m.peisong,m.times,m.image,m.goodReputation,
-               m.name,m.price,m.counts
-        from yy_merchants m where m.id=#{id}
+    <select id="findXiangqingById" parameterType="int" resultType="com.jk.model.shop.ShangBean">
+       select y.id,y.name,y.peisong,y.info,y.image from yz_shang y   where y.id = #{id}
+    </select>
+    <!--根据商家id查询商品数据-->
+    <select id="findShang" parameterType="int" resultType="com.jk.model.shop.GoodBean">
+        select m.id,m.name,m.image,m.peoplebuy,m.pingfen,m.price,m.info,m.counts
+        from t_goods_one m left join yz_shang s on m.shangId=s.id  where s.id=#{id}
+        <include refid="goodWhere"></include>
+    </select>
+    <!--查询到商品的id-->
+    <select id="findGoodById" parameterType="int" resultType="com.jk.model.shop.GoodBean">
+          select m.id,m.name,m.peisong,m.price,m.counts from t_goods_one m where m.id=#{id}
     </select>
     <!--  加入购物车-->
     <insert id="saveShops" parameterType="com.jk.model.shop.ShopBean">
@@ -53,13 +59,11 @@
 
     <!--批量删除-->
     <delete id="deleteMany">
-        delete from t_shop  where id in
+        delete from t_shop where id in
         <foreach collection="ids" separator="," open="(" close=")" item="item">
             #{item}
         </foreach>
     </delete>
-
-
     <!--手机验证码登录-->
     <!-- 根据登录账号查询用户信息 -->
     <select id="findUserByLoginNumber" parameterType="string" resultType="com.jk.model.user.UserBean">
@@ -67,29 +71,28 @@
     </select>
 
     <sql id="marketWhere">
-        <if test="merchantBean.type !=null and merchantBean.type !=''">
-            and m.type = #{merchantBean.type}
+        <if test="shangBean.type !=null and shangBean.type !=''">
+            and z.type = #{shangBean.type}
         </if>
-        <if test="merchantBean.status !=null and merchantBean.status !=''">
-            and m.status = #{merchantBean.status}
-        </if>
-        order by peisong
-        <if test="merchantBean.pingfen == 1 ">
+    </sql>
+    <sql id="goodWhere">
+        order by counts
+        <if test="goodBean.pingfen == 1 ">
             ,m.pingfen asc
         </if>
-        <if test="merchantBean.pingfen == 2 ">
+        <if test="goodBean.pingfen == 2 ">
             ,m.pingfen desc
         </if>
-        <if test="merchantBean.peoplebuy == 1 ">
+        <if test="goodBean.peoplebuy == 1 ">
             ,m.peoplebuy asc
         </if>
-        <if test="merchantBean.peoplebuy == 2 ">
+        <if test="goodBean.peoplebuy == 2 ">
             ,m.peoplebuy desc
         </if>
-        <if test="merchantBean.price == 1 ">
+        <if test="goodBean.price == 1 ">
             ,m.price asc
         </if>
-        <if test="merchantBean.price == 2 ">
+        <if test="goodBean.price == 2 ">
             ,m.price desc
         </if>
     </sql>

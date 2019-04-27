@@ -13,6 +13,7 @@ package com.jk.controller.personal.myData;
 import com.aliyun.oss.OSSClient;
 import com.jk.model.personal.myMaterial.MyPersonalBean;
 import com.jk.model.personal.myMaterial.MyResideBean;
+import com.jk.model.personal.mypersonaltree.MyRedNumberBean;
 import com.jk.service.Personal;
 import com.jk.utils.AliyunOSSClientUtil;
 import com.jk.utils.OSSClientConstants;
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -70,5 +73,41 @@ public class MyPersonalController {
         }
 
     }
+
+
+    /**
+     * 获取红包
+     * @return
+     */
+    @GetMapping("upDateRed")
+    @ResponseBody
+    public HashMap<String,Object> upDateRed(){
+           Integer userId=1;
+           HashMap<String ,Object> pman= personal.upDateRed(userId);
+           return pman;
+    }
+
+    /**
+     * 查询红包
+     */
+    @GetMapping("findRedNumber")
+    @ResponseBody
+    public List<MyRedNumberBean> findRedNumber(){
+        Integer id=1;
+        return personal.findRedNumber(id);
+
+        }
+
+
+    /**
+     * 查询金币
+     */
+    @GetMapping("findMyGold")
+    @ResponseBody
+    public Integer findMyGold(){
+        Integer id=1;
+        return personal.findMyGold(id);
+
+        }
 
 }

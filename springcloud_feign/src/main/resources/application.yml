@@ -12,6 +12,9 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     cache: false
+  data:
+    solr:
+      host: http://127.0.0.1:8090/solr
 
 feign:
   httpclient:

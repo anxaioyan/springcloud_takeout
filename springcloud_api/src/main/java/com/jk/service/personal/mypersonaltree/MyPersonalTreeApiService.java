@@ -7,8 +7,10 @@ package com.jk.service.personal.mypersonaltree;
 import com.jk.model.personal.myMaterial.MyPersonalBean;
 import com.jk.model.personal.myMaterial.MyResideBean;
 import com.jk.model.personal.mypersonaltree.MyPersonalTreeBean;
+import com.jk.model.personal.mypersonaltree.MyRedNumberBean;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface MyPersonalTreeApiService {
@@ -47,4 +49,16 @@ public interface MyPersonalTreeApiService {
     @PostMapping("upDatePersonal")
     @ResponseBody
     void upDatePersonal(@RequestBody MyPersonalBean myPersonalBean);
+
+    @GetMapping("upDateRed/{id}")
+    @ResponseBody
+    HashMap<String ,Object> upDateRed(@PathVariable("id") Integer userId);
+
+    @GetMapping("findRedNumber/{id}")
+    @ResponseBody
+    List<MyRedNumberBean> findRedNumber(@PathVariable("id") Integer id);
+
+    @GetMapping("findMyGold/{id}")
+    @ResponseBody
+    Integer findMyGold(@PathVariable("id") Integer id);
 }

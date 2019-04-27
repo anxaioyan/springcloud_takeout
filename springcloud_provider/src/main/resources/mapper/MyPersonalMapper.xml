@@ -41,4 +41,25 @@
         update t_mypersonal t set t.mytopimg=#{mytopimg},t.info=#{info} where t.id=#{id}
     </update>
 
+    <!--获取红包数-->
+    <select id="findRedCount" resultType="int">
+      select count(*) from t_myrednumber where userId=userId
+    </select>
+
+    <!--获取红包-->
+    <insert id="upDateRed">
+        insert  into t_myrednumber(redNumber,userId) values(#{redNumber},#{userId})
+    </insert>
+
+    <!--查询红包-->
+    <select id="findRedNumber" parameterType="int" resultType="com.jk.model.personal.mypersonaltree.MyRedNumberBean">
+        select t.redNumber from t_myrednumber t where t.userId=#{value}
+    </select>
+
+
+    <!--查询金币-->
+    <select id="findMyGold" resultType="int" parameterType="int">
+        select t.gold from t_gold t where t.userid=#{value}
+    </select>
+
 </mapper>

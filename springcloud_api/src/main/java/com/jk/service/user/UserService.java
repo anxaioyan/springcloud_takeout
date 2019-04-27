@@ -10,7 +10,8 @@
  */
 package com.jk.service.user;
 
-import com.jk.model.shop.MerchantBean;
+import com.jk.model.shop.GoodBean;
+import com.jk.model.shop.ShangBean;
 import com.jk.model.shop.ShopBean;
 import com.jk.model.user.UserBean;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +49,7 @@ public interface UserService {
 
     @GetMapping("findXiangqingById/{id}")
     @ResponseBody
-    MerchantBean findXiangqingById(@PathVariable("id") Integer id);
+    ShangBean findXiangqingById(@PathVariable("id") Integer id);
 
     @PostMapping("saveShops")
     @ResponseBody
@@ -81,6 +82,14 @@ public interface UserService {
     @DeleteMapping("deleteMany")
     @ResponseBody
     void deleteMany(@RequestParam("ids") Integer[] ids);
+
+    @GetMapping("findShang/{id}")
+    @ResponseBody
+    List<GoodBean> findShang(@PathVariable("id")Integer id,@RequestParam("search") String search);
+
+    @GetMapping("findGoodById/{id}")
+    @ResponseBody
+    GoodBean findGoodById(@PathVariable("id")Integer id);
 
     /*@GetMapping("queryfingById")
     @ResponseBody

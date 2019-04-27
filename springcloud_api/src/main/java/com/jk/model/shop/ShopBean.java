@@ -6,7 +6,7 @@ import java.io.Serializable;
 //@Document(collection = "t_shop")
 public class ShopBean implements Serializable {
 
-  //  private String id;
+    //  private String id;
    private Integer id;
     private String name;
     private String peisong;

@@ -13,11 +13,10 @@
 </head>
 <body>
 <div class="layui-card-body">
-
     <div class="layui-container">
         <div class="layui-row">
             <div   style="width: 900px;height: 70px; background:#F7F7F7 ;margin: auto;  " >
-                <p style="margin-left: 10%; line-height: 70px">当前金币:    <span style="font-size: 20px;color: red; "><b>0</b>个</span></p>
+                <p style="margin-left: 10%; line-height: 70px">当前金币:    <span style="font-size: 20px;color: red; "><b id="goldNumber">0</b></span>个</p>
             </div>
         </div>
         <br/>
@@ -36,15 +35,24 @@
             </tbody>
         </table>
         <div class="layui-row"  style="width: 900px; margin: auto; text-align: center">
-
             <img src="../img/a.png" height="269" width="428"/>
         </div>
-
     </div>
 </div>
 </body>
 <script>
+    $(function () {
+        
+        $.ajax({
+            url:'../myPersonal/findMyGold',
+            type:'get',
+            dataType:'json',
+            success:function (data) {
 
+                $("#goldNumber").html(data);
+            }
+        })
+    })
 
 </script>
 </html>

@@ -10,7 +10,9 @@
  */
 package com.jk.mapper.user;
 
-import com.jk.model.shop.MerchantBean;
+
+import com.jk.model.shop.GoodBean;
+import com.jk.model.shop.ShangBean;
 import com.jk.model.shop.ShopBean;
 import com.jk.model.user.UserBean;
 import org.apache.ibatis.annotations.Param;
@@ -29,7 +31,6 @@ import java.util.List;
 public interface UserMapper {
 
     UserBean findUserInfoByAccount(String account);
-
     //注册
     List<UserBean> queryReg(String account);
 
@@ -38,11 +39,11 @@ public interface UserMapper {
     void reg(UserBean userBean);
 
     //查询
-    int findMerchantCount(@Param("merchantBean") MerchantBean merchantBean);
-    List<MerchantBean> findMenchant(@Param("start")int start,@Param("rows") Integer rows,@Param("merchantBean")MerchantBean merchantBean);
+    int findMerchantCount(@Param("shangBean")ShangBean shangBean);
+    List<ShangBean> findMenchant(@Param("start")int start,@Param("rows") Integer rows,@Param("shangBean")ShangBean shangBean);
 
     //回显
-    MerchantBean findXiangqingById(Integer id);
+    ShangBean findXiangqingById(Integer id);
 
     void saveShops(ShopBean shopBean);
 
@@ -55,6 +56,12 @@ public interface UserMapper {
     UserBean findUserByLoginNumber(String phoneNumber);
 
     void deleteMany(@Param("ids") Integer[] ids);
+
+    List<GoodBean> findShang(@Param("id") Integer id,@Param("goodBean") GoodBean goodBean);
+
+    GoodBean findGoodById(Integer id);
+
+
 
 
 

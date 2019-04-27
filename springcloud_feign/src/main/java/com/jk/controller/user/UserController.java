@@ -99,7 +99,6 @@ public class UserController {
     public String toShowInfo(Integer id, Model md) {
         md.addAttribute("id", id);
         return "xiangqing";
-        //   return "商品详情";
     }
 
 

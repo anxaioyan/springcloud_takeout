@@ -80,7 +80,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/user/login2");
         // 登录成功跳转到登录成功页面
 
-        shiroFilterFactoryBean.setSuccessUrl("/page/tomain");
+        shiroFilterFactoryBean.setSuccessUrl("/page/toIndex");
         // 未授权界面;
         //shiroFilterFactoryBean.setUnauthorizedUrl("/403.html");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");

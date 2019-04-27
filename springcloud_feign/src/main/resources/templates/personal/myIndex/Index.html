@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>饿了么</title>
@@ -19,7 +19,7 @@
   		<img src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/map-logo.d72989.png" width="130" height="70">
   		<span style="float: right; padding-top: 25px; height: 30px;line-height: 30px">
   			<img src="https://three-group.oss-cn-beijing.aliyuncs.com/three_project_img/%E5%A4%B4%E5%83%8F.png" style="border-radius: 50%;vertical-align: middle;" width="28" height="28">
-  			<span style="padding-left: 20px;padding-right: 20px" onclick="mylogin()">用户名字</span>
+  			<span style="padding-left: 20px;padding-right: 20px" th:text="${session.user.account}">用户名字</span>
   			<input  type="button" class="layui-btn layui-btn-sm" style=" border: 0; background: #5db423;" onclick="openShop()" value="我要开店">
   		</span>
   	</div>	

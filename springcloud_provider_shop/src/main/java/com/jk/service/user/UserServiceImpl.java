@@ -15,15 +15,12 @@ import com.jk.mapper.user.UserMapper;
 import com.jk.model.shop.MerchantBean;
 import com.jk.model.shop.ShopBean;
 import com.jk.model.user.UserBean;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -59,7 +56,7 @@ public class UserServiceImpl implements  UserService{
 
         //通过前台传过来的账号获取账号的信息
         UserBean userInfo = userMapper.findUserInfoByAccount(userBean.getAccount());
-
+        String account = userBean.getAccount();
         if (userInfo == null) {
             result.put("code", 2);
             result.put("msg", "账号或密码错误");
@@ -76,7 +73,7 @@ public class UserServiceImpl implements  UserService{
         //将用户信息存入到session中
         result.put("code", 0);
         result.put("msg", "登录成功");
-        System.out.println(result.toString());
+        redisTemplate.delete(account);
         return result;
     }
 
@@ -247,10 +244,10 @@ public class UserServiceImpl implements  UserService{
         }
         //登录成功
         result.put("code", 0);
-        result.put("msg", "登陆成功");
+        result.put("msg", "验证码输入成功");
 //        session.setAttribute(session.getId(),user);
         //清redis缓存
-        redisTemplate.delete(account);
+//        redisTemplate.delete(account);
         return result;
     }
 

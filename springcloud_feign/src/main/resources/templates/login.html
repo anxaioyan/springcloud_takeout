@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
 
@@ -16,70 +16,160 @@
     <header class="layui-elip">登录</header>
     <form class="layui-form" id="login" action="../user/login2" method="post">
         <div class="layui-input-inline">
-            <input type="text" name="username" id="accounts" required lay-verify="required" placeholder="用户名" autocomplete="off"
+            <input type="text" name="username" id="accounts" required lay-verify="required" placeholder="请输入手机号" autocomplete="off"
                    class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <input type="password" name="password" id="passwords" required lay-verify="required" placeholder="密码" autocomplete="off"
+            <input type="password" name="password" id="passwords" required lay-verify="required" placeholder="请输入密码" autocomplete="off"
                    class="layui-input">
         </div>
+        <div class="layui-input-inline">
+            <input type="text" id="yan" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" onblur="yance()"
+                   class="layui-input">
+        </div>
+
+        <center><font size="5px" color="#dc143c"><div class="layui-input-inline" th:text="${message}"></div></font></center>
+
+        <div class="layui-input-inline">
+            <button type="button" class="layui-btn layui-btn-normal" onclick="send()">发送手机验证码</button>
+        </div>
+
         <div class="layui-input-inline login-btn">
             <button type="submit" id="plogBtn" lay-filter="login" class="layui-btn">登录</button>
         </div>
-        <div class="layui-input-inline">
-            <button type="button" id="telBtn" class="layui-btn layui-btn-primary">使用手机验证码登录</button>
-        </div>
+
         <hr/>
-        <div class="layui-input-inline">
+        <!--<div class="layui-input-inline">
             <button type="button" class="layui-btn layui-btn-primary">QQ登录</button>
         </div>
         <div class="layui-input-inline">
             <button type="button" class="layui-btn layui-btn-normal">微信登录</button>
-        </div>
+        </div>-->
         <p><a href="javascript:toReg();" class="fl">立即注册</a></p>
     </form>
 </div>
 </body>
 <script src="../js/layui/layui.js"></script>
 <script type="text/javascript">
-/*
+
     function toReg(){
         location.href = "../page/toReg";
     }
 
-    $("#telBtn").click(function (){
-        location.href = "../page/toTelLogin";
-    })
-
-    $("#plogBtn").click(function () {
+    function yance(){
         var account=$("#accounts").val();
-        var password=$("#passwords").val();
-        if (account.length==0||password.length==0) {
-                alert("账号和密码不能为空");
+        var yan=$("#yan").val();
+        if (account.length==0) {
+            layer.alert("手机号不能为空", {
+                icon: 4,
+                skin: 'layer-ext-moon'
+            })
+        }else if(yan.length==0){
+            layer.alert("验证码不能为空", {
+                icon: 4,
+                skin: 'layer-ext-moon'
+            })
         }else {
-            var name=JSON.stringify({'account':$("#accounts").val(),'password':$("#passwords").val()})
+
             $.ajax({
-                url: '../user/login',
-                data: {
-
-                    name: name
-
+                url: '../user/messagelogin',
+                data:{
+                    account:account,
+                    messageCode:yan
                 },
-
-                dataType: 'json',
-                type: 'post',
+                type: 'get',
+                dataType:'json',
                 success: function (data) {
                     if (data.code != 0) {
-                        alert(data.msg);
-                        return;
-                    } else {
-                        location.href = "../page/toMyIndex";
+                        layer.alert(data.msg, {
+                            icon: 2,
+                            skin: 'layer-ext-moon'
+                        })
+                    }else {
+                        layer.alert("验证码输入正确", {
+                            icon: 1,
+                            skin: 'layer-ext-moon'
+                        })
                     }
                 }
             })
         }
+    }
+
+
+
+    function send(){
+        var account=$("#accounts").val();
+        if (account.length==0) {
+            alert("请输入手机号");
+        }else {
+            $.ajax({
+                url: '../user/gainMessgerCode',
+                data: {
+                    account: account
+                },
+                type: 'get',
+                success: function (data) {
+                    if (data == 1) {
+                        layer.alert('恭喜您，发送成功', {
+                            icon: 1,
+                            skin: 'layer-ext-moon'
+                        })
+                    } else {
+                        layer.alert('五分钟之内发送过，请等待!!!', {
+                            icon: 2,
+                            skin: 'layer-ext-moon'
+                        })
+                    }
+                },error: function (data) {
+                    // alert(data);
+                    layer.alert('发送失败!!!', {
+                        icon: 2,
+                        skin: 'layer-ext-moon'
+                    })
+                }
+            })
+        }
+    }
+
+
+    layui.use("layer",function(){
+        var layer = layui.layer;
     })
-*/
+
+    /*$("#telBtn").click(function (){
+        location.href = "../page/toTelLogin";
+    })*/
+    /*
+        $("#plogBtn").click(function () {
+            var account=$("#accounts").val();
+            var password=$("#passwords").val();
+            if (account.length==0||password.length==0) {
+                    alert("账号和密码不能为空");
+            }else {
+                var name=JSON.stringify({'account':$("#accounts").val(),'password':$("#passwords").val()})
+                $.ajax({
+                    url: '../user/login',
+                    data: {
+
+                        name: name
+
+                    },
+
+                    dataType: 'json',
+                    type: 'post',
+                    success: function (data) {
+                        if (data.code != 0) {
+                            alert(data.msg);
+                            return;
+                        } else {
+                            location.href = "../page/toMyIndex";
+                        }
+                    }
+                })
+            }
+        })
+    */
 
     /*ayui.use(['form','layer','jquery'], function () {
 

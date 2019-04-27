@@ -10,6 +10,7 @@ package com.jk.shiro;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -17,11 +18,9 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.apache.shiro.mgt.SecurityManager;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
-import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -63,6 +62,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/css/**", "anon");
         // 放过登录页面拦截
         filterChainDefinitionMap.put("/user/login", "anon");
+        filterChainDefinitionMap.put("/page/toReg", "anon");
+        filterChainDefinitionMap.put("/user/gainMessgerCode", "anon");
+        filterChainDefinitionMap.put("/user/messagelogin", "anon");
         filterChainDefinitionMap.put("/login2", "anon");
         filterChainDefinitionMap.put("/img/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");

@@ -31,6 +31,12 @@
 <meta name="description" content="”饿了么”2008年创立于上海，是中国领先的本地生活平台。截至目前，饿了么在线外卖交易平台已覆盖全国2000个城市，加盟餐厅130万家，用户量达2.6亿">
 <meta name="keywords" content="北京明园大学美食，北京明园大学商家，北京明园大学外卖">
 
+<style>
+    .layui-nav * {
+        font-size: 16px;
+    }
+</style>
+
 </head>
 <body cute-title="" ng-class="{hidesidebar: layoutState &amp;&amp; layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}" style="position: relative;">
 <!--最上面的导航条-->
@@ -83,10 +89,15 @@
         <h2> <a href="">手机应用<span class="layui-badge-dot"></span></a></h2>
 
     <li class="layui-nav-item">
-         <a  target="_blank" href="../page/toReg">登录/注册</a></span>
-   </li>
-    <li class="layui-nav-item">
         <a  target="_blank" href="../page/">个人中心</a></span>
+    </li>
+
+    <li class="layui-nav-item">
+        <font size="5px" color="blue"><div th:text="${session.user.account}">用户名</div></font>
+    </li>
+
+    <li class="layui-nav-item">
+        <a  target="_blank" href="/logout">注销</a></span>
     </li>
 
 </ul>

@@ -81,7 +81,7 @@
         //$('#form_id').submit();
     });*/
     function jiesuan(){
-        var money = $("#total").text();
+        var money = tol;
         location.href = "../pay/pay?money="+money;
         /*$.ajax({
             url:'../pay/pay',
@@ -98,6 +98,7 @@
 
     var number = 0;  //数量
     var danjia = 0;  //单价
+    var tol = 0;
     function initShop() {
         $("#shopTable").bootstrapTable({
             url: "../user/findShop",
@@ -116,11 +117,10 @@
                 {
                     field: 'count', title: '数量', formatter: function (value, row, index) {
                         var ss = value;
-                        return '<input type="button" onclick="jia(' + row.id + ',' + row.count + ',' + row.price + ')" style="width: 20px;height:25px;color: #c93333" value="+"><input type="text"   id= "text_box' + row.id + '" value="' + value + '" size="3px"><input type="button"  style="width: 20px;height:25px;color: #c93333"  value="-" onclick="jian(' + row.id + ',' + row.count + ',' + row.price + ')">';
+                        return '<input type="button" onclick="jian(' + row.id + ',' + row.price + ')" value="-"><input type="text"   id= "text_box' + row.id + '" value="1" onkeyup="value=value.replace(/[^\\d]/g,\'\'),suan()" size="3px"><input type="button" value="+" onclick="jia(' + row.id + ',' + row.price + ')">';
+                        // return '<input type="button" onclick="jian(' + row.id + ',' + row.count + ',' + row.price + ')" style="width: 20px;height:25px;color: #c93333" value="-"><input type="text"   id= "text_box' + row.id + '" value="' + value + '" size="3px"><input type="button"  style="width: 20px;height:25px;color: #c93333"  value="+" onclick="jia(' + row.id + ',' + row.count + ',' + row.price + ')">';
                     }
                 },
-
-                /* {field:'discount',title:'折扣优惠'},*/
                 {
                     field: '456', title: '操作', formatter: function (value, row, index) {
                         var html = "<a href='javascript:delOne(" + row.id + ")'><font color='red'>删除</font></a>";
@@ -129,13 +129,30 @@
                 }
             ],
             onCheck:function(row){
-                //alert("价格"+row.unitPrice+"数量"+row.numbers)
-                var add = $("#text_box"+row.id).val()
-                number += row.count;
-                //number += add;
+                suan();
+                /*var add = $("#text_box"+row.id).val();
+                number = add*1+number;
                 danjia += add*row.price;
                 $("#jianshu").text(number);
                 $("#total").text(danjia);
+                tol = danjia;*/
+            },
+            onUncheck:function(row){
+                suan();
+                /*var add = $("#text_box"+row.id).val()
+                number -= add;
+                danjia -= add*row.price;
+                $("#jianshu").text(number);
+                $("#total").text(danjia);
+                tol = danjia;*/
+            }
+            /*onCheck:function(row){
+                var add = $("#text_box"+row.id).val();
+                number = add*1+number;
+                danjia += add*row.price;
+                $("#jianshu").text(number);
+                $("#total").text(danjia);
+                tol = danjia;
             },
             onUncheck:function(row){
                 var add = $("#text_box"+row.id).val()
@@ -143,30 +160,93 @@
                 danjia -= add*row.price;
                 $("#jianshu").text(number);
                 $("#total").text(danjia);
-            }
+                tol = danjia;
+            }*/
+            /*onCheck:function(row){
+                //alert("价格"+row.unitPrice+"数量"+row.numbers)
+                var add = $("#text_box"+row.id).val();
+                number += row.count;
+                //number += add;
+                danjia += add*row.price;
+                $("#jianshu").text(number);
+                $("#total").text(danjia);
+                tol = danjia;
+            },
+            onUncheck:function(row){
+                var add = $("#text_box"+row.id).val()
+                number -= add;
+                danjia -= add*row.price;
+                $("#jianshu").text(number);
+                $("#total").text(danjia);
+                tol = danjia;
+            }*/
 
         })
     }
 
-    function jia(id,count,price){
+    function suan(){
+        var arr = $("#shopTable").bootstrapTable("getSelections");
+        var li = 0;
+        var zong = 0;
+        for (var i=0;i<arr.length;i++) {
+            var oo = $("#text_box"+arr[i].id).val();
+            // console.log(oo+"++++++++++arr[i].id:"+arr[i].id+"+++++++++arr[i].price:"+arr[i].price);
+            li = li + oo*1;
+            zong = zong*1+arr[i].price*oo;
+            $("#jianshu").text(li);
+            $("#total").text(zong);
+            // console.log("zong:"+zong);
+            tol = zong;
+        }
+    }
+
+    function jia(id,price){
         var con = $("#text_box"+id).val();
-        var aa=con*1+1;
-        $("#text_box"+id).val(aa);
-        var arr = $("#shopTable").bootstrapTable("getSelections")
+        con = con*1+1;
+        $("#text_box"+id).val(con);
+        suan();
+        /*var con = $("#text_box"+id).val();
+        con = con*1+1;
+        $("#text_box"+id).val(con);
+        var arr = $("#shopTable").bootstrapTable("getSelections");
         for (var i=0;i<arr.length;i++) {
             if (arr[i].id == id) {
-                number -= con;
-                danjia -= con * price;
-                number += aa;
-                danjia += aa * price;
+                danjia = danjia*1+price;
+                number = number*1+1;
                 $("#jianshu").text(number);
                 $("#total").text(danjia);
+                tol = danjia;
             }
-        }
+        }*/
 
     }
 
-    function jian(id,count,price){
+    function jian(id,price){
+        var con = $("#text_box"+id).val();
+        if(con<=0){
+            $("#text_box"+id).val(0);
+        }else{
+            $("#text_box"+id).val(con-1);
+        }
+        suan();
+        /*var con = $("#text_box"+id).val();
+        if(con<=0){
+            $("#text_box"+id).val(0);
+        }else{
+            $("#text_box"+id).val(con-1);
+        }
+        var arr = $("#shopTable").bootstrapTable("getSelections");
+        for (var i=0;i<arr.length;i++) {
+            if (arr[i].id == id){
+                number -= 1;
+                danjia = danjia*1-price;
+                $("#jianshu").text(number);
+                $("#total").text(danjia);
+                tol = danjia;
+            }
+        }*/
+    }
+    /*function jian(id,count,price){
         var con = $("#text_box"+id).val();
         var bb=con*1-1;
         if(bb==0){
@@ -186,7 +266,7 @@
                 $("#total").text(danjia);
             }
         }
-    }
+    }*/
 
     //单删
     function delOne(id){

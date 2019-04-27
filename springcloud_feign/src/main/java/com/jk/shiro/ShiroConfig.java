@@ -79,7 +79,6 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setFilters(map);
         shiroFilterFactoryBean.setLoginUrl("/user/login2");
         // 登录成功跳转到登录成功页面
-
         shiroFilterFactoryBean.setSuccessUrl("/page/toIndex");
         // 未授权界面;
         //shiroFilterFactoryBean.setUnauthorizedUrl("/403.html");

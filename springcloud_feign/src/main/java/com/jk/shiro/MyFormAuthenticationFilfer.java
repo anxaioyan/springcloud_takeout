@@ -21,7 +21,7 @@ public class MyFormAuthenticationFilfer extends FormAuthenticationFilter {
 
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
-        String successUrl = "/page/toMyIndex";
+        String successUrl = "/page/toIndex";
         WebUtils.issueRedirect(request, response, successUrl);
         return false;
     }

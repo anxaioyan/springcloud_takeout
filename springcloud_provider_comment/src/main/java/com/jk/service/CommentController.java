@@ -1,7 +1,9 @@
 package com.jk.service;
 
-import com.jk.model.Comment;
+import com.jk.model.comment.Comment;
+import com.jk.model.room.Room;
 import com.jk.utils.PageUtil;
+import com.jk.utils.ResponseLayui;
 import com.jk.utils.responseComment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -19,6 +21,9 @@ public class CommentController{
 
     @Autowired
     private MongoTemplate mongoTemplate;
+
+    @Autowired
+    private RommService rommService;
 
     @PostMapping("/queryComment")
     @ResponseBody
@@ -44,6 +49,23 @@ public class CommentController{
         mongoTemplate.save(comment);
     }
 
+
+    //分页查询骑手
+    @PostMapping("/queryRoom")
+    @ResponseBody
+    public ResponseLayui queryRoom(Integer page, Integer rows, @RequestBody Room room) {
+        //查询总条数
+        int total = rommService.queryRoomCount();
+        //分页查询
+        int start = (page-1)*rows;
+        List<Room> list = rommService.queryRoom(start,rows,room);
+        ResponseLayui responseLayui = new ResponseLayui();
+        responseLayui.setCode(0);
+        responseLayui.setCount(total);
+        responseLayui.setData(list);
+        responseLayui.setMsg("");
+        return responseLayui;
+    }
 
 
 

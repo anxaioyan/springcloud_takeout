@@ -1,259 +1,309 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html>
+<link rel="stylesheet" href="../js/layui/css/style.css">
+<link rel="stylesheet" href="../js/layui/css/layui.css">
+<script src="../js/layui/layui.js"></script>
+<script src="../js/jquery.tabs.js"></script>
+<script src="../js/jquery.lazyload.js"></script>
+<script src="/layer.js"></script>
+<link rel="stylesheet" href="/layer.css" id="layui_layer_skinlayercss">
+
+<!-- 引入juquery -->
+<script src="../js/jquery-1.9.1.min.js"></script>
+<!-- 引入bootstrap的css,js -->
+<link rel="stylesheet" href="../js/bootstrap3/css/bootstrap.css">
+<script src="../js/bootstrap3/js/bootstrap.js"></script>
+<!--引入table的css，js  -->
+<link rel="stylesheet" href="../js/bootstrap-table/bootstrap-table.css">
+<script src="../js/bootstrap-table/bootstrap-table.js"></script>
+<script src="../js/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<!-- 引入bootbox的js -->
+<script src="../js/bootstrap-bootbox/bootbox.js"></script>
+<script src="../jquery.min.js"></script>
+<link rel="stylesheet" href="../layui-v2.4.5/layui/css/layui.css" media="all" />
+<script src="../layui-v2.4.5/layui/layui.js" ></script>
+<link rel="apple-touch-icon-precomposed" href="https://static2.ele.me/apple-touch-icon.png?v=2">
+<link href="../js/layui/vendor.css" rel="stylesheet">
+<link href="../js/layui/main.css" rel="stylesheet">
+<script src="../js/layui/api" data-ref="API_CONFIG"></script>
+<script src="../js/layui/perf.js.下载" type="text/javascript" crossorigin="anonymous"></script>
+<script src="../js/layui/vendor.js.下载" type="text/javascript" crossorigin="anonymous"></script>
+<script src="../js/layui/main.js.下载" type="text/javascript" crossorigin="anonymous"></script>
 
 
-    <title>Title</title>
-
-    <script src="../jquery.min.js" ></script>
-    <link rel="stylesheet" href="../layui-v2.4.5/layui/css/layui.css" media="all" />
-    <script src="../layui-v2.4.5/layui/layui.js" ></script>
-    <script>
-        function fda(){
-            layui.use(['rate'], function(){
-                var rate = layui.rate;
-                //显示文字
-                rate.render({
-                    elem: '.test1'
-                    ,value: 1
-                    ,readonly: true
-                });
-                rate.render({
-                    elem: '.test2'
-                    ,value: 2
-                    ,readonly: true
-                });
-                rate.render({
-                    elem: '.test3'
-                    ,value: 3
-                    ,readonly: true
-                });
-                rate.render({
-                    elem: '.test4'
-                    ,value: 4
-                    ,readonly: true
-                });
-                rate.render({
-                    elem: '.test5'
-                    ,value: 5
-                    ,readonly: true
-                });
+<meta name="mobile-agent" content="format=html5; url=http://m.ele.me/place/7zzz">
+<meta name="description" content="”饿了么”2008年创立于上海，是中国领先的本地生活平台。截至目前，饿了么在线外卖交易平台已覆盖全国2000个城市，加盟餐厅130万家，用户量达2.6亿">
+<meta name="keywords" content="北京明园大学美食，北京明园大学商家，北京明园大学外卖">
+<script>
+    function fda(){
+        layui.use(['rate'], function(){
+            var rate = layui.rate;
+            //显示文字
+            rate.render({
+                elem: '.test1'
+                ,value: 1
+                ,readonly: true
             });
-        }
-
-
-    </script>
-
-    <script type="text/javascript">
-        function timer(opj){
-            $(opj).find('ul').animate({
-                marginTop : "-3.5rem"
-            },500,function(){
-                $(this).css({marginTop : "0.7rem"}).find("li:first").appendTo(this);
-            })
-        }
-        $(function(){
-            var num = $('.notice_active').find('li').length;
-            if(num > 1){
-                var time=setInterval('timer(".notice_active")',3500);
-                $('.gg_more a').mousemove(function(){
-                    clearInterval(time);
-                }).mouseout(function(){
-                    time = setInterval('timer(".notice_active")',3500);
-                });
-            }
-
-            $(".news_ck").click(function(){
-                location.href = $(".notice_active .notice_active_ch").children(":input").val();
-            })
+            rate.render({
+                elem: '.test2'
+                ,value: 2
+                ,readonly: true
+            });
+            rate.render({
+                elem: '.test3'
+                ,value: 3
+                ,readonly: true
+            });
+            rate.render({
+                elem: '.test4'
+                ,value: 4
+                ,readonly: true
+            });
+            rate.render({
+                elem: '.test5'
+                ,value: 5
+                ,readonly: true
+            });
         });
-    </script>
+    }
 
 
-
-
-    <style type="text/css">
-        /*border-bottom: 1px solid #F0F0F0;*/
-        .huadong {width: 60rem;height:4rem;padding: 0.5rem 0 0.3rem 0; border-bottom: 1px solid #F0F0F0; position:relative;font: 12px/1.5 "Hiragino Sans GB","Microsoft YaHei",simsun;margin:0 auto;}
-        .huadong .huabox {  margin:0 auto; width: 80%; line-height: 4rem;}
-        .huadong .hdimg {float:left;line-height:3.5rem;}
-        .huadong .hdimg img { width: 100%; vertical-align:middle;}
-        .huadong h5 {font-size:1rem;float:left; line-height: 2.2rem; margin: 0.8rem 0 0 0; }
-        .huadong .gg_more { float: left;}
-        .huadong .gg_more a { font-size: 0.8rem; text-decoration:none;}
-
-        .huadong .notice_active {
-            float: left;
-            width: 55%;
-            height: 4rem;
-            padding: 0;
-            overflow: hidden;
-            position: relative;
-        }
-        .huadong .notice_active li{list-style-type:none;line-height: 2.4rem;overflow: hidden;}
-        /*.huadong .notice_active li.notice_active_ch {}*/
-        .huadong .notice_active li.notice_active_ch span {color:#656972;font-size:1rem;display: block;overflow: hidden; width:80%;float: left;
-            overflow: hidden;margin:0 0 2rem 0;}
-        .huadong .gg_more .news_ck {
-            float: left;
-            margin: 0 1rem 0 1rem;
-            color: #888;
-            width: 5rem;
-            height: 2rem;
-            line-height: 2rem;
-            display: block;
-            border: 1px solid #656972;
-            text-align: center;
-            border-radius: 0.7rem;
-            font-size: 0.8rem;
-            margin-top: 1rem;
-        }
-        .huadong .gg_more .news_more {
-
-        }
-        .huadong .notice_active li.notice_active_ch em {text-align:right;float:right;color:#888;font-size:0.8rem;font-style:normal;  }
-    </style>
+</script>
 
 
 </head>
-<body>
-    <ul class="layui-nav">
-        <li class="layui-nav-item"><a href="">饿了吗欢迎您的评论</a></li>
-        <li class="layui-nav-item layui-this">
-            <a href="javascript:;">产品</a>
-            <dl class="layui-nav-child">
-                <dd><a href="">选项1</a></dd>
-                <dd><a href="">选项2</a></dd>
-                <dd><a href="">选项3</a></dd>
-            </dl>
-        </li>
-        <li class="layui-nav-item"><a href="">大数据</a></li>
-        <li class="layui-nav-item">
-            <a href="javascript:;">促销打折</a>
-            <dl class="layui-nav-child">
-                <dd><a href="">移动模块</a></dd>
-                <dd><a href="">后台模版</a></dd>
-                <dd class="layui-this"><a href=""></a></dd>
-                <dd><a href=""></a></dd>
-            </dl>
-        </li>
-        <li class="layui-nav-item"><a href=""></a></li>
-    </ul>
-
-    <div class="qm-position">
-        <span class="layui-breadcrumb" lay-separator="/" style="margin-left:50px">
-            <a href="/">首页</a>
-            <a title="用户评论" href="list-37.htm">用户评论</a>
-        </span>
-    </div>
-    <main>
-        <div class="h5_yellow"></div>
-        <div class="qm-mainbox">
-            <div class="qm-maincont">
-                <div class="qm-Icontitle">
-                    <div class="qm-icon"><img src="../layui-master/dist/images/face/2.gif" height="22" width="22"/></div>
-                    <div class="qm-t1">
-                        <h1>用户评价</h1>
-                        <h3>EVALUATE</h3>
-                    </div>
-                </div>
-                <ul class="layui-nav layui-bg-blue">
-                    <li class="layui-nav-item"><a href="">艳蓝导航</a></li>
-                    <li class="layui-nav-item layui-this"><a href="">产品</a></li>
-                    <li class="layui-nav-item"><a href="">大数据</a></li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">解决方案</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="">移动模块</a></dd>
-                            <dd><a href="">后台模版</a></dd>
-                            <dd><a href="">电商平台</a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item"><a href="">社区</a></li>
-                </ul>
-            </div>
-            <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
-                <button data-method="notice" class="layui-btn">示范一个公告层</button>
-            </div>
-
-            <div class="huadong">
-                <div class="huabox">
-                    <div class="hdimg">
-                        <i class="layui-icon layui-icon-speaker" style="width: 20px"></i>
-                    </div>
-                    <h5>【公告】</h5>
-                    <div class="notice_active">
-                        <ul>
-                            <li class="notice_active_ch">
-                                <span>欢迎下次光临</span>
-
-                                <em>2017-01-20</em>
-                            </li>
-                            <li class="notice_active_ch">
-                                <span>请为本次服务进行评价</span>
-
-                                <em>2017-01-20</em>
-                            </li>
-                            <li class="notice_active_ch">
-                                <span>五星好评有奖励哦</span>
-
-                                <em>2017-01-20</em>
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-                    <div class="gg_more">
-                        <a class="news_ck" href="javascript:void(0)">查看详情</a>
-                        <a title="news_more" href="#">更多+</a>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="layui-row" id="comment_list"></div>
-                        <div class="layui-row layui-col-space10" >
-                            <div class="layui-col-md2"></div>
-                            <div class="layui-col-md3">
-                                <a href="javaScript:toPage(1)">首页</a>
-                                <a href="javaScript:toPage(2)">上一页</a>
-                                <a href="javaScript:toPage(3)">下一页</a>
-                                <a href="javaScript:toPage(4)">尾页</a>
-                                <input type="hidden" id="currentPageId"/>
-                                <input type="hidden" id="pageSizeId">
-                                <input type="hidden" id="totalPageId"/>
-                            </div>
+<!--上方导航栏（第一个）-->
+<body cute-title="" ng-class="{hidesidebar: layoutState &amp;&amp; layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}" style="position: relative;" class="hidesidebar">
+<div ng-switch="state.type" state="layoutState" class="ng-isolate-scope">
+    <div ng-switch-default="" topbar-default="" state="state" class="ng-scope ng-isolate-scope">
+        <header class="topbar shoptopbar" role="navigation" ng-class="{shoptopbar: state.type === 'shop'}">
+            <div class="container clearfix">
+                <h1><a href="https://www.ele.me/" hardjump="" class="topbar-logo icon-logo"><span>饿了么</span></a></h1>
+                <a href="../page/toMyIndex" hardjump="" class="topbar-item topbar-homepage" ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a>
+                <a href="../page/toGouwu" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">购物车</a>
+                <a href="#" target="_blank" class="topbar-item cooperation">加盟合作</a>
+                <a href="https://help.ele.me/pc/" target="_blank" class="topbar-item cooperation">我的客服</a>
+                <nav class="topbar-nav">
+                    <a ng-href="//h5.ele.me/service/agreement/#HEAEDER_SHOW=1" hardjump="" class="topbar-nav-link" target="_blank" href="https://h5.ele.me/service/agreement/#HEAEDER_SHOW=1">规则中心</a>
+                    <div class="topbar-nav-link">
+                        <i class="topbar-nav-icon icon-mobile"></i>手机应用
+                        <div class="dropbox topbar-mobile-dropbox">
+                            <span>扫一扫, 手机订餐更方便</span>
+                            <img src="../img/erweima2.jpg" class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App" />
                         </div>
-                         <div id="test1"></div>
-                        <input type="hidden" id="testCype"/>
-                        <button type="button" id="u">评分</button>
+                    </div>
+                    <div topbar-profilebox="">
+                        <div class="topbar-profilebox">
+                            <span ng-show="!$root.user.username" class="ng-hide"><a ng-href="//h5.ele.me/login/#redirect=https%3A%2F%2Fwww.ele.me%2Fshop%2FE13225239603205588383" target="_blank" href="../page/toReg">登录/注册</a></span>
+                            <span class="topbar-profilebox-wrapper" ng-show="$root.user.username">
+                            <span class="topbar-profilebox-username ng-binding"></span>
+                            <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span>
+           <div class="dropbox topbar-profilebox-dropbox">
+           <a class="icon-profile" href="https://www.ele.me/profile" hardjump="">个人中心</a>
+           <a class="icon-star" href="https://www.ele.me/profile/favor" hardjump="">我的收藏</a>
+           <a class="icon-location" href="https://www.ele.me/profile/address" hardjump="">我的地址</a>
+           <a class="icon-setting" href="https://www.ele.me/profile/security" hardjump="">安全设置</a>
+           <a class="icon-logout" href="javascript:" ng-click="logout()">退出登录</a>
+          </div></span>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+    </div>
+</div>
+<style type="text/css">
+    .box{width:1200px;background:#fff;}
+    .tab_menu{overflow:hidden;}
+
+    .tab_menu li{width:240px;float:left;color:#fff;background:#093;cursor:pointer;
+        line-height: 50px;height: 50px;margin:10px 30px 0 30px;
+        text-indent: 20px;
+    }
+    .tab_menu li img{
+        float: left;
+        margin-top: 5px;
+        margin-left: 50px;
+    }
+
+    .tab_menu li a{color:#fff;text-decoration:none;}
+
+    .tab_menu li.current a{color:#333;}
+
+
+    .tab_box .hide{display:none;}
+    .news-index-pricestyle{
+        width: 90%!important;
+        margin: 0 auto;
+        background-color: #fff;
+        overflow: hidden;
+        color: #d81b24;
+        margin-top: 5px;
+    }
+    .news-pricestyle-right{
+        float: right;
+        color: #666666;
+        text-decoration: line-through;
+        font-style: normal;
+        font-weight: normal;
+        padding-right: 8px;
+    }
+    .active-addcars{
+        display: block;
+        width: 90%!important;
+        margin: 10px 5%;
+        line-height: 36px;
+        color: #ffffff;
+        background:#fd0539 url("images/index_08.png") no-repeat 40px center;
+    }
+
+    .cp-p{
+        text-align:left;
+        display:flex;
+        justify-content:space-between;
+        flex-wrap:wrap
+    }
+    .changebg-04style li{
+        /*background-color: #ffeee0!important;*/
+    }
+</style>
+<!--第二个导航栏左侧内容 -->
+<div ng-view="" role="main" class="ng-scope">
+    <input type="hidden" id="id" name="id">
+    <div class="shopguide ng-isolate-scope" shop-guide="" data="shop" isdisabled="shop.disabled">
+        <div class="container" ng-show="shop" itemscope="" itemtype="http://schema.org/Restaurant">
+            <div class="shopguide-info">
+                <meta itemprop="url" content="https://www.ele.me/shop/E13225239603205588383" />
+                <input type="hidden" id="id2" name="id">
+                <img ng-src="#" alt="" itemprop="" src="#" id="image" name="image"/>
+                <div class="shopguide-info-wrapper">
+                    <div>
+                        <h1 title="商品详情" ng-class="{hastip: shop.tip}" itemprop="name" class="ng-binding"><span id="shangName" name="shangName"></span></h1>
+                        <a ng-href="/shop/E13225239603205588383/info" href="https://www.ele.me/shop/E13225239603205588383/info"> </a>
+                    </div>
+                    <p class="shopguide-info-rate"></p>
+                    <div class="starrating icon-star ng-isolate-scope" title="评分5.0分" rate-star="" rating="shop.rating">
+                        <span class="icon-star" ng-style="{ width: (rating * 20) + '%' }" style="width: 100%;"></span>
+                    </div>
+                    <a ng-href="/shop/E13225239603205588383/rate" class="ng-binding" href="https://www.ele.me/shop/E13225239603205588383/rate">(<font color="red"><span id="pingfen" name="pingfen"></span>分</font>)</a>
+                    <p></p>
+                    <p></p>
+                </div>
+                <!--鼠标滑过显示的内容-->
+                <div class="shopguide-info-extra">
+                    <ul>
+                        <li class="shopguide-extra-item shopguide-extra-compete ng-scope" ng-if="shopRatingScore">
+                            <div itemscope="" itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating">
+                                <h2 class="color-stress ng-binding" itemprop="ratingValue">5.0</h2>
+                                <meta itemprop="bestRating" content="5" />
+                                <meta itemprop="reviewCount" content="48" />
+                                <p>综合评价<br /><span class="color-mute ng-binding">高于周边商家</span>
+                                    <span class="color-stress ng-binding ng-scope" ng-if="shopRatingScore.compare_rating">77.2%</span>
+                                </p>
+                            </div>
+                            <div>
+                                <p>服务态度</p>
+                                <div class="starrating icon-star ng-isolate-scope" title="评分4.9分" rate-star="" rating="shopRatingScore.service_score">
+                                    <span class="icon-star" ng-style="{ width: (rating * 20) + '%' }" style="width: 98.919%;"></span>
+                                </div>
+                                <span class="color-stress ng-binding">4.9分</span>
+                                <p></p>
+                                <p>菜品评价</p>
+                                <div class="starrating icon-star ng-isolate-scope" title="评分5.0分" rate-star="" rating="shopRatingScore.food_score">
+                                    <span class="icon-star" ng-style="{ width: (rating * 20) + '%' }" style="width: 99.7298%;"></span>
+                                </div>
+                                <span class="color-stress ng-binding"><span id="pingfen2" name="pingfen"></span></span>
+                                <p></p>
+                            </div></li>
+                        <li class="shopguide-extra-item address">
+                            <p itemscope="" itemprop="streetAddress" itemtype="http://schema.org/PostalAddress"><span class="label">商家描述：</span> <span class="ng-binding" id="info" name="info"></span>
+                        <li class="shopguide-extra-item"><p class="shopguide-extra-delivery">由<span class="ng-binding" id="shangName2" name="shangName"></span>提供配送服务</p></li>
+                    </ul>
+                </div>
+            </div>
+            <!--右侧的起送价。配送费。平均送达速度-->
+            <div class="shopguide-server">
+                <span ng-hide="shop.id == 656683" class=""><em>配送费</em> <em class="shopguide-server-value ng-binding"><span id="peisong" name="peisong"></span></em>
+                    <!-- ngIf: shop.delivery_mode.description --></span>
+                <span ng-hide="shop.id == 656683" class=""><em>平均送达速度</em> <em class="shopguide-server-value ng-binding">35分钟</em></span>
+            </div>
+            <a class="shopguide-favor" href="javascript:" ng-click="favor()">
+                <i ng-if="!isFavorShop" class="icon-favorite ng-scope"></i>
+                <span ng-if="!isFavorShop" class="ng-scope">收藏</span>
+            </a>
+        </div>
+    </div>
+
+    <!--第三个导航栏内容（solr）-->
+    <div shop-nav="" data="shop" filter-data="shop.filter" display-type="shop.displayType" shop-action="shopAction" class="ng-scope ng-isolate-scope">
+        <div class="shopnav">
+            <div class="container clearfix">
+                <div class="shopnav-left">
+                    <a class="shopnav-tab active" href="#" ng-class="{active: shop.tab === 'index'}">所有商品</a>
+                    <a class="shopnav-tab" ng-class="{active: shop.tab === 'rate'}" href="#" >评价</a>
+                    <a class="shopnav-tab" href="https://www.ele.me/shop/E13225239603205588383/info" ng-class="{active: shop.tab === 'info'}">商家资质</a>
+
+                    <ul class="zs-shaixuan">
+                        <li>
+                            排序：
+                            <select name="pingfen" id="selectpingfen" style="width: 130px;height: 30px;" onchange="searchInvestment()">
+                                <option value="">评分</option>
+                                <option value="1">升序</option>
+                                <option value="2">降序</option>
+                            </select>
+                            <select name="peoplebuy" id="selectpeopleBuy" style="width: 130px;height: 30px;" onchange="searchInvestment()">
+                                <option value="">销量</option>
+                                <option value="1">升序</option>
+                                <option value="2">降序</option>
+                            </select>
+                            <select name="price" id="selectprice" style="width: 130px;height: 30px;" onchange="searchInvestment()">
+                                <option value="">价格</option>
+                                <option value="2">从高到低</option>
+                                <option value="1">从低到高</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="layui-row" id="comment_list"></div>
+                <div class="layui-row layui-col-space10" >
+                    <div class="layui-col-md2"></div>
+                    <div class="layui-col-md3">
+                        <a href="javaScript:toPage(1)">首页</a>
+                        <a href="javaScript:toPage(2)">上一页</a>
+                        <a href="javaScript:toPage(3)">下一页</a>
+                        <a href="javaScript:toPage(4)">尾页</a>
+                        <input type="hidden" id="currentPageId"/>
+                        <input type="hidden" id="pageSizeId">
+                        <input type="hidden" id="totalPageId"/>
                     </div>
                 </div>
+                <div id="test1"></div>
+                <input type="hidden" id="testCype"/>
+                <button type="button" id="u">评分</button>
             </div>
         </div>
-    </main>
-    <form class="layui-form" action="">
-        <div class="layui-form-item">
+    </div>
+</div>
+</main>
+<form class="layui-form" action="">
+    <div class="layui-form-item">
 
-            <div class="layui-form-item layui-form-text">
+        <div class="layui-form-item layui-form-text">
 
-                <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" class="layui-textarea" id="desc"></textarea>
-                </div>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" class="layui-textarea" id="desc"></textarea>
             </div>
-            </div>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button  type="button" class="layui-btn" id="cBtn" lay-filter="demo1">发表评论</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-            </div>
-    </form>
-
-
-</body>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button  type="button" class="layui-btn" id="cBtn" lay-filter="demo1">发表评论</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
 <script type="text/javascript">
     function toPage(flag){
         //获取当前页对象
@@ -341,7 +391,7 @@
         }
         for(var i in list){
             html += '<div class="layui-row layui-col-space10" ><div class="layui-col-md1"></div><div class="layui-col-md9"><div class="layui-row"><div class="layui-col-md2">';
-            html += list[i].commentname+'</div><div class="layui-col-md10">';
+            html +="用户:"+ list[i].userid+'</div><div class="layui-col-md10">';
             switch(list[i].grade)
             {
                 case 1:
@@ -428,16 +478,247 @@
 </script>
 <script type="text/javascript">
     function replaceSensitive(){
+        window.onload=function(){
+            var desc=document.getElementById('desc');
+            var re=/打架|你大爷|喝茶|贪污|腐败|专制|黑暗|打黑/g;
+            $('#desc').bind('input',function(){
+                var result=$('#desc').val().replace(re,'**');
+                $('#desc').val(result);
+            })
+        }
+    }
+</script>
+                <div class="shopnav-search">
+                    <form class="place-search ng-pristine ng-valid" role="search" ng-submit="search()">
+                        <button class="place-search-btn icon-search" ubt-click="403" ng-attr-ubt-data-keyword="{{searchText}}" title="搜索商家或美食" ubt-data-keyword=""></button>
+                        <label for="globalsearch">搜索美食</label>
+                        <input id="globalsearch" class="place-search-input ng-pristine ng-valid" ng-model="searchText" autocomplete="" placeholder="搜索商家,美食..." />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!--商品详情-->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="javascript:searchStatus(1)">热销</a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand"  href="javascript:searchStatus(2)">优惠</a>
+            </div>
+        </div>
+    </nav>
+    <div id="shop"></div>
+    <input type="hidden" id="hiddStatus" value=""/>
 
-    window.onload=function(){
-        var desc=document.getElementById('desc');
-        var re=/打架|你大爷|喝茶|贪污|腐败|专制|黑暗|打黑/g;
-        $('#desc').bind('input',function(){
-            var result=$('#desc').val().replace(re,'**');
-            $('#desc').val(result);
+    <div class="dialog" role="dialog" dialog="ITEMINFO" style="display: none;">
+        <div class="dialog-close icon-close"></div>
+        <div class="dialog-content" ng-transclude="">
+            <div shop-iteminfo="" item-info="itemInfo" class="ng-scope ng-isolate-scope">
+                <div class="shop-iteminfo">
+                    <div class="iteminfo-imagegroup">
+                        <img class="mainimage" ng-src="" alt="的图片" />
+                        <div ng-show="imagesPath.length &gt; 1" class="ng-hide">
+                            <a href="javascript:" ng-click="showImageNext(-4)" class="imagegroup-ctrl icon-profile-left-arrow"></a>
+                            <ul class="imagelist">
+                            </ul>
+                            <a href="javascript:" ng-click="showImageNext(4)" class="imagegroup-ctrl icon-profile-right-arrow"></a>
+                        </div>
+                    </div>
+                    <section class="iteminfo-info">
+                        <h5 ng-bind="itemInfo.name" class="ng-binding"></h5>
+                        <p ng-show="!!itemInfo.description" class="description ng-binding ng-hide" ng-bind="itemInfo.description"></p>
+                        <div class="iteminfo-cartitem">
+                            <div class="iteminfo-price">
+                                <span class="price"><span class="yen">&yen;</span> <span class="price ng-binding" ng-bind="(itemInfo.original_price || itemInfo.price) + (itemInfo.specfoods_id.length &gt; 1 ? '起' : '')"></span></span>
+                            </div>
+                        </div>
+                        <div class="iteminfo-rate">
+                            <ul class="rategroup"> </ul>
+                            <div pagination="" pagination-context="ratePageContext" pagination-pagesize="3" class=" pagination">
+                                <ul></ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!--右侧小导航-->
+<div class="sidetools" side-tools="">
+    <a href="" class="sidetools-item icon-visit-history" target="_blank" title="我要开店" tooltip="我要开店" tooltip-placement="left"></a>
+    <a href="../page/toGouwu" class="toolbar-cartbtn icon-cart toolbar-open"  title="购物车" tooltip="购物车" tooltip-placement="left" target="_blank"></a>
+    <a href="javascript:" class="sidetools-item icon-arrow-up" title="回到顶部" tooltip="回到顶部" tooltip-placement="left" ng-click="backToTop()"></a>
+</div>
+</div>
+<hr/>
+<footer class="footer" role="contentinfo">
+    <div class="container clearfix">
+        <div class="footer-link">
+            <h3 class="footer-link-title">用户帮助</h3>
+            <a class="footer-link-item" href="https://help.ele.me/pc/" target="_blank">我的客服</a>
+        </div>
+        <div class="footer-link">
+            <h3 class="footer-link-title">商务合作</h3>
+            <a class="footer-link-item" href="https://kaidian.ele.me/" target="_blank">我要开店</a>
+            <a class="footer-link-item" href="https://www.ele.me/support/about/jiameng" target="_blank">加盟指南</a>
+            <a class="footer-link-item" href="https://www.ele.me/support/about/contact" target="_blank">市场合作</a>
+            <a class="footer-link-item" href="http://openapi.eleme.io/" target="_blank">开放平台</a>
+        </div>
+        <div class="footer-link">
+            <h3 class="footer-link-title">关于我们</h3>
+            <a class="footer-link-item" href="https://www.ele.me/support/about" target="_blank">饿了么介绍</a>
+            <a class="footer-link-item" href="http://jobs.ele.me/" target="_blank">加入我们</a>
+            <a class="footer-link-item" href="https://www.ele.me/support/about/contact" target="_blank">联系我们</a>
+            <a class="footer-link-item" ng-href="//h5.ele.me/service/agreement/#HEAEDER_SHOW=1" target="_blank" href="https://h5.ele.me/service/agreement/#HEAEDER_SHOW=1">规则中心</a>
+            <a class="footer-link-item" ng-href="//h5.ele.me/service/agreement/#HEAEDER_SHOW=1&amp;key=ruleQue50" target="_blank" href="https://h5.ele.me/service/agreement/#HEAEDER_SHOW=1&amp;key=ruleQue50">隐私政策</a>
+        </div>
+        <div class="footer-contect">
+            <div class="footer-contect-item">
+                24小时客服热线 :
+                <a class="inherit" href="tel:10105757">10105757</a>
+            </div>
+            <div class="footer-contect-item">
+                关注我们 :
+                <div href="JavaScript:" class="icon-wechat" ubt-click="402">
+                    <div class="dropbox dropbox-bottom footer-contect-dropbox" ubt-visit="402">
+                        <img src="#" alt="微信号: elemeorder" />
+                        <p>微信号: elemeorder</p>
+                        <p>饿了么网上订餐</p>
+                    </div>
+                </div>
+                <a href="http://e.weibo.com/elemeorder" class="icon-weibo" target="_blank"></a>
+            </div>
+        </div>
+        <div class="footer-mobile">
+            <a href="https://h.ele.me/landing" target="_blank"><img src="#" class="footer-mobile-icon" alt="扫一扫下载饿了么手机 App" /></a>
+            <div class="footer-mobile-content">
+                <h3>下载手机版</h3>
+                <p>扫一扫,手机订餐方便</p>
+            </div>
+        </div>
+        <div class="footer-copyright serif">
+            <h5 class="owner">所有方：上海拉扎斯信息科技有限公司 <a href="https://www.ele.me/activity/license">| 营业执照</a></h5>
+            <p>增值电信业务许可证 : <a href="http://www.shca.gov.cn/" target="_blank">沪B2-20150033</a> | <a href="http://www.miibeian.gov.cn/" target="_blank">沪ICP备 09007032</a> | <a href="http://www.sgs.gov.cn/lz/licenseLink.do?method=licenceView&amp;entyId=20120305173227823" target="_blank">上海工商行政管理</a> Copyright &copy;2008-2018 ele.me, All Rights Reserved.互联网药品信息服务资格证书 编号：（沪）-经营性-2016-0011</p>
+        </div>
+        <div class="footer-police container">
+            <a href="http://www.zx110.org/picp/?sn=310100103568" rel="nofollow" target="_blank"><img alt="已通过沪公网备案，备案号 310100103568" src="#" height="30" /></a>
+        </div>
+    </div>
+</footer>
+<script src="../js/layui/home"></script>
+</body>
+<script>
+    $(function(){
+        initDrugList();
+    })
+    //条查
+    function searchInvestment(){
+        initDrugList();
+    }
+    function searchStatus(status){
+        $('#hiddStatus').val(status);
+        initDrugList();
+    }
+    function initDrugList() {
+        $.ajax({
+            url: '../user/findShang',
+            type: 'get',
+            data: {
+                searchList:JSON.stringify({
+                    'pingfen':$("#selectpingfen").val(),
+                    'peoplebuy':$("#selectpeopleBuy").val(),
+                    'price':$("#selectprice").val(),
+                    'status:':$("#hiddStatus").val()
+                })
+            },
+            dataType: 'json',
+            success: function (result) {
+                var data = result.rows;
+                var html = "";
+                if (data.length == 0) {
+                    html += '<p style="text-align:center;color:red;font-size:30px;"><b>分类下还没有商品</b></p>' +
+                        '<p style="color:red;font-size:14px;"><a href="javascript:;">猜您喜欢：</a></p>';
+                } else {
+                    for (var i = 0; i < data.length; i++) {
+                        var name = data[i].name;
+                        var image = data[i].image;
+                        var peisong = data[i].peisong;
+                        var type = data[i].type;
+                        var info = data[i].info;
+                        var peoplebuy = data[i].peoplebuy;
+                        var price = data[i].price;
+                        var pingfen = data[i].pingfen;
+                        html +=
+                            '<a href="#" class="classtopimg-tit" target="_blank">'+
+                            "<a  data-rst-id=\"E8511232894373335604\" data-bidding=\"\" target=\"_blank\" class=\"rstblock\">"+
+                            "<div class=\"rstblock-logo\">" +
+                            "<img src=\'"+image+"\' " +
+                            "alt=\"正在加载\" class=\"rstblock-logo-icon\" width=\"70\" height=\"70\"></div>" +
+                            "<div class=\"rstblock-content\"><div class=\"rstblock-title\">"+name+"</div>" +
+                            "<div class=\"rstblock-cost\">月售<font color='blur'>"+peoplebuy+"</font>份,评分<font color='yello'>"+pingfen+"</font>颗星</div>" +
+                            "<div class=\"rstblock-cost\">￥<font color='red'>"+price+"</font>元</div>" +
+                            /* "<div class=\"rstblock-cost\"><button onclick='gouwu()' class=\"btn btn-primary\">加入购物车</button></div></div></a>";*/
+                            " <span class=\"col-4\">\n" +
+                            " <div shop-cartbutton=\"\" food=\"food\" ng-hide=\"shop.id == '656683' || shop.disableCart\" class=\"ng-isolate-scope\">\n" +
+                            " <div ng-if=\"!menuFood.hasSpec\" class=\"ng-scope\">\n" +
+                            " <button class=\"shop-cartbutton ng-binding ng-scope\" ng-if=\"!cartItem.quantity &amp;&amp; menuFood.stock\"  onclick=add_cart("+data[i].id+")>加入购物车</button></div>\n" +
+                            " </div>\n" +
+                            " </div>\n" +
+                            " </span>\n" +
+                            "</a>";
+                    }
+                }
+                $("#shop").html(html);
+            }
+
         })
-      }
+    }
+</script>
+<script>
+    function add_cart(id){
+        $.ajax({
+            url:'../user/saveShops',
+            type:'post',
+            data:{
+                id:id,
+                counts:1
+            },
+            success:function(data){
+                alert("加入购物车成功");
+
+            }
+        })
+    }
+
+    //回显数据
+    $(function(){
+        $.ajax({
+            url:'../user/findXiangqingById/'+[[${id}]],
+            //  url: '../user/findXiangqingById/'+id,
+            type: 'get',
+            dataType:'json',
+            success: function (data) {
+                $("#id").val(data.id);
+                $("#id2").val(data.id);
+                $("#image").attr("src",data.image);
+                $("#shangName").append(data.shangName);
+                $("#shangName2").append(data.shangName);
+                $("#pingfen").append(data.pingfen);
+                $("#area").append(data.area);
+                $("#peisong").append(data.peisong);
+                $("#info").append(data.info);
+            }
+
+        })
+    })
+    //评价
+    function pingjia(){
+        location.href="../page/toPingjia"
     }
 </script>
 </html>

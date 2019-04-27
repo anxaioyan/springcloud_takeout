@@ -21,12 +21,13 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
+import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈a〉
  *
  * @author zyl
@@ -48,47 +49,39 @@ public class ShiroConfig {
      *
      * */
     @Bean
-    public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
-        System.out.println("ShiroConfiguration.shirFilter()");
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         // shiro过滤器工厂
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 
         // 必须设置 SecurityManager 如果不设置就无法完成认证和授权
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        // 过滤器链
+        ////拦截器
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-
-        // 配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
-        // logout shiro定义好的过滤器名字 /logout访问路径
-        // 浏览器访问的地址栏路径中以/logout结尾的路径 走logout过滤器
-        // logout会清除session 退出登录
+        //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
         filterChainDefinitionMap.put("/logout", "logout");
-        // 所有的css文件走  anon过滤器 此过滤器代表放过拦截 不需要权限也能访问
+        // 所有的css文件走  anon过滤器 此过滤器代表放过拦截 不需要权限也能访问 配置不会被拦截的链接 顺序判断
         filterChainDefinitionMap.put("/css/**", "anon");
         // 放过登录页面拦截
-        filterChainDefinitionMap.put("/page/tologin", "anon");
-        filterChainDefinitionMap.put("/page/toTelLogin", "anon");
         filterChainDefinitionMap.put("/user/login", "anon");
-        filterChainDefinitionMap.put("/user/login2", "anon");
+        filterChainDefinitionMap.put("/login2", "anon");
         filterChainDefinitionMap.put("/img/**", "anon");
-        filterChainDefinitionMap.put("/image/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
-        filterChainDefinitionMap.put("/layui-v2.4.5/**", "anon");
-        filterChainDefinitionMap.put("/jquery.min.js/**", "anon");
-        /// **代表所有路径 除以上路径外都拦截 authc代表权限拦截过滤器
+        /// **代表所有路径 除以上路径外都拦截 authc代表权限拦截过滤器 <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         filterChainDefinitionMap.put("/**", "authc");
         // perms权限过滤器 必须拥有某项权限才能访问对应路径
         // filterChainDefinitionMap.put("/add", "perms[user:query]");
+        // 登录请求路径 登录页面提交form表单时 表单的action写此路径
+
         Map map=new LinkedHashMap();
         map.put("authc",new MyFormAuthenticationFilfer());
         shiroFilterFactoryBean.setFilters(map);
-        // 登录请求路径 登录页面提交form表单时 表单的action写此路径
-        shiroFilterFactoryBean.setLoginUrl("/login2");
+        shiroFilterFactoryBean.setLoginUrl("/user/login2");
         // 登录成功跳转到登录成功页面
-        shiroFilterFactoryBean.setSuccessUrl("/page/toMyIndex");
+
+        shiroFilterFactoryBean.setSuccessUrl("/page/tomain");
         // 未授权界面;
-         //shiroFilterFactoryBean.setUnauthorizedUrl("/403.html");
-         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+        //shiroFilterFactoryBean.setUnauthorizedUrl("/403.html");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         // 最终返回过滤器链
         return shiroFilterFactoryBean;
